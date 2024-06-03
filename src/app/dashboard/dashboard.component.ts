@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Task } from '../objects/task.model';; // Assuming you have a Task model
 import { Project } from '../objects/project.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectDetailsDialogComponent } from '../project-details-dialog/project-details-dialog.component';
 import { CreateTaskDialogComponent } from '../create-task-dialog/create-task-dialog.component';
 import { Priority } from '../objects/priority.model';
+import { MatSidenav } from '@angular/material/sidenav';
 
 
 @Component({
@@ -15,7 +16,27 @@ import { Priority } from '../objects/priority.model';
 export class DashboardComponent {
   tasks: Task[] = []; // Initialize with some tasks
   projects: Project[] = []; // Initialize with some projects
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+  isExpanded = true;
+  sideNavDisplayed = true;
+  showSubmenu: boolean = false;
+  isShowing = false;
+  showSubSubMenu: boolean = false;
 
+  mouseenter() {
+    if (!this.isExpanded) {
+      this.isShowing = true;
+    }
+  }
+
+  mouseleave() {
+    if (!this.isExpanded) {
+      this.isShowing = false;
+    }
+  }
+  displaySideNav(){
+this.sideNavDisplayed = !this.sideNavDisplayed
+  }
   constructor(private dialog: MatDialog) {
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data

@@ -1,3 +1,4 @@
+// auth.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,11 +6,30 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 
-  constructor() { }
+  // Example: Replace this with your actual authentication logic
 
-  isLoggedIn(): any {
-    // Implement your authentication logic here
-    // For demonstration, return true if user is logged in
-    return true;
+  private isAuthenticatedValue: boolean = false;
+
+  constructor() {}
+
+  isAuthenticated(): boolean {
+    return this.isAuthenticatedValue;
+  }
+
+  login(username: string, password: string): boolean {
+    // Example: Perform authentication here
+    // Replace this logic with your actual authentication mechanism
+    if (username === 'admin' && password === 'password') {
+      this.isAuthenticatedValue = true;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  logout(): void {
+    // Example: Perform logout actions here
+    // Replace this logic with your actual logout mechanism
+    this.isAuthenticatedValue = false;
   }
 }
