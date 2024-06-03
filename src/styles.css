@@ -29,14 +29,21 @@
     background-color: var(--background-color);
   }
 
-.dashboard mat-tab-group {
+.dashboard mat-tab-group{
     background-color: white; /* Use the background color defined by the theme */
     color: var(--text-color); /* Use the text color defined by the theme */
   }
-
+  .dashboard mat-card{
+    color: var(--text-color); /* Use the text color defined by the theme */
+    background-color: var(--background-color);
+  }
   .mat-drawer-inner-container
  {
   color: var(--text-color) !important; /* Use the text color defined by the theme */
 
     background-color: var(--background-color) !important;/* Use the background color defined by the theme */
   }
+.example-container mat-icon,.mdc-list-item__primary-text{
+  color: var(--text-color) !important; /* Use the text color defined by the theme */
+
+}

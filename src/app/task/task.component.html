@@ -16,13 +16,13 @@
         </ng-container>
         <ng-template #assignedToSection>
           <p>Assigned To: {{ task.assignedTo }}</p>
-          <p>Priority: {{ task.priority }}</p>
         </ng-template>
+        <p [class.high]="task.priority == 'High'" [class.medium]="task.priority == 'Medium'" [class.low]="task.priority == 'Low'">Priority: {{ task.priority }}</p>
       </mat-card-content>
       <mat-card-actions>
         <button *ngIf="!task.assignedTo" mat-button color="primary" (click)="assignEmployee()">Assign Employee</button>
         <button *ngIf="task.assignedTo" mat-button color="primary" (click)="completeTask()">Complete</button>
-        <mat-icon *ngIf="task.completed" color="primary">check_circle</mat-icon>
+        <mat-icon *ngIf="task.completed" class="complete-icon" style="color: green !important;">check_circle</mat-icon>
       </mat-card-actions>
     </mat-card>
   </div>

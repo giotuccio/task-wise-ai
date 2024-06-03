@@ -41,7 +41,15 @@ this.sideNavDisplayed = !this.sideNavDisplayed
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data
     this.tasks = [
-      { title: 'Task 1', description: 'Description for Task 1', dueDate: '2024-06-10', priority: Priority.High, completed: false },
+      { title: 'Task 1', description: 'Description for Task 1', dueDate: '2024-06-10', priority: Priority.High, completed: false,assignedTo: 'Gio'  },
+      { title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
+      { title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
+      { title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
+      { title: 'Task 2', description: 'Description for Task 2', dueDate: '2023-06-15', priority: Priority.Low, completed: false },
+      { title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
+      { title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false},
+      { title: 'Task 2', description: 'Description for Task 2', dueDate: '2025-06-15', priority: Priority.Medium, completed: false, assignedTo: 'John' },
+      { title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
       { title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
       { title: 'Task 3', description: 'Description for Task 3', dueDate: '2024-06-20', priority: Priority.Medium, completed: false }
     ];
@@ -70,7 +78,9 @@ this.sideNavDisplayed = !this.sideNavDisplayed
       }
     });
   }
-
+  getAssignedTasks(): Task[] {
+    return this.tasks.filter(task => task.assignedTo);
+  }
   // Filter out tasks that are assigned to someone
   getPendingTasks(): Task[] {
     return this.tasks.filter(task => !task.assignedTo);
