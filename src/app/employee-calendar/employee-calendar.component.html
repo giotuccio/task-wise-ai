@@ -1,0 +1,5 @@
+<mat-calendar [(selected)]="selectedDate" (selectedChange)="onDateSelected($event)"></mat-calendar>
+<div *ngIf="selectedDate">
+  <h3>Availability for {{ selectedDate | date }}</h3>
+  <!-- Display employee availability for the selected date -->
+</div>

@@ -1,1 +1,31 @@
-/* You can add global styles to this file, and also import other style files */
+
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  /* Light Theme */
+/* Light Theme */
+.light-theme {
+    --background-color: #ffffff;
+    --text-color: #000000;
+  }
+  
+  /* Dark Theme */
+  .dark-theme  {
+    --background-color: #121212;
+    --text-color: #ffffff;
+  }
+  
+  .task mat-card ,
+  .task mat-card-subtitle,
+  .task mat-card-actions button,
+  .task mat-card-actions mat-icon {
+    color: var(--text-color); /* Use the text color defined by the theme */
+    background-color: var(--background-color);
+  }
+  
+
+.dashboard mat-tab-group {
+    background-color: white; /* Use the background color defined by the theme */
+    color: var(--text-color); /* Use the text color defined by the theme */
+  }

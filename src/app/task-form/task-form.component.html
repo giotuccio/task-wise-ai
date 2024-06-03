@@ -1,0 +1,13 @@
+<form (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput placeholder="Title" [(ngModel)]="title" name="title" required>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Description" [(ngModel)]="description" name="description" required></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="date" placeholder="Due Date" [(ngModel)]="dueDate" name="dueDate" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Create Task</button>
+  </form>
+  

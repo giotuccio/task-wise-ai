@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>{{ project.name }} Details</h2>
+<mat-dialog-content>
+  <p><strong>Description:</strong> {{ project.description }}</p>
+  <p><strong>Start Date:</strong> {{ project.startDate }}</p>
+  <p><strong>End Date:</strong> {{ project.endDate }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="true">Close</button>
+</mat-dialog-actions>

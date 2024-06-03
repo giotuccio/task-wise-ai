@@ -1,0 +1,31 @@
+<div class="dashboard">
+    <div style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px;">
+        <div style="justify-items: flex-start;">
+    <button mat-raised-button color="primary" (click)="openCreateTaskDialog()">Create Task</button>
+</div>
+    <div style="display: flex;align-items: end;justify-items: flex-end; justify-content: flex-end; gap: 10px;">
+
+        <button mat-raised-button color="primary" (click)="sortByDate()">Sort by Date</button>
+        <button mat-raised-button color="primary" (click)="sortByAssigned()">Sort by Assigned</button>
+        <button mat-raised-button color="primary" (click)="sortByPriority()">Sort by Priority</button> 
+      </div>
+    </div>
+    <mat-tab-group class="dashboard-tabs">
+      <mat-tab label="All Tasks">
+        <div *ngFor="let task of tasks">
+          <app-task [task]="task"></app-task>
+        </div>
+      </mat-tab>
+      <mat-tab label="Pending Tasks">
+        <div *ngFor="let task of getPendingTasks()">
+          <app-task [task]="task"></app-task>
+        </div>
+      </mat-tab>
+      <mat-tab label="Completed Tasks">
+        <div *ngFor="let task of tasks">
+          <app-task *ngIf="task.completed" [task]="task"></app-task>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  

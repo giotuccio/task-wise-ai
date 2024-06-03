@@ -1,0 +1,30 @@
+<div class="task" [class.completed]="task.completed" style="color: var(--text-color);" [class.dark-theme]="isDarkTheme">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title style="color: var(--text-color);" >{{ task.title }}</mat-card-title>
+        <mat-card-subtitle>Due Date: {{ task.dueDate }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ task.description }}</p>
+        <ng-container *ngIf="!task.assignedTo; else assignedToSection">
+          <mat-form-field>
+            <mat-label>Assign To</mat-label>
+            <mat-select [(ngModel)]="assignedTo" name="assignedTo">
+              <mat-option *ngFor="let employee of employees" [value]="employee">{{ employee }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+        <ng-template #assignedToSection>
+          <p>Assigned To: {{ task.assignedTo }}</p>
+          <p>Priority: {{ task.priority }}</p>
+        </ng-template>
+      </mat-card-content>
+      <mat-card-actions>
+        <button *ngIf="!task.assignedTo" mat-button color="primary" (click)="assignEmployee()">Assign Employee</button>
+        <button *ngIf="task.assignedTo" mat-button color="primary" (click)="completeTask()">Complete</button>
+        <mat-icon *ngIf="task.completed" color="primary">check_circle</mat-icon>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <mat-divider></mat-divider>
+  
