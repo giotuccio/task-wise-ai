@@ -1,0 +1,33 @@
+<div style="position: relative;">
+    <mat-form-field>
+        <mat-label>Recipient</mat-label>
+        <mat-select [(ngModel)]="recipient" name="recipient">
+          <mat-option *ngFor="let employee of employees" [value]="employee">{{ employee }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div style="    height: fit-content !important;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;gap: 10px; margin-bottom: 10px;">
+            <img *ngIf="recipient" width="50" src="https://cdn-icons-png.flaticon.com/256/147/147144.png" />
+            <p >{{recipient ? recipient : 'Task Message Updates'}}
+            </p>
+          </div>
+    <div *ngFor="let message of messages">
+      <p>{{ message }}</p>
+    </div>
+
+    <!-- Message Input Field -->
+    <div style="display: flex;flex-direction: row;width: 80%;position: fixed;bottom: 100px;">
+    <mat-form-field style="width: 80%;" appearance="fill">
+      <mat-label>Message</mat-label>
+      <input matInput #messageInput>
+    </mat-form-field>
+
+
+    <button mat-button matSuffix color="primary" (click)="sendMessage(messageInput.value)">Send</button>
+</div>
+
+  </div>
+  

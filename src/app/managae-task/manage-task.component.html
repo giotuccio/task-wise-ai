@@ -1,0 +1,23 @@
+<div>
+    <h2>Manage Task</h2>
+    <p><strong>Title:</strong> {{ task.title }}</p>
+    <p><strong>Description:</strong> {{ task.description }}</p>
+    <p><strong>Project:</strong> {{ task.project }}</p>
+    <p><strong>Due Date:</strong> {{ task.dueDate }}</p>
+    <p *ngIf="task.assignedTo"><strong>Assigned To:</strong> {{ task.assignedTo }}</p>
+    <p *ngIf="!task.assignedTo"><strong>Status:</strong> Unassigned</p>
+    <p><strong>Priority:</strong> {{ task.priority }}</p>
+    
+    <!-- Task Editing Button -->
+    <button mat-raised-button color="primary" (click)="editTask()">Edit Task</button>
+  
+    <!-- Task Deletion Button -->
+    <button mat-raised-button color="warn" (click)="deleteTask()">Delete Task</button>
+  
+    <!-- Task Status Update Buttons -->
+    <div>
+      <button mat-raised-button color="accent" (click)="updateTaskStatus('In Progress')">Mark as In Progress</button>
+      <button mat-raised-button color="primary" (click)="updateTaskStatus('Completed')">Mark as Completed</button>
+    </div>
+  </div>
+  

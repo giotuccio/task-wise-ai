@@ -7,5 +7,6 @@ export interface Task {
     dueDate: string;
     priority: Priority; // Updated property
     assignedTo?: string;
+    assignedBy?: string;
     completed?: boolean;
   }

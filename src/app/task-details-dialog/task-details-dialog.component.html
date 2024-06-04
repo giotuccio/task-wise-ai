@@ -1,0 +1,49 @@
+<h1 mat-dialog-title>Task Details</h1>
+<!-- <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close] cdkFocusInitial>Close</button>
+</div> -->
+<mat-tab-group>
+    <mat-tab label="Task Details">
+        <ng-template matTabContent>
+            <div mat-dialog-content>
+                <p><strong>Title:</strong> {{ task.title }}</p>
+                <p><strong>Description:</strong> {{ task.description }}</p>
+                <p><strong>Assigned By:</strong> {{ task.assignedBy }}</p>
+                <p><strong>Due Date:</strong> {{ task.dueDate }}</p>
+                <p *ngIf="task.assignedTo"><strong>Assigned To:</strong> {{ task.assignedTo }}</p>
+                <p *ngIf="!task.assignedTo"><strong>Status:</strong> Unassigned</p>
+                <p><strong>Priority:</strong> {{ task.priority }}</p>
+            </div>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Manage">
+        <ng-template matTabContent>
+            <div mat-dialog-content>
+                <app-manage-task [task]="task"></app-manage-task>
+            </div>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Updates">
+        <ng-template matTabContent>
+            <div mat-dialog-content>
+                <app-task-message-updates></app-task-message-updates>
+                <!-- Your messaging component goes here -->
+            </div>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Ask TaskWise">
+        <ng-template matTabContent>
+            <div mat-dialog-content>
+                <app-ask-talkwise></app-ask-talkwise>>
+            </div>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Notes">
+        <ng-template matTabContent>
+            <div mat-dialog-content>
+                <app-task-notes></app-task-notes>
+            </div>
+        </ng-template>
+    </mat-tab>
+</mat-tab-group>
+

@@ -57,6 +57,12 @@ import { CreateTaskDialogComponent } from './create-task-dialog/create-task-dial
 import { EmployeeCalendarComponent } from './employee-calendar/employee-calendar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
+import { TaskDetailsDialogComponent } from './task-details-dialog/task-details-dialog.component';
+import { TaskMessageUpdatesComponent } from './task-message-updates/task-message-updates.component';
+import {  ManageTaskComponent } from './managae-task/manage-task.component';
+import { AskTalkwiseComponent } from './ask-talkwise/ask-talkwise.component';
+import { TaskNotesComponent } from './task-notes/task-notes.component';
+import { AddNoteDialogComponent } from './task-notes/add-note/add-note.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,6 +76,12 @@ import { LoginComponent } from './login/login.component';
     CreateTaskDialogComponent,
     EmployeeCalendarComponent,
     LoginComponent,
+    TaskDetailsDialogComponent,
+    TaskMessageUpdatesComponent,
+    ManageTaskComponent,
+    AskTalkwiseComponent,
+    TaskNotesComponent,
+    AddNoteDialogComponent,
   ],
   imports: [
     BrowserModule,

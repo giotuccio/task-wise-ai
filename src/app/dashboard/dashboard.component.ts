@@ -6,6 +6,7 @@ import { ProjectDetailsDialogComponent } from '../project-details-dialog/project
 import { CreateTaskDialogComponent } from '../create-task-dialog/create-task-dialog.component';
 import { Priority } from '../objects/priority.model';
 import { MatSidenav } from '@angular/material/sidenav';
+import { TaskDetailsDialogComponent } from '../task-details-dialog/task-details-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,16 +31,16 @@ export class DashboardComponent implements AfterViewInit {
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data
     this.tasks = [
-      { project: 'Online Account Opening', title: 'Fix That', description: 'Description for Task 1', dueDate: '2024-06-10', priority: Priority.High, completed: false, assignedTo: 'Gio' },
-      { project: 'Online Account Opening', title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
-      { project: 'Online Account Opening', title: 'Task 3', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
-      { project: 'Digital Marketing', title: 'Task 4', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
-      { project: 'Online Account Opening', title: 'Task 5', description: 'Description for Task 2', dueDate: '2023-06-15', priority: Priority.Low, completed: false },
-      { project: 'Online Account Opening', title: 'Task 6', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
-      { project: 'Online Account Opening', title: 'Task 7', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false },
-      { project: 'Online Account Opening', title: 'Task 8', description: 'Description for Task 2', dueDate: '2025-06-15', priority: Priority.Medium, completed: false, assignedTo: 'John' },
-      { project: 'Digital Marketing', title: 'Task 9', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
-      { project: 'Online Account Opening', title: 'Task 10', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
+      { project: 'Online Account Opening', title: 'Fix That', description: 'Description for Task 1', dueDate: '2024-06-10', priority: Priority.High, completed: false, assignedTo: 'Gio',assignedBy: 'Lucy Lu' },
+      { project: 'Online Account Opening', title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John',assignedBy: 'Lucy Lu' },
+      { project: 'Online Account Opening', title: 'Task 3', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John',assignedBy: 'Mary Jane' },
+      { project: 'Digital Marketing', title: 'Task 4', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John',assignedBy: 'Lucy Lu' },
+      { project: 'Online Account Opening', title: 'Task 5', description: 'Description for Task 2', dueDate: '2023-06-15', priority: Priority.Low, completed: false,assignedBy: 'Mary Jane' },
+      { project: 'Online Account Opening', title: 'Task 6', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' ,assignedBy: 'Lucy Lu'},
+      { project: 'Online Account Opening', title: 'Task 7', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false ,assignedBy: 'Lucy Lu'},
+      { project: 'Online Account Opening', title: 'Task 8', description: 'Description for Task 2', dueDate: '2025-06-15', priority: Priority.Medium, completed: false, assignedTo: 'John',assignedBy: 'Mary Jane' },
+      { project: 'Digital Marketing', title: 'Task 9', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' ,assignedBy: 'Lucy Lu'},
+      { project: 'Online Account Opening', title: 'Task 10', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John',assignedBy: 'Lucy Lu' },
       { project: 'Digital Marketing', title: 'Task 11', description: 'Description for Task 3', dueDate: '2024-06-20', priority: Priority.Medium, completed: false }
     ];
 
@@ -132,4 +133,15 @@ export class DashboardComponent implements AfterViewInit {
       return priorityOrder[a.priority] - priorityOrder[b.priority];
     });
   }
+
+
+
+openTaskDetailsDialog(task: Task) {
+  this.dialog.open(TaskDetailsDialogComponent, {
+    data: task,
+    width: '80%',
+    height: '80vh'
+  });
+}
+
 }

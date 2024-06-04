@@ -1,0 +1,21 @@
+<div>
+    <h2>Task Notes</h2>
+    
+    <!-- Open Note Input Dialog -->
+    <button mat-raised-button color="primary" (click)="openNoteDialog()">Add Note</button>
+  
+    <!-- Display Saved Notes -->
+    <div *ngIf="notes.length > 0">
+      <h3>Saved Notes:</h3>
+      <ul>
+        <li *ngFor="let note of notes">
+          <p>{{ note.content }}</p>
+          <p>Date: {{ note.date | date: 'medium' }}</p>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="notes.length === 0">
+      <p>No notes added yet.</p>
+    </div>
+  </div>
+  

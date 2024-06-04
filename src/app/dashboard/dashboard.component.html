@@ -8,23 +8,48 @@
       <mat-nav-list>
 
         <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-          
+
           <div style="    height: fit-content !important;
           display: flex;
           flex-direction: row;
           align-items: center;
           justify-content: flex-start;gap: 10px; margin-bottom: 10px;">
-            <img   width="50" src="https://cdn-icons-png.flaticon.com/256/147/147144.png"/>
-          <p  routerLink="/employee-calendar">Name
-          </p>
-        </div>
-       <mat-divider></mat-divider>
+            <img width="50" src="https://cdn-icons-png.flaticon.com/256/147/147144.png" />
+            <p routerLink="/employee-calendar">Name
+            </p>
+          </div>
+          <mat-divider></mat-divider>
+
           <mat-list-item>
-              <mat-icon style="margin-right: 10px;" matListItemIcon
-        >calendar_today</mat-icon>
+            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
             <a matListItemLine routerLink="/employee-calendar">Employee Calendar</a>
 
-         </mat-list-item>
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
+            <a matListItemLine routerLink="/employee-calendar">Attachments</a>
+
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
+            <a matListItemLine routerLink="/employee-calendar">Time Tracking</a>
+
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
+            <a matListItemLine routerLink="/employee-calendar">Task Reminders</a>
+
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
+            <a matListItemLine routerLink="/employee-calendar">Employee Calendar</a>
+
+          </mat-list-item>
+          <mat-list-item>
+            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
+            <a matListItemLine routerLink="/employee-calendar">Sync</a>
+
+          </mat-list-item>
         </div>
       </mat-nav-list>
       <mat-nav-list>
@@ -32,7 +57,8 @@
     </mat-sidenav>
     <div class="example-sidenav-content">
       <div class="dashboard">
-        <mat-tab-group class="dashboard-tabs" [(selectedIndex)]="selectedIndex" (selectedTabChange)="displayProjectTasks($event.tab.textLabel)">
+        <mat-tab-group class="dashboard-tabs" [(selectedIndex)]="selectedIndex"
+          (selectedTabChange)="displayProjectTasks($event.tab.textLabel)">
           <mat-tab *ngFor="let project of projects" [label]="project.name"></mat-tab>
         </mat-tab-group>
       </div>
@@ -50,18 +76,18 @@
         <mat-tab-group class="dashboard-tabs">
           <mat-tab label="Assigned Tasks">
             <div *ngFor="let task of getAssignedTasks(selectedProjectName ?? '')">
-              <app-task [task]="task" (complete)="completeTask(task)"></app-task>
+              <app-task [task]="task" (complete)="completeTask(task)" (click)="openTaskDetailsDialog(task)"></app-task>
             </div>
           </mat-tab>
           <mat-tab label="Unassigned Tasks">
             <div *ngFor="let task of getPendingTasks(selectedProjectName ?? '')">
-              <app-task [task]="task" (complete)="completeTask(task)"></app-task>
+              <app-task [task]="task" (complete)="completeTask(task)" (click)="openTaskDetailsDialog(task)"></app-task>
             </div>
           </mat-tab>
-          
+
           <mat-tab label="Completed Tasks">
             <div *ngFor="let task of getCompletedTasks(selectedProjectName ?? '')">
-              <app-task *ngIf="task.completed" [task]="task"></app-task>
+              <app-task *ngIf="task.completed" [task]="task" (click)="openTaskDetailsDialog(task)"></app-task>
             </div>
           </mat-tab>
         </mat-tab-group>
