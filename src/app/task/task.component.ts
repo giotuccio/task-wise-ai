@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../objects/task.model';; // Assuming you have a Task model
 
 @Component({
@@ -10,10 +10,9 @@ export class TaskComponent {
   @Input() task!: Task;
   assignedTo: string = "";
   employees: string[] = ['Employee 1', 'Employee 2', 'Employee 3'];
-
+  @Output() complete: EventEmitter<void> = new EventEmitter<void>();
   completeTask() {
-this.task.completed = true;
-    console.log('Task completed:', this.task.title);
+    this.complete.emit();
   }
   assignEmployee() {
     this.task.assignedTo = this.assignedTo;

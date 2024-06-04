@@ -19,9 +19,9 @@
     </mat-sidenav>
     <div class="example-sidenav-content">
       <div class="dashboard">
-        <mat-tab-group class="dashboard-tabs">
+        <mat-tab-group class="dashboard-tabs" [(selectedIndex)]="selectedIndex" (selectedTabChange)="displayProjectTasks($event.tab.textLabel)">
           <mat-tab *ngFor="let project of projects" [label]="project.name"></mat-tab>
-          </mat-tab-group>
+        </mat-tab-group>
       </div>
       <div class="dashboard">
         <mat-card style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px;">
@@ -36,17 +36,18 @@
         </mat-card>
         <mat-tab-group class="dashboard-tabs">
           <mat-tab label="Assigned Tasks">
-            <div *ngFor="let task of   getAssignedTasks()">
-              <app-task [task]="task"></app-task>
+            <div *ngFor="let task of getAssignedTasks(selectedProjectName ?? '')">
+              <app-task [task]="task" (complete)="completeTask(task)"></app-task>
             </div>
           </mat-tab>
           <mat-tab label="Pending Tasks">
-            <div *ngFor="let task of getPendingTasks()">
-              <app-task [task]="task"></app-task>
+            <div *ngFor="let task of getPendingTasks(selectedProjectName ?? '')">
+              <app-task [task]="task" (complete)="completeTask(task)"></app-task>
             </div>
           </mat-tab>
+          
           <mat-tab label="Completed Tasks">
-            <div *ngFor="let task of tasks">
+            <div *ngFor="let task of getCompletedTasks(selectedProjectName ?? '')">
               <app-task *ngIf="task.completed" [task]="task"></app-task>
             </div>
           </mat-tab>

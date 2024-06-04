@@ -12,7 +12,9 @@ export class CreateTaskDialogComponent {
   description: string = "";
   dueDate: string = "";
   assignedTo: string = "";
+projectName: string = ""
   employees: string[] = ['Employee 1', 'Employee 2', 'Employee 3'];
+  projects: string[] = ['Project A', 'Project B'];
   priority!: Priority;
   priorities: string[] = Object.values(Priority);
   constructor(public dialogRef: MatDialogRef<CreateTaskDialogComponent>) {}
@@ -24,6 +26,7 @@ export class CreateTaskDialogComponent {
     }
 
     const newTask = {
+      project: this.projectName,
       title: this.title,
       description: this.description,
       dueDate: this.dueDate,
