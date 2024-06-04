@@ -14,7 +14,7 @@ export class CreateTaskDialogComponent {
   assignedTo: string = "";
 projectName: string = ""
   employees: string[] = ['Employee 1', 'Employee 2', 'Employee 3'];
-  projects: string[] = ['Project A', 'Project B'];
+  projects: string[] = ['Online Account Opening', 'Digital Marketing'];
   priority!: Priority;
   priorities: string[] = Object.values(Priority);
   constructor(public dialogRef: MatDialogRef<CreateTaskDialogComponent>) {}

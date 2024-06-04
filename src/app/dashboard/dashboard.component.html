@@ -8,10 +8,23 @@
       <mat-nav-list>
 
         <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-          <a class="link" style="display: flex;" mat-list-item routerLink="/employee-calendar"> <mat-icon
-              mat-list-icon>calendar_today</mat-icon>
-            Employee Calendar
-          </a>
+          
+          <div style="    height: fit-content !important;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: flex-start;gap: 10px; margin-bottom: 10px;">
+            <img   width="50" src="https://cdn-icons-png.flaticon.com/256/147/147144.png"/>
+          <p  routerLink="/employee-calendar">Name
+          </p>
+        </div>
+       <mat-divider></mat-divider>
+          <mat-list-item>
+              <mat-icon style="margin-right: 10px;" matListItemIcon
+        >calendar_today</mat-icon>
+            <a matListItemLine routerLink="/employee-calendar">Employee Calendar</a>
+
+         </mat-list-item>
         </div>
       </mat-nav-list>
       <mat-nav-list>
@@ -40,7 +53,7 @@
               <app-task [task]="task" (complete)="completeTask(task)"></app-task>
             </div>
           </mat-tab>
-          <mat-tab label="Pending Tasks">
+          <mat-tab label="Unassigned Tasks">
             <div *ngFor="let task of getPendingTasks(selectedProjectName ?? '')">
               <app-task [task]="task" (complete)="completeTask(task)"></app-task>
             </div>

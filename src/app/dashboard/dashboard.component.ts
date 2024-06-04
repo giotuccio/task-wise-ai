@@ -30,22 +30,22 @@ export class DashboardComponent implements AfterViewInit {
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data
     this.tasks = [
-      { project: 'Project A', title: 'Fix That', description: 'Description for Task 1', dueDate: '2024-06-10', priority: Priority.High, completed: false, assignedTo: 'Gio' },
-      { project: 'Project A', title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
-      { project: 'Project A', title: 'Task 3', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
-      { project: 'Project B', title: 'Task 4', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
-      { project: 'Project A', title: 'Task 5', description: 'Description for Task 2', dueDate: '2023-06-15', priority: Priority.Low, completed: false },
-      { project: 'Project A', title: 'Task 6', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
-      { project: 'Project A', title: 'Task 7', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false },
-      { project: 'Project A', title: 'Task 8', description: 'Description for Task 2', dueDate: '2025-06-15', priority: Priority.Medium, completed: false, assignedTo: 'John' },
-      { project: 'Project B', title: 'Task 9', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
-      { project: 'Project A', title: 'Task 10', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
-      { project: 'Project B', title: 'Task 11', description: 'Description for Task 3', dueDate: '2024-06-20', priority: Priority.Medium, completed: false }
+      { project: 'Online Account Opening', title: 'Fix That', description: 'Description for Task 1', dueDate: '2024-06-10', priority: Priority.High, completed: false, assignedTo: 'Gio' },
+      { project: 'Online Account Opening', title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
+      { project: 'Online Account Opening', title: 'Task 3', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
+      { project: 'Digital Marketing', title: 'Task 4', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
+      { project: 'Online Account Opening', title: 'Task 5', description: 'Description for Task 2', dueDate: '2023-06-15', priority: Priority.Low, completed: false },
+      { project: 'Online Account Opening', title: 'Task 6', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
+      { project: 'Online Account Opening', title: 'Task 7', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false },
+      { project: 'Online Account Opening', title: 'Task 8', description: 'Description for Task 2', dueDate: '2025-06-15', priority: Priority.Medium, completed: false, assignedTo: 'John' },
+      { project: 'Digital Marketing', title: 'Task 9', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
+      { project: 'Online Account Opening', title: 'Task 10', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' },
+      { project: 'Digital Marketing', title: 'Task 11', description: 'Description for Task 3', dueDate: '2024-06-20', priority: Priority.Medium, completed: false }
     ];
 
     this.projects = [
-      { name: 'Project A', description: 'Description for Project A', startDate: '2024-06-01', endDate: '2024-07-15' },
-      { name: 'Project B', description: 'Description for Project B', startDate: '2024-07-01', endDate: '2024-08-15' }
+      { name: 'Online Account Opening', description: 'Description for Online Account Opening', startDate: '2024-06-01', endDate: '2024-07-15' },
+      { name: 'Digital Marketing', description: 'Description for Digital Marketing', startDate: '2024-07-01', endDate: '2024-08-15' }
     ];
   }
 

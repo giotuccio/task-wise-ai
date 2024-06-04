@@ -1,11 +1,14 @@
 <div class="task" [class.completed]="task.completed" style="color: var(--text-color);" [class.dark-theme]="isDarkTheme">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title style="color: var(--text-color);" >{{ task.title }}</mat-card-title>
-        <mat-card-subtitle>Due Date: {{ task.dueDate }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ task.description }}</p>
+  <mat-card class="task-card">
+    <mat-card-content class="task-content">
+      <div class="column">
+        <mat-card-header  style="padding: 0px;">
+          <mat-card-title style="color: var(--text-color);" >{{ task.title }}</mat-card-title>
+          <mat-card-subtitle>Project: {{ task.project }}</mat-card-subtitle>
+          <mat-card-subtitle>Due Date: {{ task.dueDate }}</mat-card-subtitle>
+        </mat-card-header>
+      </div>
+      <div class="column">
         <ng-container *ngIf="!task.assignedTo; else assignedToSection">
           <mat-form-field>
             <mat-label>Assign To</mat-label>
@@ -18,13 +21,14 @@
           <p>Assigned To: {{ task.assignedTo }}</p>
         </ng-template>
         <p [class.high]="task.priority == 'High'" [class.medium]="task.priority == 'Medium'" [class.low]="task.priority == 'Low'">Priority: {{ task.priority }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button *ngIf="!task.assignedTo" mat-button color="primary" (click)="assignEmployee()">Assign Employee</button>
-        <button *ngIf="task.assignedTo" mat-button color="primary" (click)="completeTask()">Complete</button>
-        <mat-icon *ngIf="task.completed" class="complete-icon" style="color: green !important;">check_circle</mat-icon>
-      </mat-card-actions>
-    </mat-card>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button *ngIf="!task.assignedTo" mat-button color="primary" (click)="assignEmployee()">Assign Employee</button>
+      <button *ngIf="task.assignedTo" mat-button color="primary" (click)="completeTask()">Complete</button>
+      <mat-icon *ngIf="task.completed" class="complete-icon" style="color: green !important;">check_circle</mat-icon>
+    </mat-card-actions>
+  </mat-card>
   </div>
   <mat-divider></mat-divider>
   

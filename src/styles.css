@@ -1,49 +1,63 @@
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
 
-  body {
-    background-color: var(--background-color);
-    color: var(--text-color);
-  }
-  /* Light Theme */
 /* Light Theme */
 .light-theme {
-    --background-color: #ffffff;
-    --text-color: #000000;
-  }
-  
-  /* Dark Theme */
-  .dark-theme  {
-    --background-color: #000000;
-    --text-color: #ffffff;
-  }
-  
-  .task mat-card ,
-  .task mat-card-subtitle,
-  .task mat-card-actions button,
-  .task mat-card-actions mat-icon {
-    color: var(--text-color); /* Use the text color defined by the theme */
-    background-color: var(--background-color);
-  }
-  .login-container mat-card,
-  .login-container h2{
-    color: var(--text-color); /* Use the text color defined by the theme */
-    background-color: var(--background-color);
-  }
+  --background-color: #ffffff;
+  --text-color: #000000;
+}
 
-.dashboard mat-tab-group{
-    background-color: white; /* Use the background color defined by the theme */
-    color: var(--text-color); /* Use the text color defined by the theme */
-  }
-  .dashboard mat-card{
-    color: var(--text-color); /* Use the text color defined by the theme */
-    background-color: var(--background-color);
-  }
-  .mat-drawer-inner-container
- {
-  color: var(--text-color) !important; /* Use the text color defined by the theme */
+/* Dark Theme */
+.dark-theme {
+  --background-color: #000000;
+  --text-color: #ffffff;
+}
 
-    background-color: var(--background-color) !important;/* Use the background color defined by the theme */
-  }
-.example-container mat-icon,.mdc-list-item__primary-text{
-  color: var(--text-color) !important; /* Use the text color defined by the theme */
+.task mat-card,
+.task mat-card-subtitle,
+.task mat-card-actions button,
+.task mat-card-actions mat-icon {
+  color: var(--text-color);
+  /* Use the text color defined by the theme */
+  background-color: var(--background-color);
+}
+
+.login-container mat-card,
+.login-container h2 {
+  color: var(--text-color);
+  /* Use the text color defined by the theme */
+  background-color: var(--background-color);
+}
+
+.dashboard mat-tab-group {
+  background-color: white;
+  /* Use the background color defined by the theme */
+  color: var(--text-color);
+  /* Use the text color defined by the theme */
+}
+
+.dashboard mat-card {
+  color: var(--text-color);
+  /* Use the text color defined by the theme */
+  background-color: var(--background-color);
+}
+
+.mat-drawer-inner-container {
+  color: var(--text-color) !important;
+  /* Use the text color defined by the theme */
+
+  background-color: var(--background-color) !important;
+  /* Use the background color defined by the theme */
+}
+
+.example-container mat-icon, .example-container mat-list-item a {
+  color: var(--text-color) !important;
+  /* Use the text color defined by the theme */
+
+}
+.example-container mat-divider{
+  border-top-color: var(--text-color) !important;
 
 }
