@@ -21,19 +21,36 @@
 
 
 .task-card {
-  display: flex;
+  margin: 10px;
 }
-
 .task-content {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
 }
 
 .column {
   flex: 1;
-  margin-top: 10px;
+}
+.column:nth-child(2) {
+  padding-left: 20px; /* Add padding to separate columns */
+}
+
+/* Styling for specific elements */
+.task-card mat-card-header,
+.task-card mat-card-content,
+.task-card mat-card-actions {
+  padding: 10px; /* Add padding as needed */
+}
+
+.task-card mat-card-subtitle,
+.task-card p {
+  margin: 5px 0; /* Add margin for spacing */
 }
 .full-width {
   display: flex;

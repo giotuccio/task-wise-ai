@@ -58,26 +58,34 @@ export class DashboardComponent implements AfterViewInit {
       {
         id: "1",
         project: "Online Account Opening",
-        title: "Task 2",
-        description: "Description for Task 2",
+
+        title: "Update User Profile Page",
+        description:
+          "The user profile page needs to be updated to include new fields for the user's address, phone number, and profile picture. Additionally, the layout should be optimized for mobile devices to ensure a better user experience. The changes should be consistent with the overall design of the application and should be implemented following the existing coding standards.",
         dueDate: "2024-06-15",
         priority: Priority.Low,
         status: Status.In_Progress,
         completed: false,
         assignedTo: "John",
         assignedBy: "Lucy Lu",
+
+
       },
       {
         id: "1",
         project: "Online Account Opening",
-        title: "Task 3",
-        description: "Description for Task 2",
+
+        title: "Update Button",
+        description:
+          "The user profile page needs to be updated to include new fields for the user's address, phone number, and profile picture. Additionally, the layout should be optimized for mobile devices to ensure a better user experience. The changes should be consistent with the overall design of the application and should be implemented following the existing coding standards.",
         dueDate: "2024-06-15",
         priority: Priority.Low,
         status: Status.In_Progress,
         completed: false,
         assignedTo: "John",
-        assignedBy: "Mary Jane",
+        assignedBy: "Lucy Lu",
+
+
       },
       {
         id: "1",

@@ -1,41 +1,39 @@
-<div class="task" [class.completed]="task.completed" style="color: var(--text-color);" [class.dark-theme]="isDarkTheme">
+<div class="task" [class.completed]="task.completed" [class.dark-theme]="isDarkTheme">
   <mat-card class="task-card" matRipple>
     <mat-card-content class="task-content">
-      <div class="column">
-        <mat-card-header  style="padding: 0px;">
-          <mat-card-title style="color: var(--text-color);" >{{ task.title }}</mat-card-title>
-          <mat-card-subtitle>Project: {{ task.project }}</mat-card-subtitle>
-          <mat-card-subtitle>Due Date: {{ task.dueDate }}</mat-card-subtitle>
-          <mat-card-subtitle>Description: {{ task.description }}</mat-card-subtitle>
-        </mat-card-header>
-      </div>
-      <div class="column">
-        <ng-container *ngIf="!task.assignedTo; else assignedToSection">
-          <mat-form-field (click)="$event.stopPropagation()">
-            <mat-label>Assign To</mat-label>
-            <mat-select [(ngModel)]="assignedTo" name="assignedTo">
-              <mat-option *ngFor="let employee of employees" [value]="employee">{{ employee }}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </ng-container>
-        <ng-template #assignedToSection>
-          <p>Assigned To: {{ task.assignedTo }}</p>
-        </ng-template>
-        <div>
-        Status: {{task.assignedTo ? task.status : 'New'}}
+      <div class="row">
+        <!-- Left column for title -->
+        <div class="column">
+          <mat-card-header>
+            <mat-card-title>{{ task.title }}</mat-card-title>
+          </mat-card-header>
         </div>
-        <p [class.high]="task.priority == 'High'" [class.medium]="task.priority == 'Medium'" [class.low]="task.priority == 'Low'">Priority: {{ task.priority }}</p>
+        <!-- Right column for description, due date, etc. -->
+        <div class="column">
+          <mat-card-subtitle><strong>Description:</strong> {{ task.description }}</mat-card-subtitle>
+          <mat-card-subtitle>Due Date: {{ task.dueDate }}</mat-card-subtitle>
+          <ng-container *ngIf="!task.assignedTo; else assignedToSection">
+            <mat-form-field (click)="$event.stopPropagation()">
+              <mat-label>Assign To</mat-label>
+              <mat-select [(ngModel)]="assignedTo" name="assignedTo" (selectionChange)="assignEmployee($event)">
+                <mat-option *ngFor="let employee of employees" [value]="employee">{{ employee }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+          <ng-template #assignedToSection>
+            <p>Assigned To: {{ task.assignedTo }}</p>
+          </ng-template>
+          <div>Status: {{ task.assignedTo ? task.status : 'New' }}</div>
+          <p [class.high]="task.priority == 'High'" [class.medium]="task.priority == 'Medium'" [class.low]="task.priority == 'Low'">Priority: {{ task.priority }}</p>
+        </div>
       </div>
     </mat-card-content>
-
-    <mat-card-actions class="full-width">
+    <mat-card-actions class="full-width" *ngIf="task.assignedTo">
       <mat-button-toggle-group [(ngModel)]="selectedOption" (ngModelChange)="toggleTaskStatus()" class="full-width">
         <mat-button-toggle value="inProgress">In Progress</mat-button-toggle>
         <mat-button-toggle value="sendToQA">Ready For QA</mat-button-toggle>
         <mat-button-toggle value="complete">Complete</mat-button-toggle>
       </mat-button-toggle-group>
     </mat-card-actions>
-    
   </mat-card>
-  </div>
-  
+</div>
