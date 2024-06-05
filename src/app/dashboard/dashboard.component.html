@@ -1,56 +1,52 @@
 <div class="dashboard">
   <mat-tab-group style="background-color: aliceblue;">
     <mat-tab label="Projects">
-      <mat-sidenav-container class="example-container" autosize style="    background-color: rgb(26 72 125);
-      ">
+      <button mat-button (click)="toggleSideNav()">Toggle Side Nav</button>
+      <mat-sidenav-container class="example-container" autosize>
+        <!-- Sidebar -->
         <mat-sidenav #sidenav class="example-sidenav" mode="side" [opened]="sideNavDisplayed">
-          <mat-nav-list>
-            <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-              <div style="    height: fit-content !important;
-                 display: flex;
-                 flex-direction: row;
-                 align-items: center;
-                 justify-content: flex-start;gap: 10px; margin-bottom: 10px;">
-               <img class="avatar" [src]="avatarSrc" (click)="openUpdatePhotoDialog()">
-               <p>Name</p>
-              </div>
-              <mat-divider></mat-divider>
-              <mat-list-item>
-                <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
-                <a matListItemLine routerLink="/employee-calendar">Calendar</a>
-              </mat-list-item>
-              <mat-list-item>
-                <mat-icon style="margin-right: 10px;" matListItemIcon>attach_file</mat-icon>
-                <a matListItemLine routerLink="/employee-calendar">Attachments</a>
-              </mat-list-item>
-              <mat-list-item>
-                <mat-icon style="margin-right: 10px;" matListItemIcon>timelapse</mat-icon>
-                <a matListItemLine routerLink="/employee-calendar">Time Tracking</a>
-              </mat-list-item>
-              <mat-list-item (click)="openTaskWiseAI()">
-         <img style="margin-right: 10px;" matListItemIcon src="assets/TaskWiseAI.png"/>
-                <a matListItemLine >TaskWiseAI Task</a>
-              </mat-list-item>
-            </div>
+          <div class="sidebar-header">
+            <img class="avatar" [src]="avatarSrc" (click)="openUpdatePhotoDialog()" alt="Avatar">
+            <p class="username">Name</p>
+          </div>
+          <mat-divider></mat-divider>
+          <mat-nav-list class="sidebar-nav">
+            <mat-list-item routerLink="/employee-calendar">
+              <mat-icon matListIcon>calendar_today</mat-icon>
+              <a matLine>Calendar</a>
+            </mat-list-item>
+            <mat-list-item routerLink="/employee-calendar">
+              <mat-icon matListIcon>attach_file</mat-icon>
+              <a matLine>Attachments</a>
+            </mat-list-item>
+            <mat-list-item routerLink="/employee-calendar">
+              <mat-icon matListIcon>timelapse</mat-icon>
+              <a matLine>Time Tracking</a>
+            </mat-list-item>
+            <mat-list-item (click)="openTaskWiseAI()">
+              <img style="margin-right: 10px; vertical-align: middle;" matListItemIcon src="assets/TaskWiseAI.png" />
+              <a matListItemLine>Create Task</a>
+            </mat-list-item>
           </mat-nav-list>
-          <mat-nav-list>
-          </mat-nav-list>
+          
         </mat-sidenav>
-        <div class="example-sidenav-content" style="margin: 50px; ">
+
+        <!-- Main Content -->
+        <div class="main-content">
           <div class="dashboard">
-            <mat-card style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px;">
-        
-              <!-- <div style="display: flex;align-items: end;justify-items: flex-end; justify-content: flex-end; gap: 10px;">
-  <button mat-raised-button color="primary" (click)="sortByDate()">Sort by Date</button>
-  <button mat-raised-button color="primary" (click)="sortByAssigned()">Sort by Assigned</button>
-  <button mat-raised-button color="primary" (click)="sortByPriority()">Sort by Priority</button>
-  </div> -->
+            <!-- Header -->
+            <mat-card class="dashboard-header">
+              <!-- Header content goes here -->
             </mat-card>
-            <mat-tab-group style="background-color: rgba(176, 198, 176, 0.72);" class="dashboard-tabs"
-              [(selectedIndex)]="selectedIndex" (selectedTabChange)="displayProjectTasks($event.tab.textLabel)">
+
+            <!-- Project Tabs -->
+            <mat-tab-group class="dashboard-tabs" [(selectedIndex)]="selectedIndex"
+              (selectedTabChange)="displayProjectTasks($event.tab.textLabel)">
               <mat-tab *ngFor="let project of projects" [label]="project.name"></mat-tab>
             </mat-tab-group>
           </div>
+
+          <!-- Task Tabs -->
           <div class="dashboard">
             <mat-tab-group class="dashboard-tabs">
               <mat-tab label="Assigned Tasks">
@@ -75,67 +71,53 @@
         </div>
       </mat-sidenav-container>
     </mat-tab>
+
     <mat-tab label="Campaigns">
-      <mat-sidenav-container class="example-container" autosize style="background-color: rgb(205, 215, 65);">
-        <!-- <div [class.closed]="!sideNavDisplayed" [class.opened]="sideNavDisplayed">
-          <mat-icon (click)="displaySideNav()">{{sideNavDisplayed ? 'arrow_left' : 'arrow_right'}}</mat-icon>
-        </div> -->
+      <button mat-button (click)="toggleSideNav()">Toggle Side Nav</button>
+
+      <mat-sidenav-container class="example-container" autosize>
         <mat-sidenav #sidenav class="example-sidenav" mode="side" [opened]="sideNavDisplayed">
-          <mat-nav-list>
-            <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-              <div style="    height: fit-content !important;
-              display: flex;
-              flex-direction: row;
-              align-items: center;
-              justify-content: flex-start;gap: 10px; margin-bottom: 10px;">
-            <img class="avatar" [src]="avatarSrc" (click)="openUpdatePhotoDialog()">
-            <p>Name</p>
-           </div>
-              <mat-divider></mat-divider>
-              <mat-list-item>
-                <mat-icon style="margin-right: 10px;" matListItemIcon>people</mat-icon>
-                <a matListItemLine routerLink="/employee-calendar">CRM</a>
-              </mat-list-item>
-              <mat-list-item>
-                <mat-icon style="margin-right: 10px;" matListItemIcon>email</mat-icon>
-                <a matListItemLine routerLink="/employee-calendar">Mass Email</a>
-              </mat-list-item>
-              <mat-list-item>
-                <mat-icon style="margin-right: 10px;" matListItemIcon>trending_up</mat-icon>
-                <a matListItemLine routerLink="/employee-calendar">SEO Management</a>
-              </mat-list-item>
-              <mat-list-item>
-                <mat-icon style="margin-right: 10px;" matListItemIcon>forum</mat-icon>
-                <a matListItemLine routerLink="/employee-calendar">Product Marketing</a>
-              </mat-list-item>
-              <mat-list-item (click)="openCampaignWiseAI()">
-                <img style="margin-right: 10px;" matListItemIcon src="assets/TaskWiseAI.png"/>
-                       <a matListItemLine >TaskWiseAI Campaign</a>
-                     </mat-list-item>
-            </div>
-          </mat-nav-list>
-          <mat-nav-list>
+          <div class="sidebar-header">
+            <img class="avatar" [src]="avatarSrc" (click)="openUpdatePhotoDialog()" alt="Avatar">
+            <p class="username">Name</p>
+          </div>
+          <mat-divider></mat-divider>
+          <mat-nav-list class="sidebar-nav">
+            <mat-list-item routerLink="/employee-calendar">
+              <mat-icon matListIcon>people</mat-icon>
+              <a matLine>CRM</a>
+            </mat-list-item>
+            <mat-list-item routerLink="/employee-calendar">
+              <mat-icon matListIcon>email</mat-icon>
+              <a matLine>Mass Email</a>
+            </mat-list-item>
+            <mat-list-item routerLink="/employee-calendar">
+              <mat-icon matListIcon>trending_up</mat-icon>
+              <a matLine>SEO Management</a>
+            </mat-list-item>
+            <mat-list-item routerLink="/employee-calendar">
+              <mat-icon matListIcon>forum</mat-icon>
+              <a matLine>Product Marketing</a>
+            </mat-list-item>
+            <mat-list-item (click)="openTaskWiseAI()">
+              <img style="margin-right: 10px;" matListItemIcon src="assets/TaskWiseAI.png"/>
+                     <a matListItemLine >Create Campaign</a>
+                   </mat-list-item>
           </mat-nav-list>
         </mat-sidenav>
-        <div class="example-sidenav-content" style="margin: 50px;">
+        <div class="example-sidenav-content">
           <div class="dashboard">
-            <mat-card style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px;">
-          
-              <!-- <div style="display: flex;align-items: end;justify-items: flex-end; justify-content: flex-end; gap: 10px;">
-                 <button mat-raised-button color="primary" (click)="sortByDate()">Sort by Date</button>
-                 <button mat-raised-button color="primary" (click)="sortByAssigned()">Sort by Assigned</button>
-                 <button mat-raised-button color="primary" (click)="sortByPriority()">Sort by Priority</button>
-                 </div> -->
-            </mat-card>
             <mat-tab-group class="dashboard-tabs">
               <mat-tab label="Active Campains">
-                <div *ngFor="let campaign of  campaigns">
-                  <app-campaigns *ngIf="campaign.isActive" [campaign]="campaign" (click)="openCampaignDetailsDialog(campaign)"></app-campaigns>
+                <div *ngFor="let campaign of campaigns">
+                  <app-campaigns *ngIf="campaign.isActive" [campaign]="campaign"
+                    (click)="openCampaignDetailsDialog(campaign)"></app-campaigns>
                 </div>
               </mat-tab>
               <mat-tab label="Inactive Campaigns">
-                <div *ngFor="let campaign of  campaigns">
-                  <app-campaigns *ngIf="!campaign.isActive" [campaign]="campaign"  (click)="openCampaignDetailsDialog(campaign)"></app-campaigns>
+                <div *ngFor="let campaign of campaigns">
+                  <app-campaigns *ngIf="!campaign.isActive" [campaign]="campaign"
+                    (click)="openCampaignDetailsDialog(campaign)"></app-campaigns>
                 </div>
               </mat-tab>
             </mat-tab-group>
@@ -143,10 +125,11 @@
         </div>
       </mat-sidenav-container>
     </mat-tab>
+
   </mat-tab-group>
 
 </div>
 <div class="shimmer-wrapper" (click)=" openAskTaskWise() ">
-  <img  class="shimmer-image"  src="assets/TaskAITransparent.png" width="80px"/>
+  <img class="shimmer-image" src="assets/TaskAITransparent.png" width="80px" />
   <div class="shimmer-overlay"></div>
 </div>

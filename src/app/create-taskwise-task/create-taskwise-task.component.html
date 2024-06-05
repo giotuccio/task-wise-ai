@@ -69,7 +69,7 @@
   <!-- Input Field for Sending Prompts to AI -->
   <div style="position: fixed; bottom: 100px; display: flex; width: 80%; flex-direction: row;">
     <mat-form-field class="example-full-width" style="width: 80%;">
-      <input matInput #promptInput type="text" style="width: 80%;" placeholder="Ask TaskWiseAI something...">
+      <input matInput #promptInput type="text" style="width: 80%;" placeholder="Begin by telling me more about the task you'd like to create..">
     </mat-form-field>
     <button mat-button (click)="sendMessageToAI(promptInput.value)">Send</button>
 

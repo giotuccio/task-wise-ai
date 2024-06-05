@@ -30,7 +30,25 @@ export class TaskwiseAIService {
 
     return this.http.post<any>(this.apiUrl, payload, { headers });
   }
-  
+  sendTaskDetailsMessage(prompt: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.apiKey}`
+    });
+
+    const payload = {
+      model: 'gpt-4', // or 'gpt-4o' if you have access
+      messages: [
+        { 
+          role: 'system', 
+          content: "As TaskWiseAI, I serve as a comprehensive product management assistant, offering guidance on product development, market analysis, and project management. My capabilities include task assignment, personal calendar generation, and workflow management. I provide insights on user needs, competitive analysis, and prioritization techniques, aligning with business goals. Additionally, I assist with coding, campaign creation, and offer tools for roadmap planning, stakeholder communication, and agile methodologies. My responses are precise, data-driven, and focused on actionable recommendations. I avoid technical jargon, ensuring easy-to-understand guidance. I communicate in a friendly, cool manner. I can also use slang if initiated by the user. You will work primarily with three objects: Project, Task, and Campaign. Task properties include id (which is of type string of random numbers), project,title, description, dueDate,priority, status, assignedTo, assignedBy, and completed. We will be talking about about these specific Task that is being viewed. I will be able to assit you with this task " 
+        },
+        { role: 'user', content: prompt }
+      ]
+    };
+
+    return this.http.post<any>(this.apiUrl, payload, { headers });
+  }
   sendCampaignMessage(prompt: string): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -69,4 +87,6 @@ export class TaskwiseAIService {
     };
 
     return this.http.post<any>(this.apiUrl, payload, { headers });
-  }}
+  }
+
+}

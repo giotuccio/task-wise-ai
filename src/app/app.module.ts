@@ -69,6 +69,7 @@ import { CreateTaskwiseCampaignComponent } from './create-taskwise-campaign/crea
 import { AskTaskwiseDialogComponent } from './ask-taskwise-dialog/ask-taskwise-dialog.component';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { UpdatePhotoDialogComponent } from './update-photo-dialog/update-photo-dialog.component';
+import { TaskwiseTaskDetailsAssistComponent } from './taskwise-task-details-assist/taskwise-task-details-assist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -94,6 +95,7 @@ import { UpdatePhotoDialogComponent } from './update-photo-dialog/update-photo-d
     AskTaskwiseDialogComponent,
     BarChartComponent,
     UpdatePhotoDialogComponent,
+    TaskwiseTaskDetailsAssistComponent,
   ],
   imports: [
     BrowserModule,
