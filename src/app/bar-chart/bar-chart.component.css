@@ -1,0 +1,33 @@
+.chart-container {
+    width: 100%;
+    height: auto;
+    margin: 200px auto;
+  }
+  
+  .bars {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 300px; /* Adjust height as needed */
+  }
+  
+  .bar {
+    width: 100%;
+    background-color: #2196f3;
+    margin-right: 10px; /* Adjust margin between bars */
+    position: relative;
+    transition: width 0.5s;
+  }
+  
+  .bar-label {
+    position: absolute;
+    bottom: -20px; /* Adjust bottom position as needed */
+    left: 50%;
+    text-wrap: nowrap;
+    transform: translateX(-50%);
+    color: black;
+    font-size: 14px;
+  }
+  
+  /* You can add additional styling as needed */
+  

@@ -13,6 +13,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 })
 export class CreateTaskwiseTaskComponent {
   responseFromAI: string = "";
+  prompt: string = ""
 
   newTask!: Task;
   isWaiting = false;
@@ -21,6 +22,7 @@ export class CreateTaskwiseTaskComponent {
 
   sendMessageToAI(prompt: string): void {
     this.isWaiting = true;
+    this.prompt = prompt;
     this.taskwiseAIService.sendTaskMessage(prompt).subscribe(response => {
       if(response)
         this.isWaiting = false;
@@ -67,7 +69,7 @@ export class CreateTaskwiseTaskComponent {
     // Provide more specific details about the task in the prompt
     const prompt = '{"message": "create a new task with the following details changed: title, description, due date, priority, assigned to, assigned by, and project."}';
     
-    this.sendMessageToAI(prompt);
+    this.sendMessageToAI('configure that task with the following details enhance: title, description' + this.prompt);
   }
   
   

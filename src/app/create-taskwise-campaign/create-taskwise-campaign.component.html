@@ -1,3 +1,5 @@
+<h1 mat-dialog-title>AI Campaign Assistant</h1>
+
 <div style="position: relative;">
     <!-- Display AI Response -->
     <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
@@ -17,6 +19,10 @@
           <td><strong>Description:</strong></td>
           <td><textarea [(ngModel)]="newCampaign.description" class="editable-field"></textarea></td>
         </tr>
+        <tr>
+            <td><strong>End Date:</strong></td>
+            <td><input type="date" [(ngModel)]="newCampaign.startDate" class="editable-field"></td>
+          </tr>
         <tr>
           <td><strong>End Date:</strong></td>
           <td><input type="date" [(ngModel)]="newCampaign.endDate" class="editable-field"></td>

@@ -11,9 +11,8 @@
                  flex-direction: row;
                  align-items: center;
                  justify-content: flex-start;gap: 10px; margin-bottom: 10px;">
-                <img width="50" src="https://cdn-icons-png.flaticon.com/256/147/147144.png" />
-                <p routerLink="/employee-calendar">Name
-                </p>
+               <img class="avatar" [src]="avatarSrc" (click)="openUpdatePhotoDialog()">
+               <p>Name</p>
               </div>
               <mat-divider></mat-divider>
               <mat-list-item>
@@ -30,7 +29,7 @@
               </mat-list-item>
               <mat-list-item (click)="openTaskWiseAI()">
          <img style="margin-right: 10px;" matListItemIcon src="assets/TaskWiseAI.png"/>
-                <a matListItemLine >TaskWiseAI</a>
+                <a matListItemLine >TaskWiseAI Task</a>
               </mat-list-item>
             </div>
           </mat-nav-list>
@@ -40,9 +39,7 @@
         <div class="example-sidenav-content" style="margin: 50px; ">
           <div class="dashboard">
             <mat-card style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px;">
-              <div style="justify-items: flex-start;">
-                <button mat-raised-button color="primary" (click)="openCreateTaskDialog()">Create Task</button>
-              </div>
+        
               <!-- <div style="display: flex;align-items: end;justify-items: flex-end; justify-content: flex-end; gap: 10px;">
   <button mat-raised-button color="primary" (click)="sortByDate()">Sort by Date</button>
   <button mat-raised-button color="primary" (click)="sortByAssigned()">Sort by Assigned</button>
@@ -87,14 +84,13 @@
           <mat-nav-list>
             <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
               <div style="    height: fit-content !important;
-           display: flex;
-           flex-direction: row;
-           align-items: center;
-           justify-content: flex-start;gap: 10px; margin-bottom: 10px;">
-                <img width="50" src="https://cdn-icons-png.flaticon.com/256/147/147144.png" />
-                <p routerLink="/employee-calendar">Name
-                </p>
-              </div>
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: flex-start;gap: 10px; margin-bottom: 10px;">
+            <img class="avatar" [src]="avatarSrc" (click)="openUpdatePhotoDialog()">
+            <p>Name</p>
+           </div>
               <mat-divider></mat-divider>
               <mat-list-item>
                 <mat-icon style="margin-right: 10px;" matListItemIcon>people</mat-icon>
@@ -114,7 +110,7 @@
               </mat-list-item>
               <mat-list-item (click)="openCampaignWiseAI()">
                 <img style="margin-right: 10px;" matListItemIcon src="assets/TaskWiseAI.png"/>
-                       <a matListItemLine >TaskWiseAI</a>
+                       <a matListItemLine >TaskWiseAI Campaign</a>
                      </mat-list-item>
             </div>
           </mat-nav-list>
@@ -124,9 +120,7 @@
         <div class="example-sidenav-content" style="margin: 50px;">
           <div class="dashboard">
             <mat-card style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px;">
-              <div style="justify-items: flex-start;">
-                <button mat-raised-button color="primary" (click)="openCreateTaskDialog()">Create Campaign</button>
-              </div>
+          
               <!-- <div style="display: flex;align-items: end;justify-items: flex-end; justify-content: flex-end; gap: 10px;">
                  <button mat-raised-button color="primary" (click)="sortByDate()">Sort by Date</button>
                  <button mat-raised-button color="primary" (click)="sortByAssigned()">Sort by Assigned</button>
@@ -151,4 +145,8 @@
     </mat-tab>
   </mat-tab-group>
 
+</div>
+<div class="shimmer-wrapper" (click)=" openAskTaskWise() ">
+  <img  class="shimmer-image"  src="assets/TaskAITransparent.png" width="80px"/>
+  <div class="shimmer-overlay"></div>
 </div>

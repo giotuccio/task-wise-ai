@@ -66,6 +66,9 @@ import { AddNoteDialogComponent } from './task-notes/add-note/add-note.component
 import { CampaignsComponent } from './campaigns/campaigns.component';
 import { CampaignDetailsDialogComponent } from './campaign-details-dialog/campaign-details-dialog.component';
 import { CreateTaskwiseCampaignComponent } from './create-taskwise-campaign/create-taskwise-campaign.component';
+import { AskTaskwiseDialogComponent } from './ask-taskwise-dialog/ask-taskwise-dialog.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { UpdatePhotoDialogComponent } from './update-photo-dialog/update-photo-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,6 +91,9 @@ import { CreateTaskwiseCampaignComponent } from './create-taskwise-campaign/crea
     CampaignsComponent,
     CampaignDetailsDialogComponent,
     CreateTaskwiseCampaignComponent,
+    AskTaskwiseDialogComponent,
+    BarChartComponent,
+    UpdatePhotoDialogComponent,
   ],
   imports: [
     BrowserModule,

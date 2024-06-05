@@ -12,6 +12,8 @@ import { Campaign } from '../objects/campaign.model';
 import { CampaignDetailsDialogComponent } from '../campaign-details-dialog/campaign-details-dialog.component';
 import { CreateTaskwiseTaskComponent } from '../create-taskwise-task/create-taskwise-task.component';
 import { CreateTaskwiseCampaignComponent } from '../create-taskwise-campaign/create-taskwise-campaign.component';
+import { AskTaskwiseDialogComponent } from '../ask-taskwise-dialog/ask-taskwise-dialog.component';
+import { UpdatePhotoDialogComponent } from '../update-photo-dialog/update-photo-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +34,7 @@ export class DashboardComponent implements AfterViewInit {
   displayedTasks: Task[] = [];
   selectedIndex = 0;
   selectedProjectName: string | null = null;
-
+  avatarSrc = 'https://cdn-icons-png.flaticon.com/256/147/147144.png';
   constructor(private dialog: MatDialog) {
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data
@@ -154,7 +156,20 @@ export class DashboardComponent implements AfterViewInit {
     });
   }
 
+  openUpdatePhotoDialog(): void {
+    const dialogRef = this.dialog.open(UpdatePhotoDialogComponent, {
+      width: '300px',
+      data: { }
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Update user's photo here
+        // For demo purposes, let's assume the photo was uploaded successfully and update the avatar source
+        this.avatarSrc = URL.createObjectURL(result);
+      }
+    });
+  }
 
   openTaskDetailsDialog(task: Task) {
     const dialogRef = this.dialog.open(TaskDetailsDialogComponent, {
@@ -177,7 +192,27 @@ export class DashboardComponent implements AfterViewInit {
       height: '80vh'
     });
   }
-
+  openAskTaskWise() {
+    const dialogRef = this.dialog.open(AskTaskwiseDialogComponent, {
+      data: {
+        campaigns: this.campaigns,
+        projects: this.projects,
+        tasks: this.tasks
+      },
+      width: '80%',
+      height: '80vh'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      const newTask = dialogRef.componentInstance?.newTask;
+      // Check if a new task was added
+      if (newTask) {
+        console.log(result, newTask);
+        // Update the tasks array or perform any other necessary actions
+        this.tasks.push(newTask);
+      }
+    });
+  }
   openTaskWiseAI() {
     const dialogRef = this.dialog.open(CreateTaskwiseTaskComponent, {
       data: {
@@ -190,14 +225,16 @@ export class DashboardComponent implements AfterViewInit {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      const newTask = dialogRef.componentInstance.newTask
+      const newTask = dialogRef.componentInstance?.newTask;
       // Check if a new task was added
+      if (newTask) {
         console.log(result, newTask);
-        
         // Update the tasks array or perform any other necessary actions
         this.tasks.push(newTask);
+      }
     });
   }
+  
   openCampaignWiseAI() {
     const dialogRef = this.dialog.open(CreateTaskwiseCampaignComponent, {
       data: {
@@ -210,12 +247,14 @@ export class DashboardComponent implements AfterViewInit {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      const newCampaign = dialogRef.componentInstance.newCampaign
-      // Check if a new task was added
+      const newCampaign = dialogRef.componentInstance?.newCampaign;
+      // Check if a new campaign was added
+      if (newCampaign) {
         console.log(result, newCampaign);
-        
-        // Update the tasks array or perform any other necessary actions
+        // Update the campaigns array or perform any other necessary actions
         this.campaigns.push(newCampaign);
+      }
     });
   }
+  
 }

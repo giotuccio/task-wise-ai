@@ -42,7 +42,7 @@ export class CreateTaskwiseCampaignComponent {
           description: taskDetails.description,
           startDate: taskDetails.startDate,
           endDate: taskDetails.endDate,
-          isActive: taskDetails.isActive,
+          isActive: taskDetails.isActive == 'true' ? true : false,
         };
 
         // Adding the new task

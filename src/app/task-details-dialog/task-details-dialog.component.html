@@ -6,14 +6,38 @@
     <mat-tab label="Task Details">
         <ng-template matTabContent>
             <div mat-dialog-content>
-                <p><strong>Title:</strong> {{ task.title }}</p>
-                <p><strong>Description:</strong> {{ task.description }}</p>
-                <p><strong>Assigned By:</strong> {{ task.assignedBy }}</p>
-                <p><strong>Due Date:</strong> {{ task.dueDate }}</p>
-                <p *ngIf="task.assignedTo"><strong>Assigned To:</strong> {{ task.assignedTo }}</p>
-                <p *ngIf="!task.assignedTo"><strong>Status:</strong> Unassigned</p>
-                <p><strong>Priority:</strong> {{ task.priority }}</p>
-            </div>
+                <table class="task-table">
+                  <tr>
+                    <td><strong>Title:</strong></td>
+                    <td>{{ task.title }}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Description:</strong></td>
+                    <td>{{ task.description }}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Assigned By:</strong></td>
+                    <td>{{ task.assignedBy }}</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Due Date:</strong></td>
+                    <td>{{ task.dueDate }}</td>
+                  </tr>
+                  <tr *ngIf="task.assignedTo">
+                    <td><strong>Assigned To:</strong></td>
+                    <td>{{ task.assignedTo }}</td>
+                  </tr>
+                  <tr *ngIf="!task.assignedTo">
+                    <td><strong>Status:</strong></td>
+                    <td>Unassigned</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Priority:</strong></td>
+                    <td>{{ task.priority }}</td>
+                  </tr>
+                </table>
+              </div>
+              
         </ng-template>
     </mat-tab>
     <mat-tab label="Manage">

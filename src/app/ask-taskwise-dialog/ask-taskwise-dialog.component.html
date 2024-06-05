@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>TaskWiseAI Personal Assistant</h1>
+
+<div style="position: relative;">
+    <!-- Display AI Response -->
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+      <mat-spinner *ngIf="isWaiting"></mat-spinner>
+    </div>
+    
+  
+    <div style="padding: 10px;" *ngIf="responseFromAI">
+      <h2>TaskWise Response:</h2>
+{{responseFromAI}}
+      <!-- Your dialog content here -->
+ 
+    </div>
+    <div style="display: flex; justify-items: center;justify-content: center;">
+  
+    <button style="    font-size: 11px;" *ngIf="responseFromAI" mat-button (click)="regenerateResponse()"><mat-icon>refresh</mat-icon>Regenerate</button>
+  </div>
+    <!-- Input Field for Sending Prompts to AI -->
+    <div style="position: fixed; bottom: 100px; display: flex; width: 80%; flex-direction: row;">
+      <mat-form-field class="example-full-width" style="width: 80%;">
+        <input matInput #promptInput type="text" style="width: 80%;" placeholder="Ask TaskWiseAI something...">
+      </mat-form-field>
+      <button mat-button (click)="sendMessageToAI(promptInput.value)">Send</button>
+  
+      <!-- Regenerate button -->
+    </div>
+  </div>
+  

@@ -1,0 +1,8 @@
+<div class="chart-container">
+    <div class="bars">
+      <div *ngFor="let data of chartData" class="bar"  [style.height.px]="data.value" [style.background-color]="data.color">
+        <span class="bar-label">{{ data.label }}: {{data.value | number}}</span>
+      </div>
+    </div>
+  </div>
+  
