@@ -7,6 +7,10 @@ import { CreateTaskDialogComponent } from '../create-task-dialog/create-task-dia
 import { Priority } from '../objects/priority.model';
 import { MatSidenav } from '@angular/material/sidenav';
 import { TaskDetailsDialogComponent } from '../task-details-dialog/task-details-dialog.component';
+import { Status } from '../objects/status.model';
+import { Campaign } from '../objects/campaign.model';
+import { CampaignDetailsDialogComponent } from '../campaign-details-dialog/campaign-details-dialog.component';
+import { AskTalkwiseComponent } from '../ask-talkwise/ask-talkwise.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +19,7 @@ import { TaskDetailsDialogComponent } from '../task-details-dialog/task-details-
 })
 export class DashboardComponent implements AfterViewInit {
   tasks: Task[] = []; // Initialize with some tasks
+  campaigns: Campaign[] = []; // Initialize with some campaigns
   projects: Project[] = []; // Initialize with some projects
   selectedProject: Project | null = null;
   @ViewChild('sidenav') sidenav!: MatSidenav;
@@ -31,17 +36,26 @@ export class DashboardComponent implements AfterViewInit {
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data
     this.tasks = [
-      { project: 'Online Account Opening', title: 'Fix That', description: 'Description for Task 1', dueDate: '2024-06-10', priority: Priority.High, completed: false, assignedTo: 'Gio',assignedBy: 'Lucy Lu' },
-      { project: 'Online Account Opening', title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John',assignedBy: 'Lucy Lu' },
-      { project: 'Online Account Opening', title: 'Task 3', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John',assignedBy: 'Mary Jane' },
-      { project: 'Digital Marketing', title: 'Task 4', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John',assignedBy: 'Lucy Lu' },
-      { project: 'Online Account Opening', title: 'Task 5', description: 'Description for Task 2', dueDate: '2023-06-15', priority: Priority.Low, completed: false,assignedBy: 'Mary Jane' },
-      { project: 'Online Account Opening', title: 'Task 6', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' ,assignedBy: 'Lucy Lu'},
-      { project: 'Online Account Opening', title: 'Task 7', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false ,assignedBy: 'Lucy Lu'},
-      { project: 'Online Account Opening', title: 'Task 8', description: 'Description for Task 2', dueDate: '2025-06-15', priority: Priority.Medium, completed: false, assignedTo: 'John',assignedBy: 'Mary Jane' },
-      { project: 'Digital Marketing', title: 'Task 9', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John' ,assignedBy: 'Lucy Lu'},
-      { project: 'Online Account Opening', title: 'Task 10', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, assignedTo: 'John',assignedBy: 'Lucy Lu' },
-      { project: 'Digital Marketing', title: 'Task 11', description: 'Description for Task 3', dueDate: '2024-06-20', priority: Priority.Medium, completed: false }
+      {id: '1', project: 'Online Account Opening', title: 'Fix That', description: 'Description for Task 1', dueDate: '2024-06-10', priority: Priority.High, status: Status.In_Progress, completed: false, assignedTo: 'Gio', assignedBy: 'Lucy Lu' },
+      {id: '1', project: 'Online Account Opening', title: 'Task 2', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, status: Status.In_Progress, completed: false, assignedTo: 'John', assignedBy: 'Lucy Lu' },
+      {id: '1', project: 'Online Account Opening', title: 'Task 3', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, status: Status.In_Progress, completed: false, assignedTo: 'John', assignedBy: 'Mary Jane' },
+      { id: '1',project: 'Digital Marketing', title: 'Task 4', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, status: Status.In_Progress, completed: false, assignedTo: 'John', assignedBy: 'Lucy Lu' },
+      {id: '1', project: 'Online Account Opening', title: 'Task 5', description: 'Description for Task 2', dueDate: '2023-06-15', priority: Priority.Low, status: Status.In_Progress, completed: false, assignedBy: 'Mary Jane' },
+      {id: '1', project: 'Online Account Opening', title: 'Task 6', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, status: Status.In_Progress, completed: false, assignedTo: 'John', assignedBy: 'Lucy Lu' },
+      {id: '1', project: 'Online Account Opening', title: 'Task 7', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, status: Status.In_Progress, completed: false, assignedBy: 'Lucy Lu' },
+      {id: '1', project: 'Online Account Opening', title: 'Task 8', description: 'Description for Task 2', dueDate: '2025-06-15', priority: Priority.Medium, status: Status.In_Progress, completed: false, assignedTo: 'John', assignedBy: 'Mary Jane' },
+      { id: '1',project: 'Digital Marketing', title: 'Task 9', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, completed: false, status: Status.In_Progress, assignedTo: 'John', assignedBy: 'Lucy Lu' },
+      { id: '1',project: 'Online Account Opening', title: 'Task 10', description: 'Description for Task 2', dueDate: '2024-06-15', priority: Priority.Low, status: Status.In_Progress, completed: false, assignedTo: 'John', assignedBy: 'Lucy Lu' },
+      { id: '2',project: 'Digital Marketing', title: 'Task 11', description: 'Description for Task 3', dueDate: '2024-06-20', duration: 1000, priority: Priority.Medium, status: Status.New, completed: false }
+    ];
+    this.campaigns = [
+
+      { name: 'Campaign 1', description: 'Description for Online Account Opening', startDate: '2024-06-01', endDate: '2024-07-15', isActive: true },
+      { name: 'Campaign 2', description: 'Description for Online Account Opening', startDate: '2024-06-01', endDate: '2024-07-15', isActive: false },
+      { name: 'Campaign 3', description: 'Description for Online Account Opening', startDate: '2024-06-01', endDate: '2024-07-15', isActive: true },
+      { name: 'Campaign 4', description: 'Description for Online Account Opening', startDate: '2024-06-01', endDate: '2024-07-15', isActive: false },
+      { name: 'Campaign 5', description: 'Description for Online Account Opening', startDate: '2024-06-01', endDate: '2024-07-15', isActive: true },
+
     ];
 
     this.projects = [
@@ -99,8 +113,13 @@ export class DashboardComponent implements AfterViewInit {
   getCompletedTasks(projectName: string): Task[] {
     return this.tasks.filter(task => task.project === projectName && task.assignedTo && task.completed);
   }
+
+  getActiveCampaigns(campaignActive: boolean): Campaign[] {
+    return this.campaigns.filter(campaign => campaign.isActive === campaignActive)
+  }
   completeTask(task: Task) {
     task.completed = true;
+    task.status = Status.Complete
   }
   sortByDate() {
     this.tasks.sort((a, b) => {
@@ -136,12 +155,46 @@ export class DashboardComponent implements AfterViewInit {
 
 
 
-openTaskDetailsDialog(task: Task) {
-  this.dialog.open(TaskDetailsDialogComponent, {
-    data: task,
-    width: '80%',
-    height: '80vh'
-  });
-}
+  openTaskDetailsDialog(task: Task) {
+    const dialogRef = this.dialog.open(TaskDetailsDialogComponent, {
+      data: task,
+      width: '80%',
+      height: '80vh'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      // If result is not null, add the new task to the list
+      // this.tasks.push(dialogRef.componentInstance.task);
+      console.log(dialogRef.componentInstance.task);
 
+    });
+  }
+  openCampaignDetailsDialog(campaign: Campaign) {
+    this.dialog.open(CampaignDetailsDialogComponent, {
+      data: campaign,
+      width: '80%',
+      height: '80vh'
+    });
+  }
+
+  openTaskWiseAI() {
+    const dialogRef = this.dialog.open(AskTalkwiseComponent, {
+      data: {
+        campaigns: this.campaigns,
+        projects: this.projects,
+        tasks: this.tasks
+      },
+      width: '80%',
+      height: '80vh'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      const newTask = dialogRef.componentInstance.newTask
+      // Check if a new task was added
+        console.log(result, newTask);
+        
+        // Update the tasks array or perform any other necessary actions
+        this.tasks.push(newTask);
+    });
+  }
+  
 }

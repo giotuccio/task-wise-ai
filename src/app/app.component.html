@@ -1,11 +1,14 @@
 <div style="padding: 10px;">
 
-<header style="display: flex; flex-direction: row; justify-content: space-between;">
+<header style="display: flex; flex-direction: row; justify-content: end;">
   <!-- Your header content goes here -->
-  <h1 routerLink="/dashboard">TaskWiseAI</h1>
-  <button mat-button (click)="toggleTheme()">
+  <div class="shimmer-wrapper">
+    <img src="assets/TaskWiseLogo.png" width="120px" class="shimmer-image" />
+    <div class="shimmer-overlay"></div>
+  </div>
+  <!-- <button mat-button (click)="toggleTheme()">
     <mat-icon [ngClass]="isDarkTheme ? 'dark-icon' : 'light-icon'">brightness_6</mat-icon>
-  </button>
+  </button> -->
   
 </header>
 

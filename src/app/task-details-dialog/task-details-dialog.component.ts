@@ -8,5 +8,9 @@ import { Task } from '../objects/task.model';
   styleUrls: ['./task-details-dialog.component.css']
 })
 export class TaskDetailsDialogComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public task: Task) { }
+  newTask!: Task
+  taskId: string = "";
+  constructor(@Inject(MAT_DIALOG_DATA) public task: Task) { 
+    task = this.newTask;
+  }
 }

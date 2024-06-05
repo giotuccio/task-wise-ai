@@ -1,0 +1,63 @@
+.employee-calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .mat-calendar {
+    width: 300px; /* Adjust width as needed */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .mat-calendar-header {
+    background-color: #0078d4; /* Outlook blue color */
+    color: #fff;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  
+  .mat-calendar-body-cell {
+    font-size: 14px;
+  }
+  
+  .mat-calendar-table {
+    width: 100%;
+  }
+  
+  .mat-calendar-table-header {
+    font-weight: bold;
+  }
+  
+  .mat-calendar-table-header-row {
+    background-color: #f0f0f0; /* Light gray background */
+  }
+  
+  .mat-calendar-body {
+    padding: 10px;
+  }
+  
+  .mat-calendar-body-row {
+    height: 40px; /* Adjust row height as needed */
+  }
+  
+  .mat-calendar-body-cell-content {
+    padding: 5px;
+  }
+  
+  .availability-container {
+    margin-top: 20px;
+  }
+  
+  .availability-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .availability-details {
+    font-size: 16px;
+  }
+  

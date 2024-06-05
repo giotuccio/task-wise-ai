@@ -1,99 +1,150 @@
 <div class="dashboard">
-  <div [class.closed]="!sideNavDisplayed" [class.opened]="sideNavDisplayed"><mat-icon
-      (click)="displaySideNav()">{{sideNavDisplayed ? 'close' : 'arrow_right'}}</mat-icon>
-  </div>
-
-  <mat-sidenav-container class="example-container" autosize>
-    <mat-sidenav #sidenav class="example-sidenav" mode="side" [opened]="sideNavDisplayed">
-      <mat-nav-list>
-
-        <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
-
-          <div style="    height: fit-content !important;
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: flex-start;gap: 10px; margin-bottom: 10px;">
-            <img width="50" src="https://cdn-icons-png.flaticon.com/256/147/147144.png" />
-            <p routerLink="/employee-calendar">Name
-            </p>
+  <mat-tab-group style="background-color: aliceblue;">
+    <mat-tab label="Projects">
+      <mat-sidenav-container class="example-container" autosize style="    background-color: rgb(26 72 125);
+      ">
+        <mat-sidenav #sidenav class="example-sidenav" mode="side" [opened]="sideNavDisplayed">
+          <mat-nav-list>
+            <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+              <div style="    height: fit-content !important;
+                 display: flex;
+                 flex-direction: row;
+                 align-items: center;
+                 justify-content: flex-start;gap: 10px; margin-bottom: 10px;">
+                <img width="50" src="https://cdn-icons-png.flaticon.com/256/147/147144.png" />
+                <p routerLink="/employee-calendar">Name
+                </p>
+              </div>
+              <mat-divider></mat-divider>
+              <mat-list-item>
+                <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
+                <a matListItemLine routerLink="/employee-calendar">Calendar</a>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon style="margin-right: 10px;" matListItemIcon>attach_file</mat-icon>
+                <a matListItemLine routerLink="/employee-calendar">Attachments</a>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon style="margin-right: 10px;" matListItemIcon>timelapse</mat-icon>
+                <a matListItemLine routerLink="/employee-calendar">Time Tracking</a>
+              </mat-list-item>
+              <mat-list-item (click)="openTaskWiseAI()">
+         <img style="margin-right: 10px;" matListItemIcon src="assets/TaskWiseAI.png"/>
+                <a matListItemLine >TaskWiseAI</a>
+              </mat-list-item>
+            </div>
+          </mat-nav-list>
+          <mat-nav-list>
+          </mat-nav-list>
+        </mat-sidenav>
+        <div class="example-sidenav-content" style="margin: 50px; ">
+          <div class="dashboard">
+            <mat-card style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px;">
+              <div style="justify-items: flex-start;">
+                <button mat-raised-button color="primary" (click)="openCreateTaskDialog()">Create Task</button>
+              </div>
+              <!-- <div style="display: flex;align-items: end;justify-items: flex-end; justify-content: flex-end; gap: 10px;">
+  <button mat-raised-button color="primary" (click)="sortByDate()">Sort by Date</button>
+  <button mat-raised-button color="primary" (click)="sortByAssigned()">Sort by Assigned</button>
+  <button mat-raised-button color="primary" (click)="sortByPriority()">Sort by Priority</button>
+  </div> -->
+            </mat-card>
+            <mat-tab-group style="background-color: rgba(176, 198, 176, 0.72);" class="dashboard-tabs"
+              [(selectedIndex)]="selectedIndex" (selectedTabChange)="displayProjectTasks($event.tab.textLabel)">
+              <mat-tab *ngFor="let project of projects" [label]="project.name"></mat-tab>
+            </mat-tab-group>
           </div>
-          <mat-divider></mat-divider>
-
-          <mat-list-item>
-            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
-            <a matListItemLine routerLink="/employee-calendar">Employee Calendar</a>
-
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
-            <a matListItemLine routerLink="/employee-calendar">Attachments</a>
-
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
-            <a matListItemLine routerLink="/employee-calendar">Time Tracking</a>
-
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
-            <a matListItemLine routerLink="/employee-calendar">Task Reminders</a>
-
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
-            <a matListItemLine routerLink="/employee-calendar">Employee Calendar</a>
-
-          </mat-list-item>
-          <mat-list-item>
-            <mat-icon style="margin-right: 10px;" matListItemIcon>calendar_today</mat-icon>
-            <a matListItemLine routerLink="/employee-calendar">Sync</a>
-
-          </mat-list-item>
+          <div class="dashboard">
+            <mat-tab-group class="dashboard-tabs">
+              <mat-tab label="Assigned Tasks">
+                <div *ngFor="let task of getAssignedTasks(selectedProjectName ?? '')">
+                  <app-task [task]="task" (complete)="completeTask(task)"
+                    (click)="openTaskDetailsDialog(task)"></app-task>
+                </div>
+              </mat-tab>
+              <mat-tab label="Unassigned Tasks">
+                <div *ngFor="let task of getPendingTasks(selectedProjectName ?? '')">
+                  <app-task [task]="task" (complete)="completeTask(task)"
+                    (click)="openTaskDetailsDialog(task)"></app-task>
+                </div>
+              </mat-tab>
+              <mat-tab label="Completed Tasks">
+                <div *ngFor="let task of getCompletedTasks(selectedProjectName ?? '')">
+                  <app-task *ngIf="task.completed" [task]="task" (click)="openTaskDetailsDialog(task)"></app-task>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
         </div>
-      </mat-nav-list>
-      <mat-nav-list>
-      </mat-nav-list>
-    </mat-sidenav>
-    <div class="example-sidenav-content">
-      <div class="dashboard">
-        <mat-tab-group class="dashboard-tabs" [(selectedIndex)]="selectedIndex"
-          (selectedTabChange)="displayProjectTasks($event.tab.textLabel)">
-          <mat-tab *ngFor="let project of projects" [label]="project.name"></mat-tab>
-        </mat-tab-group>
-      </div>
-      <div class="dashboard">
-        <mat-card style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px;">
-          <div style="justify-items: flex-start;">
-            <button mat-raised-button color="primary" (click)="openCreateTaskDialog()">Create Task</button>
+      </mat-sidenav-container>
+    </mat-tab>
+    <mat-tab label="Campaigns">
+      <mat-sidenav-container class="example-container" autosize style="background-color: rgb(205, 215, 65);">
+        <!-- <div [class.closed]="!sideNavDisplayed" [class.opened]="sideNavDisplayed">
+          <mat-icon (click)="displaySideNav()">{{sideNavDisplayed ? 'arrow_left' : 'arrow_right'}}</mat-icon>
+        </div> -->
+        <mat-sidenav #sidenav class="example-sidenav" mode="side" [opened]="sideNavDisplayed">
+          <mat-nav-list>
+            <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+              <div style="    height: fit-content !important;
+           display: flex;
+           flex-direction: row;
+           align-items: center;
+           justify-content: flex-start;gap: 10px; margin-bottom: 10px;">
+                <img width="50" src="https://cdn-icons-png.flaticon.com/256/147/147144.png" />
+                <p routerLink="/employee-calendar">Name
+                </p>
+              </div>
+              <mat-divider></mat-divider>
+              <mat-list-item>
+                <mat-icon style="margin-right: 10px;" matListItemIcon>people</mat-icon>
+                <a matListItemLine routerLink="/employee-calendar">CRM</a>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon style="margin-right: 10px;" matListItemIcon>email</mat-icon>
+                <a matListItemLine routerLink="/employee-calendar">Mass Email</a>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon style="margin-right: 10px;" matListItemIcon>trending_up</mat-icon>
+                <a matListItemLine routerLink="/employee-calendar">SEO Management</a>
+              </mat-list-item>
+              <mat-list-item>
+                <mat-icon style="margin-right: 10px;" matListItemIcon>forum</mat-icon>
+                <a matListItemLine routerLink="/employee-calendar">Product Marketing</a>
+              </mat-list-item>
+            </div>
+          </mat-nav-list>
+          <mat-nav-list>
+          </mat-nav-list>
+        </mat-sidenav>
+        <div class="example-sidenav-content" style="margin: 50px;">
+          <div class="dashboard">
+            <mat-card style="display: flex; flex-direction: row; justify-content: space-between; padding: 10px;">
+              <div style="justify-items: flex-start;">
+                <button mat-raised-button color="primary" (click)="openCreateTaskDialog()">Create Campaign</button>
+              </div>
+              <!-- <div style="display: flex;align-items: end;justify-items: flex-end; justify-content: flex-end; gap: 10px;">
+                 <button mat-raised-button color="primary" (click)="sortByDate()">Sort by Date</button>
+                 <button mat-raised-button color="primary" (click)="sortByAssigned()">Sort by Assigned</button>
+                 <button mat-raised-button color="primary" (click)="sortByPriority()">Sort by Priority</button>
+                 </div> -->
+            </mat-card>
+            <mat-tab-group class="dashboard-tabs">
+              <mat-tab label="Active Campains">
+                <div *ngFor="let campaign of  campaigns">
+                  <app-campaigns *ngIf="campaign.isActive" [campaign]="campaign" (click)="openCampaignDetailsDialog(campaign)"></app-campaigns>
+                </div>
+              </mat-tab>
+              <mat-tab label="Inactive Campaigns">
+                <div *ngFor="let campaign of  campaigns">
+                  <app-campaigns *ngIf="!campaign.isActive" [campaign]="campaign"  (click)="openCampaignDetailsDialog(campaign)"></app-campaigns>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
           </div>
-          <div style="display: flex;align-items: end;justify-items: flex-end; justify-content: flex-end; gap: 10px;">
-            <button mat-raised-button color="primary" (click)="sortByDate()">Sort by Date</button>
-            <button mat-raised-button color="primary" (click)="sortByAssigned()">Sort by Assigned</button>
-            <button mat-raised-button color="primary" (click)="sortByPriority()">Sort by Priority</button>
-          </div>
-        </mat-card>
-        <mat-tab-group class="dashboard-tabs">
-          <mat-tab label="Assigned Tasks">
-            <div *ngFor="let task of getAssignedTasks(selectedProjectName ?? '')">
-              <app-task [task]="task" (complete)="completeTask(task)" (click)="openTaskDetailsDialog(task)"></app-task>
-            </div>
-          </mat-tab>
-          <mat-tab label="Unassigned Tasks">
-            <div *ngFor="let task of getPendingTasks(selectedProjectName ?? '')">
-              <app-task [task]="task" (complete)="completeTask(task)" (click)="openTaskDetailsDialog(task)"></app-task>
-            </div>
-          </mat-tab>
+        </div>
+      </mat-sidenav-container>
+    </mat-tab>
+  </mat-tab-group>
 
-          <mat-tab label="Completed Tasks">
-            <div *ngFor="let task of getCompletedTasks(selectedProjectName ?? '')">
-              <app-task *ngIf="task.completed" [task]="task" (click)="openTaskDetailsDialog(task)"></app-task>
-            </div>
-          </mat-tab>
-        </mat-tab-group>
-      </div>
-
-    </div>
-
-  </mat-sidenav-container>
 </div>

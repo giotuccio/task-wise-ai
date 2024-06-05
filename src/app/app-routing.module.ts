@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeCalendarComponent } from './employee-calendar/employee-calendar.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard'; // Import your AuthGuard
+import { TaskDetailsDialogComponent } from './task-details-dialog/task-details-dialog.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
     component: DashboardComponent, 
     // canActivate: [AuthGuard] 
   },
+  { path: 'task-details/:id', component: TaskDetailsDialogComponent },
   { 
     path: 'employee-calendar', 
     component: EmployeeCalendarComponent, 

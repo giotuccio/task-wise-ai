@@ -1,1 +1,76 @@
-<p>ask-talkwise works!</p>
+<div style="position: relative;">
+  <!-- Display AI Response -->
+  <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+    <mat-spinner *ngIf="isWaiting"></mat-spinner>
+  </div>
+  
+
+  <div style="padding: 10px;" *ngIf="responseFromAI">
+    <h2>TaskWise Response:</h2>
+    <table class="task-table">
+      <tr>
+        <td><strong>Project:</strong></td>
+        <td><input type="text" [(ngModel)]="newTask.project" class="editable-field"></td>
+      </tr>
+      <tr>
+        <td><strong>Title:</strong></td>
+        <td><input type="text" [(ngModel)]="newTask.title" class="editable-field"></td>
+      </tr>
+      <tr>
+        <td><strong>Description:</strong></td>
+        <td><textarea [(ngModel)]="newTask.description" class="editable-field"></textarea></td>
+      </tr>
+      <tr>
+        <td><strong>Due Date:</strong></td>
+        <td><input type="date" [(ngModel)]="newTask.dueDate" class="editable-field"></td>
+      </tr>
+      <tr>
+        <td><strong>Priority:</strong></td>
+        <td>
+          <select [(ngModel)]="newTask.priority" class="editable-field">
+            <option value="High">High</option>
+            <option value="Normal">Normal</option>
+            <option value="Low">Low</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Status:</strong></td>
+        <td>
+          <select [(ngModel)]="newTask.status" class="editable-field">
+            <option value="New">New</option>
+            <option value="In Progress">In Progress</option>
+            <option value="On Hold">On Hold</option>
+            <option value="Complete">Complete</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Assigned To:</strong></td>
+        <td><input type="text" [(ngModel)]="newTask.assignedTo" class="editable-field"></td>
+      </tr>
+      <tr>
+        <td><strong>Assigned By:</strong></td>
+        <td><input type="text" [(ngModel)]="newTask.assignedBy" class="editable-field"></td>
+      </tr>
+    </table>
+    <!-- Your dialog content here -->
+  <div style="display: flex; justify-items: center;justify-content: center;">
+
+<button mat-button (click)="closeDialog()">Save Edited Changes</button>
+</div>
+  </div>
+  <div style="display: flex; justify-items: center;justify-content: center;">
+
+  <button style="    font-size: 11px;" *ngIf="responseFromAI" mat-button (click)="regenerateResponse()"><mat-icon>refresh</mat-icon>Regenerate</button>
+</div>
+  <!-- Input Field for Sending Prompts to AI -->
+  <div style="position: fixed; bottom: 100px; display: flex; width: 80%; flex-direction: row;">
+    <mat-form-field class="example-full-width" style="width: 80%;">
+      <input matInput #promptInput type="text" style="width: 80%;" placeholder="Ask TaskWiseAI something...">
+    </mat-form-field>
+    <button mat-button (click)="sendMessageToAI(promptInput.value)">Send</button>
+
+    <!-- Regenerate button -->
+  </div>
+</div>

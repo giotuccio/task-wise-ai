@@ -63,6 +63,8 @@ import {  ManageTaskComponent } from './managae-task/manage-task.component';
 import { AskTalkwiseComponent } from './ask-talkwise/ask-talkwise.component';
 import { TaskNotesComponent } from './task-notes/task-notes.component';
 import { AddNoteDialogComponent } from './task-notes/add-note/add-note.component';
+import { CampaignsComponent } from './campaigns/campaigns.component';
+import { CampaignDetailsDialogComponent } from './campaign-details-dialog/campaign-details-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,6 +84,8 @@ import { AddNoteDialogComponent } from './task-notes/add-note/add-note.component
     AskTalkwiseComponent,
     TaskNotesComponent,
     AddNoteDialogComponent,
+    CampaignsComponent,
+    CampaignDetailsDialogComponent,
   ],
   imports: [
     BrowserModule,
