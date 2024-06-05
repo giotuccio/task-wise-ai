@@ -10,7 +10,8 @@ import { TaskDetailsDialogComponent } from '../task-details-dialog/task-details-
 import { Status } from '../objects/status.model';
 import { Campaign } from '../objects/campaign.model';
 import { CampaignDetailsDialogComponent } from '../campaign-details-dialog/campaign-details-dialog.component';
-import { AskTalkwiseComponent } from '../ask-talkwise/ask-talkwise.component';
+import { CreateTaskwiseTaskComponent } from '../create-taskwise-task/create-taskwise-task.component';
+import { CreateTaskwiseCampaignComponent } from '../create-taskwise-campaign/create-taskwise-campaign.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -168,6 +169,7 @@ export class DashboardComponent implements AfterViewInit {
 
     });
   }
+  
   openCampaignDetailsDialog(campaign: Campaign) {
     this.dialog.open(CampaignDetailsDialogComponent, {
       data: campaign,
@@ -177,7 +179,7 @@ export class DashboardComponent implements AfterViewInit {
   }
 
   openTaskWiseAI() {
-    const dialogRef = this.dialog.open(AskTalkwiseComponent, {
+    const dialogRef = this.dialog.open(CreateTaskwiseTaskComponent, {
       data: {
         campaigns: this.campaigns,
         projects: this.projects,
@@ -196,5 +198,24 @@ export class DashboardComponent implements AfterViewInit {
         this.tasks.push(newTask);
     });
   }
+  openCampaignWiseAI() {
+    const dialogRef = this.dialog.open(CreateTaskwiseCampaignComponent, {
+      data: {
+        campaigns: this.campaigns,
+        projects: this.projects,
+        tasks: this.tasks
+      },
+      width: '80%',
+      height: '80vh'
+    });
   
+    dialogRef.afterClosed().subscribe(result => {
+      const newCampaign = dialogRef.componentInstance.newCampaign
+      // Check if a new task was added
+        console.log(result, newCampaign);
+        
+        // Update the tasks array or perform any other necessary actions
+        this.campaigns.push(newCampaign);
+    });
+  }
 }

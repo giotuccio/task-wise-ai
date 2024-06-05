@@ -60,11 +60,12 @@ import { LoginComponent } from './login/login.component';
 import { TaskDetailsDialogComponent } from './task-details-dialog/task-details-dialog.component';
 import { TaskMessageUpdatesComponent } from './task-message-updates/task-message-updates.component';
 import {  ManageTaskComponent } from './managae-task/manage-task.component';
-import { AskTalkwiseComponent } from './ask-talkwise/ask-talkwise.component';
+import { CreateTaskwiseTaskComponent } from './create-taskwise-task/create-taskwise-task.component';
 import { TaskNotesComponent } from './task-notes/task-notes.component';
 import { AddNoteDialogComponent } from './task-notes/add-note/add-note.component';
 import { CampaignsComponent } from './campaigns/campaigns.component';
 import { CampaignDetailsDialogComponent } from './campaign-details-dialog/campaign-details-dialog.component';
+import { CreateTaskwiseCampaignComponent } from './create-taskwise-campaign/create-taskwise-campaign.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,11 +82,12 @@ import { CampaignDetailsDialogComponent } from './campaign-details-dialog/campai
     TaskDetailsDialogComponent,
     TaskMessageUpdatesComponent,
     ManageTaskComponent,
-    AskTalkwiseComponent,
+    CreateTaskwiseTaskComponent,
     TaskNotesComponent,
     AddNoteDialogComponent,
     CampaignsComponent,
     CampaignDetailsDialogComponent,
+    CreateTaskwiseCampaignComponent,
   ],
   imports: [
     BrowserModule,

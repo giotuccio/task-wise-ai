@@ -1,27 +1,27 @@
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { TaskwiseAIService } from '../services/task-wise-ai.service';
-import { TaskService } from '../services/task.service';
 import { Priority } from '../objects/priority.model';
 import { Status } from '../objects/status.model';
 import { Task } from '../objects/task.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-
+import { Campaign } from '../objects/campaign.model';
+import { CampaignServiceService } from '../services/campaign-service.service';
 @Component({
-  selector: 'app-ask-talkwise',
-  templateUrl: './ask-talkwise.component.html',
-  styleUrls: ['./ask-talkwise.component.css']
+  selector: 'app-create-taskwise-campaign',
+  templateUrl: './create-taskwise-campaign.component.html',
+  styleUrls: ['./create-taskwise-campaign.component.css']
 })
-export class AskTalkwiseComponent {
+export class CreateTaskwiseCampaignComponent {
   responseFromAI: string = "";
 
-  newTask!: Task;
+  newCampaign!: Campaign;
   isWaiting = false;
-  constructor(private taskwiseAIService: TaskwiseAIService, private taskService: TaskService, @Inject(MAT_DIALOG_DATA) public task: Task,
-    private dialogRef: MatDialogRef<AskTalkwiseComponent>) { }
+  constructor(private taskwiseAIService: TaskwiseAIService, private campaignService: CampaignServiceService, @Inject(MAT_DIALOG_DATA) public task: Task,
+    private dialogRef: MatDialogRef<CreateTaskwiseCampaignComponent>) { }
 
   sendMessageToAI(prompt: string): void {
     this.isWaiting = true;
-    this.taskwiseAIService.sendMessage(prompt).subscribe(response => {
+    this.taskwiseAIService.sendCampaignMessage(prompt).subscribe(response => {
       if(response)
         this.isWaiting = false;
       this.responseFromAI = response.choices[0].message.content; // Extracting the task details from the response
@@ -37,21 +37,16 @@ export class AskTalkwiseComponent {
         const taskDetails = JSON.parse(preprocessedResponse);
 
         // Creating the new task object
-        this.newTask = {
-          id: taskDetails.id,
-          project: taskDetails.project,
-          title: taskDetails.title,
+        this.newCampaign = {
+          name: taskDetails.name,
           description: taskDetails.description,
-          dueDate: taskDetails.dueDate,
-          priority: taskDetails.priority as Priority,
-          status: taskDetails.status as Status,
-          assignedTo: taskDetails.assignedTo,
-          assignedBy: taskDetails.assignedBy,
-          completed: taskDetails.completed,
+          startDate: taskDetails.startDate,
+          endDate: taskDetails.endDate,
+          isActive: taskDetails.isActive,
         };
 
         // Adding the new task
-        this.taskService.addTask(this.newTask);
+        this.campaignService.addCampaign(this.newCampaign);
       } catch (error) {
         console.error('Error parsing response:', error);
       }
@@ -73,6 +68,6 @@ export class AskTalkwiseComponent {
   
   closeDialog(): void {
     // Close the dialog and pass the updated task back to the parent component
-    this.dialogRef.close(this.newTask);
+    this.dialogRef.close(this.newCampaign);
   }
 }

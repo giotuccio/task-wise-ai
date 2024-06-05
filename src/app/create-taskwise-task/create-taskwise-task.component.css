@@ -1,0 +1,32 @@
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .task-table td {
+    padding: 8px;
+    border: 1px solid #dddddd;
+  }
+  
+  .task-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .task-table tr:hover {
+    background-color: #ddd;
+  }
+  .editable-field {
+    width: 100%; /* Make inputs fill the available space */
+    padding: 8px; /* Add some padding for better spacing */
+    border: 1px solid #ccc; /* Add a border for better visibility */
+    border-radius: 4px; /* Round the corners */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    font-size: 14px; /* Set the font size */
+    line-height: 1.5; /* Set the line height */
+  }
+  
+  .editable-field:focus {
+    outline: none; /* Remove the default focus outline */
+    border-color: #007bff; /* Change the border color when input is focused */
+  }
+  
