@@ -19,7 +19,18 @@
   color: green !important;
 }
 
-
+.blue{
+  background-color: rgba(0, 0, 255, 0.542) !important;
+  color: white !important;
+}
+.yellow{
+  background-color: rgba(207, 221, 14, 0.679) !important;
+  color: white !important;
+}
+.green{
+  background-color: rgba(31, 210, 82, 0.617) !important;
+  color: white !important;
+}
 .task-card {
   margin: 10px;
 }

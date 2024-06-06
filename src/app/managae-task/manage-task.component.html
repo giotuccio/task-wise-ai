@@ -8,16 +8,19 @@
     <p *ngIf="!task.assignedTo"><strong>Status:</strong> Unassigned</p>
     <p><strong>Priority:</strong> {{ task.priority }}</p>
     <p><strong>Status:</strong> {{ task.status }}</p>
-    
+    <div style="display:  flex; flex-direction: row; justify-content: space-around;">
+      <div style="display:  flex;justify-content: end; gap: 10px;">
     <!-- Task Editing Button -->
     <button mat-raised-button color="primary" (click)="editTask()">Edit Task</button>
   
     <!-- Task Deletion Button -->
     <button mat-raised-button color="warn" (click)="deleteTask()">Delete Task</button>
+  </div>
   
     <!-- Task Status Update Buttons -->
     <div>
       <button mat-raised-button color="primary" (click)="updateTaskStatus('Completed')">Mark as Completed</button>
+    </div>
     </div>
   </div>
   

@@ -60,4 +60,24 @@ body {
 .example-container mat-divider{
   border-top-color: var(--text-color) !important;
 
+
+  
+}
+.task-wise-bottom-sheet{
+  width: 100%;
+  min-width: 100% !important;
+  display: block !important;
+}
+.mat-bottom-sheet-container-medium {
+  height: 40vh !important;
+}
+.mat-bottom-sheet-container-large{
+  height: 40vh !important;
+  width: 100% !important;
+  min-width: 100% !important;
+
+}
+.cdk-overlay-container{
+  z-index: 2 !important;
+
 }

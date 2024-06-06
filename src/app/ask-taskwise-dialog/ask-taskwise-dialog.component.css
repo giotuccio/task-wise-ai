@@ -1,0 +1,9 @@
+.taskwise-prompt-input{
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

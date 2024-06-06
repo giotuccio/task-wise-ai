@@ -12,5 +12,6 @@ export class TaskDetailsDialogComponent {
   taskId: string = "";
   constructor(@Inject(MAT_DIALOG_DATA) public task: Task) { 
     task = this.newTask;
+  
   }
 }

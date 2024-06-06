@@ -4,7 +4,7 @@ import { TaskService } from '../services/task.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Task } from '../objects/task.model';
 import { TaskDetailsDialogComponent } from '../task-details-dialog/task-details-dialog.component';
-
+import OpenAI from 'openai';
 @Component({
   selector: 'app-taskwise-task-details-assist',
   templateUrl: './taskwise-task-details-assist.component.html',
@@ -14,9 +14,12 @@ export class TaskwiseTaskDetailsAssistComponent {
   responseFromAI: string = "";
   prompt: string = ""
     newTask!: Task;
-   @Input() taskDetails!: Task
+taskDetails!: Task
     isWaiting = false;
+  private apiKey = 'sk-proj-2cEviiXmLeay9H5E7lk7T3BlbkFJFO8whaA7YBA5NzhzSzhV'; // Replace with your OpenAI API key
 
+    openai = new OpenAI({ apiKey: `Bearer ${this.apiKey}`,dangerouslyAllowBrowser: true});
+    audioResponse: string = '';
     constructor(private taskwiseAIService: TaskwiseAIService, private taskService: TaskService, @Inject(MAT_DIALOG_DATA) public task: Task,
       private dialogRef: MatDialogRef<TaskDetailsDialogComponent>) {
        }
@@ -45,5 +48,28 @@ export class TaskwiseTaskDetailsAssistComponent {
     }
     
     
- 
+    generateAudio(): void {
+      this.openai.audio.speech.create({
+        model: "tts-1",
+        voice: "alloy",
+        input: "Heello",
+      }).then(response => {
+        // Store the URL of the generated audio file
+        this.audioResponse = response.url;
+        // Play the audio
+        this.playAudio();
+      }).catch(error => {
+        console.error("Error generating audio:", error);
+      });
+    }
+  
+    // Method to play the audio
+    playAudio(): void {
+      if (this.audioResponse) {
+        // Use an HTML audio element to play the audio
+        const audioElement = new Audio(this.audioResponse);
+        audioElement.play();
+      }
+    }
+  
 }

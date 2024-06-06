@@ -14,6 +14,7 @@ import { CreateTaskwiseTaskComponent } from "../create-taskwise-task/create-task
 import { CreateTaskwiseCampaignComponent } from "../create-taskwise-campaign/create-taskwise-campaign.component";
 import { AskTaskwiseDialogComponent } from "../ask-taskwise-dialog/ask-taskwise-dialog.component";
 import { UpdatePhotoDialogComponent } from "../update-photo-dialog/update-photo-dialog.component";
+import { MatBottomSheet } from "@angular/material/bottom-sheet";
 
 @Component({
   selector: "app-dashboard",
@@ -35,133 +36,15 @@ export class DashboardComponent implements AfterViewInit {
   selectedIndex = 0;
   selectedProjectName: string | null = null;
   avatarSrc = "https://cdn-icons-png.flaticon.com/256/147/147144.png";
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private bottomSheet: MatBottomSheet) {
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data
     this.tasks = [
       {
         id: "1",
         project: "Online Account Opening",
-
         title: "Update User Profile Page",
-        description:
-          "The user profile page needs to be updated to include new fields for the user's address, phone number, and profile picture. Additionally, the layout should be optimized for mobile devices to ensure a better user experience. The changes should be consistent with the overall design of the application and should be implemented following the existing coding standards.",
-        dueDate: "2024-06-15",
-        priority: Priority.Low,
-        status: Status.In_Progress,
-        completed: false,
-        assignedTo: "John",
-        assignedBy: "Lucy Lu",
-
-
-      },
-      {
-        id: "1",
-        project: "Online Account Opening",
-
-        title: "Update User Profile Page",
-        description:
-          "The user profile page needs to be updated to include new fields for the user's address, phone number, and profile picture. Additionally, the layout should be optimized for mobile devices to ensure a better user experience. The changes should be consistent with the overall design of the application and should be implemented following the existing coding standards.",
-        dueDate: "2024-06-15",
-        priority: Priority.Low,
-        status: Status.In_Progress,
-        completed: false,
-        assignedTo: "John",
-        assignedBy: "Lucy Lu",
-
-
-      },
-      {
-        id: "1",
-        project: "Online Account Opening",
-
-        title: "Update Button",
-        description:
-          "The user profile page needs to be updated to include new fields for the user's address, phone number, and profile picture. Additionally, the layout should be optimized for mobile devices to ensure a better user experience. The changes should be consistent with the overall design of the application and should be implemented following the existing coding standards.",
-        dueDate: "2024-06-15",
-        priority: Priority.Low,
-        status: Status.In_Progress,
-        completed: false,
-        assignedTo: "John",
-        assignedBy: "Lucy Lu",
-
-
-      },
-      {
-        id: "1",
-        project: "Digital Marketing",
-        title: "Task 4",
-        description: "Description for Task 2",
-        dueDate: "2024-06-15",
-        priority: Priority.Low,
-        status: Status.In_Progress,
-        completed: false,
-        assignedTo: "John",
-        assignedBy: "Lucy Lu",
-      },
-      {
-        id: "1",
-        project: "Online Account Opening",
-        title: "Task 5",
-        description: "Description for Task 2",
-        dueDate: "2023-06-15",
-        priority: Priority.Low,
-        status: Status.In_Progress,
-        completed: false,
-        assignedBy: "Mary Jane",
-      },
-      {
-        id: "1",
-        project: "Online Account Opening",
-        title: "Task 6",
-        description: "Description for Task 2",
-        dueDate: "2024-06-15",
-        priority: Priority.Low,
-        status: Status.In_Progress,
-        completed: false,
-        assignedTo: "John",
-        assignedBy: "Lucy Lu",
-      },
-      {
-        id: "1",
-        project: "Online Account Opening",
-        title: "Task 7",
-        description: "Description for Task 2",
-        dueDate: "2024-06-15",
-        priority: Priority.Low,
-        status: Status.In_Progress,
-        completed: false,
-        assignedBy: "Lucy Lu",
-      },
-      {
-        id: "1",
-        project: "Online Account Opening",
-        title: "Task 8",
-        description: "Description for Task 2",
-        dueDate: "2025-06-15",
-        priority: Priority.Medium,
-        status: Status.In_Progress,
-        completed: false,
-        assignedTo: "John",
-        assignedBy: "Mary Jane",
-      },
-      {
-        id: "1",
-        project: "Digital Marketing",
-        title: "Task 9",
-        description: "Description for Task 2",
-        dueDate: "2024-06-15",
-        priority: Priority.Low,
-        completed: false,
-        status: Status.In_Progress,
-        assignedTo: "John",
-        assignedBy: "Lucy Lu",
-      },
-      {
-        id: "1",
-        project: "Online Account Opening",
-        title: "Task 10",
-        description: "Description for Task 2",
+        description: "The user profile page needs to be updated to include new fields for the user's address, phone number, and profile picture. Additionally, the layout should be optimized for mobile devices to ensure a better user experience. The changes should be consistent with the overall design of the application and should be implemented following the existing coding standards.",
         dueDate: "2024-06-15",
         priority: Priority.Low,
         status: Status.In_Progress,
@@ -172,15 +55,103 @@ export class DashboardComponent implements AfterViewInit {
       {
         id: "2",
         project: "Digital Marketing",
-        title: "Task 11",
-        description: "Description for Task 3",
+        title: "Create Social Media Campaign",
+        description: "Develop a comprehensive social media strategy including content planning, audience targeting, and performance tracking across various platforms such as Facebook, Instagram, and Twitter.",
         dueDate: "2024-06-20",
-        duration: 1000,
         priority: Priority.Medium,
         status: Status.New,
         completed: false,
       },
+      {
+        id: "3",
+        project: "Online Account Opening",
+        title: "Update Billing Information",
+        description: "Revise the billing information section to allow users to add multiple payment methods, view past transactions, and manage billing preferences with ease.",
+        dueDate: "2024-06-15",
+        priority: Priority.Low,
+        status: Status.In_Progress,
+        completed: false,
+        assignedTo: "John",
+        assignedBy: "Lucy Lu",
+      },
+      {
+        id: "4",
+        project: "Digital Marketing",
+        title: "Launch Email Campaign",
+        description: "Execute a targeted email marketing campaign to engage existing customers, promote new products, and drive website traffic. The campaign should be optimized for different devices and email clients.",
+        dueDate: "2024-06-20",
+        priority: Priority.Medium,
+        status: Status.New,
+        completed: false,
+      },
+      {
+        id: "5",
+        project: "Online Account Opening",
+        title: "Add Two-Factor Authentication",
+        description: "Implement two-factor authentication for enhanced security, requiring users to verify their identity using a second method such as a code sent to their mobile device or email.",
+        dueDate: "2024-06-15",
+        priority: Priority.Low,
+        status: Status.In_Progress,
+        completed: false,
+        assignedTo: "John",
+        assignedBy: "Lucy Lu",
+      },
+      {
+        id: "6",
+        project: "Digital Marketing",
+        title: "Create PPC Campaign",
+        description: "Set up a pay-per-click advertising campaign on search engines and social media platforms to increase brand visibility, generate leads, and drive conversions. The campaign should target relevant keywords and demographics.",
+        dueDate: "2024-06-20",
+        priority: Priority.Medium,
+        status: Status.New,
+        completed: false,
+      },
+      {
+        id: "7",
+        project: "Online Account Opening",
+        title: "Enhance User Dashboard",
+        description: "Enhance the user dashboard with interactive data visualizations, personalized widgets, and customizable layouts. The goal is to provide users with a seamless and intuitive experience when accessing their account information.",
+        dueDate: "2024-06-15",
+        priority: Priority.Low,
+        status: Status.In_Progress,
+        completed: false,
+        assignedTo: "John",
+        assignedBy: "Lucy Lu",
+      },
+      {
+        id: "8",
+        project: "Digital Marketing",
+        title: "Optimize Landing Pages",
+        description: "Optimize landing pages for improved conversion rates by implementing A/B testing, analyzing user behavior, and refining page elements such as headlines, call-to-action buttons, and form fields.",
+        dueDate: "2024-06-20",
+        priority: Priority.Medium,
+        status: Status.New,
+        completed: false,
+      },
+      {
+        id: "9",
+        project: "Online Account Opening",
+        title: "Implement Live Chat Support",
+        description: "Integrate live chat functionality into the website to provide real-time assistance to users, answer queries, and address concerns promptly. The chat system should be accessible from any page and compatible with desktop and mobile devices.",
+        dueDate: "2024-06-15",
+        priority: Priority.Low,
+        status: Status.In_Progress,
+        completed: false,
+        assignedTo: "John",
+        assignedBy: "Lucy Lu",
+      },
+      {
+        id: "10",
+        project: "Digital Marketing",
+        title: "Create Content Calendar",
+        description: "Develop a content calendar outlining topics, publication dates, and distribution channels for blog posts, social media updates, and email newsletters. The calendar should align with marketing objectives and target audience interests.",
+        dueDate: "2024-06-20",
+        priority: Priority.Medium,
+        status: Status.New,
+        completed: false,
+      }
     ];
+    
     this.campaigns = [
       {
         name: "Campaign 1",
@@ -274,7 +245,7 @@ export class DashboardComponent implements AfterViewInit {
   }
   openCreateTaskDialog() {
     const dialogRef = this.dialog.open(CreateTaskDialogComponent, {
-      width: "400px",
+      width: "400px"
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -387,24 +358,20 @@ export class DashboardComponent implements AfterViewInit {
     });
   }
   openAskTaskWise() {
-    const dialogRef = this.dialog.open(AskTaskwiseDialogComponent, {
+    const dialogRef = this.bottomSheet.open(AskTaskwiseDialogComponent, {
       data: {
         campaigns: this.campaigns,
         projects: this.projects,
         tasks: this.tasks,
       },
-      width: "80%",
-      height: "80vh",
+      panelClass: 'task-wise-bottom-sheet',
+      hasBackdrop: false,
+      closeOnNavigation: true
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      const newTask = dialogRef.componentInstance?.newTask;
+    dialogRef.afterDismissed().subscribe((result) => {
       // Check if a new task was added
-      if (newTask) {
-        console.log(result, newTask);
-        // Update the tasks array or perform any other necessary actions
-        this.tasks.push(newTask);
-      }
+ 
     });
   }
   openTaskWiseAI() {

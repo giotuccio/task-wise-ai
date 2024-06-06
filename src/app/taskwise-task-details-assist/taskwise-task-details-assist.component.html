@@ -22,7 +22,7 @@
         <input matInput #promptInput type="text" style="width: 80%;" placeholder="Ask TaskWiseAI something...">
       </mat-form-field>
       <button mat-button (click)="sendMessageToAI(promptInput.value)">Send</button>
-  
+      <button (click)="generateAudio()">Play Audio</button>
       <!-- Regenerate button -->
     </div>
   </div>

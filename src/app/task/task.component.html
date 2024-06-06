@@ -30,9 +30,9 @@
     </mat-card-content>
     <mat-card-actions class="full-width" *ngIf="task.assignedTo">
       <mat-button-toggle-group [(ngModel)]="selectedOption" (ngModelChange)="toggleTaskStatus()" class="full-width">
-        <mat-button-toggle value="inProgress">In Progress</mat-button-toggle>
-        <mat-button-toggle value="sendToQA">Ready For QA</mat-button-toggle>
-        <mat-button-toggle value="complete">Complete</mat-button-toggle>
+        <mat-button-toggle value="inProgress" [class.blue]="selectedOption == 'inProgress'">In Progress</mat-button-toggle>
+        <mat-button-toggle value="sendToQA" [class.yellow]="selectedOption == 'sendToQA'">Ready For QA</mat-button-toggle>
+        <mat-button-toggle value="complete" [class.green]="selectedOption == 'complete'">Complete</mat-button-toggle>
       </mat-button-toggle-group>
     </mat-card-actions>
   </mat-card>
