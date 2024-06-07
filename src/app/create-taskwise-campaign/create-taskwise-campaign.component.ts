@@ -77,7 +77,7 @@ aiImageUrl: string = ""
       const taskDetails = JSON.parse(this.responseFromAI);
 
   
-      this.taskwiseAIService.generateImage(`Generate an imqge from the following: ${taskDetails.description}`).subscribe(data => {
+      this.taskwiseAIService.generateImage(`Generate an imqge from the following: ${taskDetails.description}. Display text over image if asked from ${prompt}`).subscribe(data => {
         this.isWaiting = false;
         this.imageData =  data.data[0].url;// Adjust based on actual API response
   

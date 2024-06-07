@@ -53,17 +53,18 @@
   </div>
     <!-- Input Field for Sending Prompts to AI -->
     <div mat-dialog-actions style="position: fixed; bottom: 100px; display: flex; width: 80%; flex-direction: column; justify-content: center;">
-      <div style="display: flex; flex-direction: row; width: 100%;">
+      <div style="display: flex; flex-direction: row; width: 90%;align-items: center;">
+        <input type="file" (change)="onImageSelected($event)" hidden #fileInput>
+        <button mat-raised-button (click)="fileInput.click()"><mat-icon>attach_file</mat-icon></button>
+        <button mat-raised-button (click)="uploadAndEditImage(promptAndImageInput.value)" [disabled]="!selectedImage"><mat-icon>upload</mat-icon></button>
         <mat-form-field class="example-full-width" style="width: 80%;">
           <input matInput #promptAndImageInput type="text" placeholder="Describe your campaign..">
         </mat-form-field>
-        <button mat-button (click)="handleCampaignAndImage(promptAndImageInput.value)">Generate Campaign</button>
+        <button mat-raised-button (click)="handleCampaignAndImage(promptAndImageInput.value)" style="text-wrap: nowrap;">Create Campaign</button>
       </div>
       <!-- Image upload section -->
       <div style="display: flex; flex-direction: row; width: 100%; margin-top: 20px;">
-        <input type="file" (change)="onImageSelected($event)" hidden #fileInput>
-        <button mat-raised-button (click)="fileInput.click()">Upload Image</button>
-        <button mat-raised-button (click)="uploadAndEditImage(promptAndImageInput.value)" [disabled]="!selectedImage">Edit & Upload</button>
+       
       </div>
     </div>
   </div>

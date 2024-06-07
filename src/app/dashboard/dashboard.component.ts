@@ -33,6 +33,7 @@ export class DashboardComponent implements AfterViewInit {
   showSubmenu: boolean = false;
   isShowing = false;
   showSubSubMenu: boolean = false;
+  isAskTaskWiseOpen = false;
   displayedTasks: Task[] = [];
   selectedIndex = 0;
   selectedProjectName: string | null = null;
@@ -361,22 +362,32 @@ export class DashboardComponent implements AfterViewInit {
       height: "80vh",
     });
   }
-  openAskTaskWise() {
-    const dialogRef = this.bottomSheet.open(AskTaskwiseDialogComponent, {
-      data: {
-        campaigns: this.campaigns,
-        projects: this.projects,
-        tasks: this.tasks,
-      },
-      panelClass: 'task-wise-bottom-sheet',
-      hasBackdrop: false,
-      closeOnNavigation: true
-    });
 
-    dialogRef.afterDismissed().subscribe((result) => {
-      // Check if a new task was added
- 
-    });
+  toggleAskTaskWise(): void {
+    if (!this.isAskTaskWiseOpen) {
+      // Open the bottom sheet
+      const dialogRef = this.bottomSheet.open(AskTaskwiseDialogComponent, {
+        data: {
+          campaigns: this.campaigns,
+          projects: this.projects,
+          tasks: this.tasks,
+        },
+        panelClass: 'task-wise-bottom-sheet',
+        hasBackdrop: false,
+        closeOnNavigation: true
+      });
+
+      // Subscribe to the afterDismissed event
+      dialogRef.afterDismissed().subscribe((result) => {
+        // Check if a new task was added
+      });
+    } else {
+      // Close the bottom sheet
+      this.bottomSheet.dismiss();
+    }
+
+    // Toggle the state variable
+    this.isAskTaskWiseOpen = !this.isAskTaskWiseOpen;
   }
   openTaskWiseAI() {
     const dialogRef = this.dialog.open(CreateTaskwiseTaskComponent, {
