@@ -12,7 +12,7 @@
   </div>
 
 
-  <div style="padding: 10px;" *ngIf="responseFromAI">
+  <div style="padding: 10px; position: absolute; top: 10px;" *ngIf="responseFromAI">
     <h2>TaskWise Response:</h2>
     {{responseFromAI}}
     <!-- Your dialog content here -->
@@ -30,6 +30,7 @@
     <button style="    font-size: 11px;" *ngIf="responseFromAI" mat-button
       (click)="regenerateResponse()"><mat-icon>refresh</mat-icon>Regenerate</button>
   </div>
+  <div>{{generatingSpeech}}</div>
   <!-- Input Field for Sending Prompts to AI -->
   <div
   class="taskwise-prompt-input"
@@ -40,8 +41,10 @@
     <mat-form-field class="example-full-width" style="width: 80%;">
       <input matInput #promptInput type="text" style="width: 80%;" placeholder="Ask TaskWiseAI something...">
     </mat-form-field>
+    <div style="display: flex; flex-direction: row;">
     <button mat-button (click)="sendMessageToAI(promptInput.value)">Send</button>
-
+    <button *ngIf="responseFromAI" mat-button (click)="playAudio()">Voice</button>
+  </div>
     <!-- Regenerate button -->
   </div>
 </div>

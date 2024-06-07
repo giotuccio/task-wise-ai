@@ -3,7 +3,7 @@
       <mat-card-title>{{ campaign.name }}</mat-card-title>
       <mat-card-subtitle>Start Date: {{ campaign.startDate | date: "MM/dd/YYYY" }}</mat-card-subtitle>
       <mat-card-subtitle>End Date: {{ campaign.endDate  | date: "MM/dd/YYYY"}}</mat-card-subtitle>
-      <img [src]="campaign.campaignImage" width="50%"/>
+      <img *ngIf="campaign.campaignImage" [src]="campaign.campaignImage" width="50%"/>
       <app-bar-chart *ngIf="campaign.isActive" [chartData]="chartData"></app-bar-chart>
     </mat-card-content>
   </mat-card>

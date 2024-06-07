@@ -56,29 +56,25 @@ export class TaskwiseAIService {
     return this.http.post<any>(this.apiUrl, payload, { headers });
   }
 
-
-  async textToSpeech(text: string): Promise<Observable<OpenAI.Audio.Speech>> {
+  textToSpeech(text: string): Observable<Blob> {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const openaiUrl = 'https://api.openai.com/v1/audio/speech';
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${this.apiKey}`
+      'Authorization': `Bearer ${this.apiKey}`,  // Ensure your API key is securely handled
+      'Content-Type': 'application/json'
     });
-
-    const openai = new OpenAI({
-      apiKey: this.apiKey,
-      dangerouslyAllowBrowser: true
-    });
-
-
-
-    const speech = openai.audio.speech.create({
-      model: "tts-1",
-      voice: "alloy",
+  
+    const payload = {
+      model: "tts-1",  // Correctly specify the TTS model, e.g., "tts-1"
       input: text,
+      voice: "fable",  // Specify the voice model if applicable
+      format: "mp3"  // Specify the audio format, "mp3" is common
+    };
+  
+    return this.http.post(`${proxyUrl}${openaiUrl}`, payload, {
+      headers: headers,
+      responseType: 'blob'  // Set responseType to 'blob' to handle binary data
     });
-    console.log(speech);
-
-    return this.http.post<Speech>(this.speechUrl, speech, { headers });
-
   }
 
 

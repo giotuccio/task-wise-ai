@@ -1,0 +1,7 @@
+.campaign-image{
+    margin: 20px auto;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+}

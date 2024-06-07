@@ -20,7 +20,8 @@ export class AskTaskwiseDialogComponent {
 prompt: string = ""
   newTask!: Task;
   isWaiting = false;
-  speech: any
+  speech: any;
+  generatingSpeech = ""
   constructor(private taskwiseAIService: TaskwiseAIService, private taskService: TaskService, @Inject(MAT_BOTTOM_SHEET_DATA) public task: Task,
     private dialogRef: MatBottomSheetRef<AskTaskwiseDialogComponent>) { 
 
@@ -60,15 +61,20 @@ prompt: string = ""
     // Provide more specific details about the task in the prompt
     
   }
-  playAudio(audio: ArrayBuffer): void {
-    if (audio) {
-      // Use an HTML audio element to play the audio
-      const audioBlob = new Blob([audio], { type: 'audio/mpeg' });
+  playAudio(): void {
+    this.taskwiseAIService.textToSpeech(this.responseFromAI).subscribe((response) => {
+      this.generatingSpeech = "Generating Voice "
+      console.log(response); // See what's actually being returned.
+      if(response){
+        this.generatingSpeech = ""
+      
+      const audioBlob = new Blob([response], { type: 'audio/mpg' });
       const audioUrl = URL.createObjectURL(audioBlob);
       const audioElement = new Audio(audioUrl);
-      audioElement.play();
-    }
+      audioElement.play();}
+    });
   }
+  
   closeDialog(): void {
     // Close the dialog and pass the updated task back to the parent component
     this.dialogRef.dismiss();

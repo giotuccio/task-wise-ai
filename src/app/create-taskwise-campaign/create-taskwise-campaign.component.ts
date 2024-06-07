@@ -117,7 +117,7 @@ aiImageUrl: string = ""
     // Provide more specific details about the task in the prompt
     const prompt = '{"message": "create a new task with the following details changed: title, description, due date, priority, assigned to, assigned by, and project."}';
     
-    this.sendMessageToAI(prompt);
+    this.handleCampaignAndImage(prompt);
   }
   
   
