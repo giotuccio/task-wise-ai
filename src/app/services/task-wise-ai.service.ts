@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, take } from 'rxjs';
 import OpenAI from 'openai';
 import { Speech } from 'openai/resources/audio/speech';
 import { AssemblyAI } from 'assemblyai';
@@ -11,8 +11,9 @@ import { environment } from 'src/environment';
 export class TaskwiseAIService {
   private apiUrl = 'https://api.openai.com/v1/chat/completions'; // OpenAI Chat API endpoint
   private speechUrl = 'http://api.openai.com/v1/audio/speech'; // OpenAI Chat API endpoint
+  private imageUrl = 'http://api.openai.com/v1/images/generations'; // OpenAI Chat API endpoint
   private apiKey = environment.taskwiseApiKey; // Replace with your OpenAI API key
-
+  private imageSubject = new Subject<any>();
   constructor(private http: HttpClient) { }
   fundamentals = `Style font and display niceley spaced. the date is ${new Date().toLocaleDateString()}  so any start or dueDates should be in that year or later`;
   personalFundamentals = `tyle font and display niceley spaced. The date is ${new Date().toLocaleDateString()} so any start or dueDates should be in that year or later. TaskeWise ismore Casual here. Allowing the user to feel comfortable expressing their needs to it. Sometimes TaskWise responds sarcastically. If TaskWise response is a list, ordered sequence then its displays it as a list.`
@@ -98,7 +99,7 @@ export class TaskwiseAIService {
       ]
     };
 
-    return this.http.post<any>(this.apiUrl, payload, { headers });
+    return this.http.post<any>(this.apiUrl, payload, { headers: headers });
   }
 
   sendMessage(prompt: string): Observable<any> {
@@ -162,5 +163,23 @@ export class TaskwiseAIService {
 
     return this.http.post<any>(this.apiUrl, payload, { headers });
   }
-
+  generateImage(prompt: string): Observable<any> {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const openaiUrl = 'https://api.openai.com/v1/images/generations';
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.apiKey}`,
+      'Content-Type': 'application/json'
+    });
+   
+    const payload = {
+      prompt: prompt,
+      n: 1,
+      size: "1024x1024",
+      model: "dall-e-3",
+    };
+   
+    return this.http.post(`${proxyUrl}${openaiUrl}`, payload, { headers });
+   }
+   
+ 
 }

@@ -20,7 +20,7 @@
           <td><textarea [(ngModel)]="newCampaign.description" class="editable-field"></textarea></td>
         </tr>
         <tr>
-            <td><strong>End Date:</strong></td>
+            <td><strong>Start Date:</strong></td>
             <td><input type="date" [(ngModel)]="newCampaign.startDate" class="editable-field"></td>
           </tr>
         <tr>
@@ -32,25 +32,42 @@
             <td><input  [(ngModel)]="newCampaign.isActive" class="editable-field"></td>
           </tr>
         
-  
+          <tr *ngIf="imageData">
+            <td><strong>Campaign Image:</strong></td>
+            <td><img [src]="newCampaign.campaignImage"  [(ngModel)]="newCampaign.campaignImage" class="editable-field"/></td>
+          </tr>
       </table>
       <!-- Your dialog content here -->
-    <div style="display: flex; justify-items: center;justify-content: center;">
+    <div style="display: flex; justify-items: center;justify-content: center;gap: 8px;">
   
   <button mat-button (click)="closeDialog()">Save Edited Changes</button>
+  <button mat-button (click)="closeDialog()">Create Campaign</button>
   </div>
+    </div>
+    <div *ngIf="imageData">
+      <img [src]="imageData" width="80%" height="80%"/>
     </div>
     <div style="display: flex; justify-items: center;justify-content: center;">
   
     <button style="    font-size: 11px;" *ngIf="responseFromAI" mat-button (click)="regenerateResponse()"><mat-icon>refresh</mat-icon>Regenerate</button>
   </div>
     <!-- Input Field for Sending Prompts to AI -->
-    <div style="position: fixed; bottom: 100px; display: flex; width: 80%; flex-direction: row;justify-content: center;">
+    <div style="position: fixed; bottom: 100px; display: flex; width: 80%; flex-direction: column;justify-content: center;">
+      <div style="display: flex;flex-direction: row;">
+
+        <mat-form-field class="example-full-width" style="width: 80%;">
+          <input matInput #promptInput type="text" style="width: 80%;" placeholder="Begin by telling me more about the campaign you'd like to create..">
+        </mat-form-field>
+        <button mat-button (click)="sendMessageToAI(promptInput.value)">Generate Campaign</button>
+    </div>
+      <div style="display: flex;flex-direction: row;">
+
       <mat-form-field class="example-full-width" style="width: 80%;">
-        <input matInput #promptInput type="text" style="width: 80%;" placeholder="Begin by telling me more about the campaign you'd like to create..">
+        <input matInput #promptImageInput type="text" style="width: 80%;" placeholder="Create Image..">
       </mat-form-field>
-      <button mat-button (click)="sendMessageToAI(promptInput.value)">Send</button>
-  
+      <button mat-button (click)="sendImageGeneratorMessage(promptImageInput.value)">Generate Image</button>
+      </div>
+
       <!-- Regenerate button -->
     </div>
   </div>

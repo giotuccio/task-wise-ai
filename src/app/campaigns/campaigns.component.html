@@ -3,5 +3,6 @@
         <mat-card-subtitle>Campaign: {{ campaign.name }}</mat-card-subtitle>
         <mat-card-subtitle>Start Date: {{ campaign.startDate | date: "MM/dd/YYYY" }}</mat-card-subtitle>
         <mat-card-subtitle>End Date: {{ campaign.endDate  | date: "MM/dd/YYYY"}}</mat-card-subtitle>
+        <img [src]="campaign.campaignImage" width="100%"/>
     </mat-card-content>
 </mat-card>

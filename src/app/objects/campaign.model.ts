@@ -4,5 +4,6 @@ export interface Campaign {
     startDate: string;
     endDate: string;
     isActive: boolean;
+    campaignImage?: string;
   }
   

@@ -13,14 +13,27 @@ import { CampaignServiceService } from '../services/campaign-service.service';
 })
 export class CreateTaskwiseCampaignComponent {
   responseFromAI: string = "";
-
+aiImageUrl: string = ""
   newCampaign!: Campaign;
+  imageData: string | null = null;
   isWaiting = false;
   constructor(private taskwiseAIService: TaskwiseAIService, private campaignService: CampaignServiceService, @Inject(MAT_DIALOG_DATA) public task: Task,
     private dialogRef: MatDialogRef<CreateTaskwiseCampaignComponent>) { }
 
+ sendImageGeneratorMessage(prompt: string): void {
+  this.isWaiting = true;
+  this.taskwiseAIService.generateImage(prompt).subscribe(data => {
+    this.isWaiting = false;
+    this.imageData =  data.data[0].url;// Adjust based on actual API response
+  });
+}
+
+    
+
   sendMessageToAI(prompt: string): void {
     this.isWaiting = true;
+
+
     this.taskwiseAIService.sendCampaignMessage(prompt).subscribe(response => {
       if(response)
         this.isWaiting = false;
@@ -43,6 +56,7 @@ export class CreateTaskwiseCampaignComponent {
           startDate: taskDetails.startDate,
           endDate: taskDetails.endDate,
           isActive: taskDetails.isActive == 'true' ? true : false,
+          campaignImage: this.imageData ?? ''
         };
 
         // Adding the new task
