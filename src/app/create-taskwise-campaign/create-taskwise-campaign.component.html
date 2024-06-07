@@ -1,14 +1,13 @@
-<h1 mat-dialog-title>AI Campaign Assistant</h1>
+<h1 mat-dialog-title style="color: white;">AI Campaign Assistant</h1>
 
-<div style="position: relative;">
+<div mat-dialog-content style="position: relative;">
     <!-- Display AI Response -->
     <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
       <mat-spinner *ngIf="isWaiting"></mat-spinner>
     </div>
     
   
-    <div style="padding: 10px;" *ngIf="responseFromAI && !isWaiting">
-      <h2>TaskWise Response:</h2>
+    <div style="padding: 10px;" *ngIf="responseFromAI && !isWaiting || imageData && !isWaiting">
       <table class="task-table">
      
         <tr>
@@ -21,16 +20,20 @@
         </tr>
         <tr>
             <td><strong>Start Date:</strong></td>
-            <td><input  [(ngModel)]="newCampaign.startDate" class="editable-field"></td>
+            <td><input  [(ngModel)]="newCampaign.startDate"  class="editable-field"></td>
           </tr>
         <tr>
           <td><strong>End Date:</strong></td>
           <td><input [(ngModel)]="newCampaign.endDate" class="editable-field"></td>
         </tr>
         <tr>
-            <td><strong>Active Status:</strong></td>
-            <td><input  [(ngModel)]="newCampaign.isActive" class="editable-field"></td>
-          </tr>
+          <td><strong>Active Status</strong></td>
+          <td>
+            <mat-slide-toggle color="primary" [(ngModel)]="newCampaign.isActive">
+              {{ newCampaign.isActive ? 'Active' : 'Inactive' }}
+            </mat-slide-toggle>
+          </td>
+        </tr>
         
           <tr *ngIf="imageData">
             <td><strong>Campaign Image:</strong></td>
@@ -49,29 +52,19 @@
     <button style="    font-size: 11px;" *ngIf="responseFromAI" mat-button (click)="regenerateResponse()"><mat-icon>refresh</mat-icon>Regenerate</button>
   </div>
     <!-- Input Field for Sending Prompts to AI -->
-    <div style="position: fixed; bottom: 100px; display: flex; width: 80%; flex-direction: column;justify-content: center;">
-      <!-- <div style="display: flex;flex-direction: row;">
-
+    <div mat-dialog-actions style="position: fixed; bottom: 100px; display: flex; width: 80%; flex-direction: column; justify-content: center;">
+      <div style="display: flex; flex-direction: row; width: 100%;">
         <mat-form-field class="example-full-width" style="width: 80%;">
-          <input matInput #promptInput type="text" style="width: 80%;" placeholder="Begin by telling me more about the campaign you'd like to create..">
-        </mat-form-field>
-        <button mat-button (click)="sendMessageToAI(promptInput.value)">Generate Campaign</button>
-    </div> -->
-      <!-- <div style="display: flex;flex-direction: row;">
-
-      <mat-form-field class="example-full-width" style="width: 80%;">
-        <input matInput #promptImageInput type="text" style="width: 80%;" placeholder="Create Image..">
-      </mat-form-field>
-      <button mat-button (click)="sendImageGeneratorMessage(promptImageInput.value)">Generate Image</button>
-      </div> -->
-      <div style="display: flex;flex-direction: row;">
-
-        <mat-form-field class="example-full-width" style="width: 80%;">
-          <input matInput #promptAndImageInput type="text" style="width: 80%;" placeholder="Describe your campaign..">
+          <input matInput #promptAndImageInput type="text" placeholder="Describe your campaign..">
         </mat-form-field>
         <button mat-button (click)="handleCampaignAndImage(promptAndImageInput.value)">Generate Campaign</button>
-        </div>
-      <!-- Regenerate button -->
+      </div>
+      <!-- Image upload section -->
+      <div style="display: flex; flex-direction: row; width: 100%; margin-top: 20px;">
+        <input type="file" (change)="onImageSelected($event)" hidden #fileInput>
+        <button mat-raised-button (click)="fileInput.click()">Upload Image</button>
+        <button mat-raised-button (click)="uploadAndEditImage(promptAndImageInput.value)" [disabled]="!selectedImage">Edit & Upload</button>
+      </div>
     </div>
   </div>
   

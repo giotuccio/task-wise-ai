@@ -29,4 +29,6 @@
     outline: none; /* Remove the default focus outline */
     border-color: #007bff; /* Change the border color when input is focused */
   }
-  
+  h1{
+    color: white;
+  }

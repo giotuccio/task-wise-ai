@@ -15,6 +15,7 @@ import { CreateTaskwiseCampaignComponent } from "../create-taskwise-campaign/cre
 import { AskTaskwiseDialogComponent } from "../ask-taskwise-dialog/ask-taskwise-dialog.component";
 import { UpdatePhotoDialogComponent } from "../update-photo-dialog/update-photo-dialog.component";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
+import { TaskService } from "../services/task.service";
 
 @Component({
   selector: "app-dashboard",
@@ -36,7 +37,7 @@ export class DashboardComponent implements AfterViewInit {
   selectedIndex = 0;
   selectedProjectName: string | null = null;
   avatarSrc = "https://cdn-icons-png.flaticon.com/256/147/147144.png";
-  constructor(private dialog: MatDialog, private bottomSheet: MatBottomSheet) {
+  constructor(private dialog: MatDialog, private bottomSheet: MatBottomSheet, private taskService: TaskService) {
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data
     this.tasks = [
@@ -149,6 +150,8 @@ export class DashboardComponent implements AfterViewInit {
         priority: Priority.Medium,
         status: Status.New,
         completed: false,
+        assignedTo: "John",
+        assignedBy: "TaskWiseAI"
       }
     ];
     
@@ -176,7 +179,7 @@ export class DashboardComponent implements AfterViewInit {
       },
       {
         name: "Campaign 4",
-        description: "Description for Online Account Opening",
+        description: "Campaign for sneaker products that are half off for a limited time. these sneakers can make you jump higher",
         startDate: "2024-06-01",
         endDate: "2024-07-15",
         isActive: false,
@@ -346,6 +349,7 @@ export class DashboardComponent implements AfterViewInit {
     dialogRef.afterClosed().subscribe((result) => {
       // If result is not null, add the new task to the list
       // this.tasks.push(dialogRef.componentInstance.task);
+    
       console.log(dialogRef.componentInstance.task);
     });
   }

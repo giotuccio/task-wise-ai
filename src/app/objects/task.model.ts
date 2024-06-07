@@ -13,4 +13,5 @@ export interface Task {
     assignedBy?: string;
     duration?: number;
     completed?: boolean;
+    isDeleted?: boolean
   }

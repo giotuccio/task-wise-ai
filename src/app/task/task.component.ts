@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task } from '../objects/task.model';; // Assuming you have a Task model
+import { Task } from '../objects/task.model';import { Status } from '../objects/status.model';
+import { Priority } from '../objects/priority.model';
+import { TaskService } from '../services/task.service';
+; // Assuming you have a Task model
 
 @Component({
   selector: 'app-task',
@@ -13,6 +16,10 @@ export class TaskComponent {
   selectedOption: string = 'inProgress';
 
   @Output() complete: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor(private taskService: TaskService){
+
+  }
   completeTask() {
     this.complete.emit();
   }
@@ -30,13 +37,18 @@ export class TaskComponent {
     this.isDarkTheme = !this.isDarkTheme;
   }
   
-toggleTaskStatus(): void {
+toggleTaskStatus(task: Task): void {
   event?.stopPropagation()
+  this.taskService.editTask(task)
+
   switch (this.selectedOption) {
     case 'inProgress':
+  task.status = Status.In_Progress
+
       // Handle in progress status
       break;
     case 'sendToQA':
+  task.status = Status.QA
       // Handle send to QA status
       break;
     case 'complete':

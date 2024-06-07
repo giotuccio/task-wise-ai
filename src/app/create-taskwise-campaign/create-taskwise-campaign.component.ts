@@ -16,6 +16,7 @@ export class CreateTaskwiseCampaignComponent {
 aiImageUrl: string = ""
   newCampaign!: Campaign;
   imageData: string | null = null;
+  selectedImage: File | null = null;
   isWaiting = false;
   constructor(private taskwiseAIService: TaskwiseAIService, private campaignService: CampaignServiceService, @Inject(MAT_DIALOG_DATA) public task: Task,
     private dialogRef: MatDialogRef<CreateTaskwiseCampaignComponent>) { }
@@ -76,7 +77,7 @@ aiImageUrl: string = ""
       const taskDetails = JSON.parse(this.responseFromAI);
 
   
-      this.taskwiseAIService.generateImage(`Generate a campaign for the following image: ${taskDetails.description}`).subscribe(data => {
+      this.taskwiseAIService.generateImage(`Generate an imqge from the following: ${taskDetails.description}`).subscribe(data => {
         this.isWaiting = false;
         this.imageData =  data.data[0].url;// Adjust based on actual API response
   
@@ -102,6 +103,97 @@ aiImageUrl: string = ""
       this.isWaiting = false;
       console.error('Error in image generation:', error);
     });
+  }
+  
+  onImageSelected(event: Event): void {
+    const element = event.currentTarget as HTMLInputElement;
+    let fileList: FileList | null = element.files;
+    if (fileList && fileList.length > 0) {
+      const file = fileList[0];
+      if (file.type !== 'image/png') {
+        alert('Please upload a valid PNG file.');
+        return;
+      }
+  
+      if (file.size > 4000000) { // 4MB in bytes
+        alert('File size must be less than 4MB.');
+        return;
+      }
+  
+      const img = new Image();
+      img.src = window.URL.createObjectURL(file);
+      img.onload = () => {
+        if (img.width === img.height) {
+          this.selectedImage = file; // File is already a square
+        } else {
+          // Resize the image to be square
+          this.resizeImageToSquare(img, (resizedBlob: any) => {
+            if (resizedBlob) {
+              this.selectedImage = new File([resizedBlob], 'resized-image.png', { type: 'image/png' });
+            } else {
+              alert('Failed to resize the image.');
+            }
+          });
+        }
+      };
+    }
+  }
+  resizeImageToSquare(img: HTMLImageElement, callback: (resizedBlob: Blob | null) => void): void {
+    const canvas = document.createElement('canvas');
+    const size = Math.max(img.width, img.height);
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+  
+    if (ctx) {
+      // Calculate the center position to draw the image
+      const dx = (size - img.width) / 2;
+      const dy = (size - img.height) / 2;
+      
+      ctx.drawImage(img, dx, dy);
+      canvas.toBlob(blob => {
+        callback(blob);  // Ensures blob is either Blob or null
+      }, 'image/png');
+    } else {
+      callback(null);  // Handle the case where canvas context is not available
+    }
+  }
+  
+  
+
+  uploadAndEditImage(prompt: string): void {
+    this.isWaiting = true;
+    if (this.selectedImage) {
+      console.log('Sending image with prompt:', prompt);  // Debug: Log the prompt
+  
+      this.taskwiseAIService.editImage(prompt, this.selectedImage).subscribe(
+        response => {
+          console.log('API Response:', response);  // Debug: Log full response
+  
+          if (response && response.data && response.data.length > 0) {
+            this.imageData = response.data[0].url;
+            this.newCampaign = {
+              name: 'New Campaign',
+              description: 'Generated with new image',
+              startDate: '2024-01-01',
+              endDate: '2024-12-31',
+              isActive: true,
+              campaignImage: this.imageData || ''
+            };
+  
+            console.log('New Campaign:', this.newCampaign);  // Debug: Log the new campaign object
+            this.isWaiting = false;
+          } else {
+            console.error('No data returned or incorrect response structure:', response);
+            this.isWaiting = false;
+          }
+        },
+        error => {
+          console.error('Error editing image:', error);
+          this.isWaiting = false;
+        }
+      );
+    }
   }
   
   private saveCampaignDetails(details: any) {

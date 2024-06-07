@@ -1,6 +1,7 @@
 body {
   background-color: var(--background-color);
   color: var(--text-color);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 /* Light Theme */
@@ -87,4 +88,14 @@ body {
 .cdk-overlay-container{
   z-index: 2 !important;
 
+}
+
+h1[mat-dialog-title]{
+  background-color: rgba(0, 0, 255, 0.551);
+  color: white;
+  text-align: center;
+}
+
+.mat-drawer-container{
+  height: 100vh !important;
 }

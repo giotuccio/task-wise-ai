@@ -1,9 +1,21 @@
 <mat-card>
+
     <mat-card-content>
+  <mat-spinner *ngIf="isWaiting"/>
       <mat-card-title>{{ campaign.name }}</mat-card-title>
+      <mat-card-title>{{ campaign.description }}</mat-card-title>
       <mat-card-subtitle>Start Date: {{ campaign.startDate | date: "MM/dd/YYYY" }}</mat-card-subtitle>
       <mat-card-subtitle>End Date: {{ campaign.endDate  | date: "MM/dd/YYYY"}}</mat-card-subtitle>
+      <mat-slide-toggle color="primary" [(ngModel)]="campaign.isActive">
+        {{ campaign.isActive ? 'Active' : 'Inactive' }}
+      </mat-slide-toggle>
+      <div style="display: flex; margin:10px auto; justify-content: center;">
       <img *ngIf="campaign.campaignImage" [src]="campaign.campaignImage" width="50%"/>
+      <img *ngIf="!campaign.campaignImage" [src]="imageUrl" width="50%"/>
+    </div>
+<div *ngIf="!campaign.campaignImage">
+<button mat-button  (click)="generateImage()">Generate Campaign Image</button>
+</div>
       <app-bar-chart *ngIf="campaign.isActive" [chartData]="chartData"></app-bar-chart>
     </mat-card-content>
   </mat-card>

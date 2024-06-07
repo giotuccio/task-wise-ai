@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject, take } from 'rxjs';
+import { Observable, Subject, catchError, from, switchMap, take, throwError } from 'rxjs';
 import OpenAI from 'openai';
 import { Speech } from 'openai/resources/audio/speech';
 import { AssemblyAI } from 'assemblyai';
@@ -12,6 +12,7 @@ export class TaskwiseAIService {
   private apiUrl = 'https://api.openai.com/v1/chat/completions'; // OpenAI Chat API endpoint
   private speechUrl = 'http://api.openai.com/v1/audio/speech'; // OpenAI Chat API endpoint
   private imageUrl = 'http://api.openai.com/v1/images/generations'; // OpenAI Chat API endpoint
+  private imagEditeUrl = 'http://api.openai.com/v1/images/edits'; // OpenAI Chat API endpoint
   private apiKey = environment.taskwiseApiKey; // Replace with your OpenAI API key
   private imageSubject = new Subject<any>();
   constructor(private http: HttpClient) { }
@@ -176,6 +177,79 @@ export class TaskwiseAIService {
    
     return this.http.post(`${proxyUrl}${openaiUrl}`, payload, { headers });
    }
-   
+   // Function to create a mask from an image
+   private createMask(imageFile: File): Promise<Blob | null> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          reject('Could not get canvas context');
+          return;
+        }
+  
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        const imageData = ctx.getImageData(0, 0, img.width, img.height);
+        const data = imageData.data;
+  
+        for (let i = 0; i < data.length; i += 4) {
+          if (data[i] + data[i + 1] + data[i + 2] > 600) {  // Making very bright pixels transparent
+            data[i + 3] = 0;
+          }
+        }
+  
+        ctx.putImageData(imageData, 0, 0);
+        canvas.toBlob(blob => {
+          if (blob) {
+            resolve(blob);
+          } else {
+            reject('Failed to create blob from canvas');
+          }
+        }, 'image/png');
+      };
+  
+      img.onerror = () => {
+        reject('Image load error');
+      };
+  
+      img.src = URL.createObjectURL(imageFile);
+    });
+  }
+  
+
+  editImage(prompt: string, imageFile: File): Observable<any> {
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const openaiUrl = 'https://api.openai.com/v1/images/edits';
+    const formData = new FormData();
+    
+    formData.append('prompt', prompt);
+    formData.append('image', imageFile);
+    formData.append('model', 'dall-e-2');
+  
+    // Create a mask and then submit the form data
+    return from(this.createMask(imageFile)).pipe(
+      switchMap(maskBlob => {
+        if (maskBlob) {
+          formData.append('mask', maskBlob);
+        }
+  
+        return this.http.post(`${proxyUrl}${openaiUrl}`, formData, {
+          headers: new HttpHeaders({
+            'Authorization': `Bearer ${this.apiKey}`
+            // The Content-Type header will be set automatically
+          })
+        });
+      }),
+      catchError(error => {
+        console.error('Error in creating or uploading the mask:', error);
+        return throwError(() => new Error('Error in creating or uploading the mask'));
+      })
+    );
+  }
+  
+  
  
 }

@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../objects/task.model'; // Assuming you have a Task model
+import { Priority } from '../objects/priority.model';
+import { Status } from '../objects/status.model';
 
 @Component({
   selector: 'app-manage-task',
@@ -8,21 +10,29 @@ import { Task } from '../objects/task.model'; // Assuming you have a Task model
 })
 export class ManageTaskComponent {
   @Input() task!: Task; // Input task from parent component
+  @Output() edit = new EventEmitter<Task>();
+  @Output() delete = new EventEmitter<Task>();
+  @Output() updateStatus = new EventEmitter<string>();
+  priorities: string[];
+  status: string[];
+  constructor() { 
+    this.priorities = Object.values(Priority);
+    this.status = Object.values(Status);
+  }
 
-  constructor() { }
 
   editTask() {
-    // Implement task editing logic here
-    console.log('Editing task:', this.task);
+    // Emit edit event to parent component
+    this.edit.emit(this.task);
   }
 
   deleteTask() {
-    // Implement task deletion logic here
-    console.log('Deleting task:', this.task);
+    // Emit delete event to parent component
+    this.delete.emit(this.task);
   }
 
   updateTaskStatus(newStatus: string) {
-    // Implement task status update logic here
-    console.log('Updating task status to:', newStatus);
+    // Emit update status event to parent component
+    this.updateStatus.emit(newStatus);
   }
 }
