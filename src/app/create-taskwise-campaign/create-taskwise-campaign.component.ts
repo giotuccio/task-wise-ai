@@ -67,6 +67,47 @@ aiImageUrl: string = ""
     });
   }
 
+  handleCampaignAndImage(prompt: string): void {
+    this.isWaiting = true;
+  
+    this.taskwiseAIService.sendCampaignMessage(prompt).subscribe(response => {
+      // Assuming 'url' is directly available in the response. Adjust according to actual API response structure.
+      this.responseFromAI = response.choices[0].message.content; // Extracting the task details from the response
+      const taskDetails = JSON.parse(this.responseFromAI);
+
+  
+      this.taskwiseAIService.generateImage(`Generate a campaign for the following image: ${taskDetails.description}`).subscribe(data => {
+        this.isWaiting = false;
+        this.imageData =  data.data[0].url;// Adjust based on actual API response
+  
+        // Example to process your text response and link it with the image
+   
+
+        this.newCampaign = {
+          name: taskDetails.name,
+          description: taskDetails.description,
+          startDate: taskDetails.startDate,
+          endDate: taskDetails.endDate,
+          isActive: taskDetails.isActive == 'true' ? true : false,
+          campaignImage: this.imageData ?? ''
+        };
+  
+        // Example function to process and save the combined data
+        this.saveCampaignDetails(this.newCampaign);
+      }, error => {
+        this.isWaiting = false;
+        console.error('Error in text generation:', error);
+      });
+    }, error => {
+      this.isWaiting = false;
+      console.error('Error in image generation:', error);
+    });
+  }
+  
+  private saveCampaignDetails(details: any) {
+    // Logic to save or use the campaign details
+    this.campaignService.addCampaign(this.newCampaign);
+  }
 
 
   regenerateResponse(): void {
