@@ -61,7 +61,9 @@ this.imageQuantity = this.imageQuantity;
         };
 
         // Adding the new task
-        this.campaignService.addCampaign(this.newCampaign);
+        this.campaignService.addCampaign(this.newCampaign).subscribe((response) => {
+          return response
+        })
       } catch (error) {
         console.error('Error parsing response:', error);
       }
@@ -198,7 +200,9 @@ this.imageQuantity = this.imageQuantity;
   
   private saveCampaignDetails(details: any) {
     // Logic to save or use the campaign details
-    this.campaignService.addCampaign(this.newCampaign);
+    this.campaignService.addCampaign(this.newCampaign).subscribe((response) => {
+      return response
+    })
   }
 
 
@@ -215,6 +219,12 @@ this.imageQuantity = this.imageQuantity;
   
   closeDialog(): void {
     // Close the dialog and pass the updated task back to the parent component
+    if(this.newCampaign){
+      this.campaignService.addCampaign(this.newCampaign).subscribe((response) => {
+        return response
+      })
     this.dialogRef.close(this.newCampaign);
+
+    }
   }
 }

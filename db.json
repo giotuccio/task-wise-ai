@@ -119,23 +119,74 @@
         "assignedBy": "TaskWiseAI",
         "completed": false
       }
-    }
-  ],
-
-  "projects": [
-    {
-      "name": "Digital Marketing",
-      "description": "",
-      "startDate": "",
-      "endDate": ""
     },
     {
-      "name": "Online Account",
-      "description": "",
-      "startDate": "",
-      "endDate": ""
+      "id": "9ff7",
+      "task": {
+        "id": "8391624879",
+        "project": "Digital Marketing",
+        "title": "Sneaker Campaign Creation",
+        "description": "Initiate and execute an impactful sneaker campaign",
+        "dueDate": "7/9/2024",
+        "priority": "High",
+        "status": "New",
+        "assignedTo": "Chelsey Dietrich",
+        "assignedBy": "Nicholas Runolfsdottir V",
+        "completed": false
+      }
+    }
+  ],
+  "projects": [
+    {
+      "project": {
+        "name": "Digital Marketing",
+        "description": "",
+        "startDate": "",
+        "endDate": ""
+      }
+    },
+    {
+      "project": {
+        "name": "Online Account",
+        "description": "",
+        "startDate": "",
+        "endDate": ""
+      }
+    }
+  ],
+  "campaigns": [
+    {
+      "id": "288f",
+      "campaign": {
+        "name": "Super Cool Random Campaign",
+        "description": "A campaign aimed to attract a wide, diverse audience with its cool, unique approach.",
+        "startDate": "09/01/2024",
+        "endDate": "12/31/2024",
+        "isActive": true,
+        "campaignImage": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-igpCA8jLmAtZO9PE5996QLqf/user-OAsZ1G5Qvck6YtjMLuyEwgtu/img-SYlfKexVeMt9xfOJUN0gnFGu.png?st=2024-06-08T16%3A49%3A28Z&se=2024-06-08T18%3A49%3A28Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-06-08T17%3A38%3A34Z&ske=2024-06-09T17%3A38%3A34Z&sks=b&skv=2023-11-03&sig=71TW38CT2hy8qiJEdP8dzYRWUgMFORKA3UtHKPo4ZBQ%3D"
+      }
+    },
+    {
+      "id": "87d5",
+      "campaign": {
+        "name": "Super Cool Random Campaign",
+        "description": "This is a fantastic random campaign created to promote our top-notch products and services. Expect a lot of fun and engagement!",
+        "startDate": "2024-07-01",
+        "endDate": "2024-12-31",
+        "isActive": false,
+        "campaignImage": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-igpCA8jLmAtZO9PE5996QLqf/user-OAsZ1G5Qvck6YtjMLuyEwgtu/img-O6qjdwQuovV8D3weoGcY0ImV.png?st=2024-06-08T16%3A50%3A38Z&se=2024-06-08T18%3A50%3A38Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-06-08T17%3A43%3A22Z&ske=2024-06-09T17%3A43%3A22Z&sks=b&skv=2023-11-03&sig=vsTladKYKTTAvlpBKmk4AXyznqCLc7Z3eC5th5zppF0%3D"
+      }
+    },
+    {
+      "id": "822c",
+      "campaign": {
+        "name": "Super Cool Random Campaign",
+        "description": "This is a fantastic random campaign created to promote our top-notch products and services. Expect a lot of fun and engagement!",
+        "startDate": "2024-07-01",
+        "endDate": "2024-12-31",
+        "isActive": false,
+        "campaignImage": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-igpCA8jLmAtZO9PE5996QLqf/user-OAsZ1G5Qvck6YtjMLuyEwgtu/img-O6qjdwQuovV8D3weoGcY0ImV.png?st=2024-06-08T16%3A50%3A38Z&se=2024-06-08T18%3A50%3A38Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-06-08T17%3A43%3A22Z&ske=2024-06-09T17%3A43%3A22Z&sks=b&skv=2023-11-03&sig=vsTladKYKTTAvlpBKmk4AXyznqCLc7Z3eC5th5zppF0%3D"
+      }
     }
   ]
-
-
 }

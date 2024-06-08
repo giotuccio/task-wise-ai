@@ -43,7 +43,7 @@
     <mat-tab label="Manage">
         <ng-template matTabContent>
             <div mat-dialog-content>
-                <app-manage-task [task]="task" (edit)="editTask(editedTask)" (delete)="deleteTask($event)" ></app-manage-task>
+                <app-manage-task [task]="task" (edit)="editTask(task)" (delete)="deleteTask($event)" ></app-manage-task>
             </div>
         </ng-template>
     </mat-tab>

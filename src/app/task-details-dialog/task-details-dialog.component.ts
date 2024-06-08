@@ -21,9 +21,9 @@ export class TaskDetailsDialogComponent {
 
 
 
-  editTask(task: Tasks) {
+  editTask(task: Task) {
     
-this.taskService.editTask(task.id).subscribe((response) => {
+this.taskService.editTask(this.newTask).subscribe((response) => {
 console.log(response);
 
 })

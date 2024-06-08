@@ -47,15 +47,11 @@ export class DashboardComponent implements AfterViewInit, OnInit {
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data
     this.userName = authService.getLoggedInUserName()  ?? "Gio"
-   
-   
+  
+    
   }
 ngOnInit(): void {
-  this.taskService.getProjects().subscribe((response) => {
-    this.projects = response;
-    console.log(this.projects);
-    
-  })
+  
 this.userService.getUsers().subscribe((response) => {
   if(response){
     this.employees = response; 
@@ -63,18 +59,22 @@ this.userService.getUsers().subscribe((response) => {
     
   }
 
- 
-})
 
+})
 this.taskService.getTasks().subscribe((response) => {
   this.tasks = response
 })
-
+this.taskService.getProjects().subscribe((response) => {
+  this.projects = response
+})
+this.campaignService.getCampaigns().subscribe((response) => {
+  this.campaigns =response
+})
 }
   ngAfterViewInit() {
     // Set the selectedIndex to 0 to activate the first tab
     this.selectedIndex = 0;
-this.projects = this.projects
+
     // Display tasks for the first project
     if (this.projects.length > 0) {
       this.displayProjectTasks(this.projects[0].name);
