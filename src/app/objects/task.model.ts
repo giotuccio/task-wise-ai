@@ -15,3 +15,8 @@ export interface Task {
     completed?: boolean;
     isDeleted?: boolean
   }
+
+  export interface Tasks {
+    task: Tasks;
+    id: string
+    }

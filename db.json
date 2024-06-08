@@ -1,0 +1,141 @@
+{
+  "tasks": [
+    {
+      "task": {
+        "id": "512475orty1289",
+        "project": "Online Account Opening",
+        "title": "ActiveList",
+        "description": "To activate the list for the Online Account Opening project",
+        "dueDate": "08/30/2024",
+        "priority": "High",
+        "status": "New",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "TaskWiseAI",
+        "completed": false
+      },
+      "id": "83f7"
+    },
+    {
+      "id": "b4b0",
+      "task": {
+        "id": "573881492",
+        "project": "Digital Marketing",
+        "title": "ALIGNNNN",
+        "description": "gfdgfg",
+        "dueDate": "6/9/2024",
+        "priority": "High",
+        "status": "New",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "",
+        "completed": false
+      }
+    },
+    {
+      "id": "6680",
+      "task": {
+        "id": "7243",
+        "project": "Digital Marketing",
+        "title": "Design an SEO Strategy",
+        "description": "The task involves researching keywords, defining SEO goals, and implementing the SEO strategy",
+        "dueDate": "7/10/2024",
+        "priority": "High",
+        "status": "New",
+        "assignedTo": "Mrs. Dennis Schulist",
+        "assignedBy": "TaskWiseAI",
+        "completed": false
+      }
+    },
+    {
+      "id": "e779",
+      "task": {
+        "id": "78910",
+        "project": "Digital Marketing",
+        "title": "Develop new social media strategy",
+        "description": "This task aims to develop a new social media strategy that enhances brand awareness and increases customer engagement.",
+        "dueDate": "7/8/2024",
+        "priority": "High",
+        "status": "New",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "AI Assistant",
+        "completed": false
+      }
+    },
+    {
+      "id": "3206",
+      "task": {
+        "id": "512475orty1289",
+        "project": "Online Account Opening",
+        "title": "ActiveList",
+        "description": "To activate the list for the Online Account Opening project",
+        "dueDate": "08/30/2024",
+        "priority": "High",
+        "status": "New",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "TaskWiseAI",
+        "completed": false
+      }
+    },
+    {
+      "id": "7ccd",
+      "task": {
+        "id": "469082",
+        "project": "Digital Marketing",
+        "title": "Social Media Strategy",
+        "description": "Plan and execute a comprehensive social media strategy",
+        "dueDate": "10/28/2024",
+        "priority": "High",
+        "status": "New",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "Nicholas Runolfsdottir V",
+        "completed": false
+      }
+    },
+    {
+      "id": "a0ca",
+      "task": {
+        "id": "928340",
+        "project": "Digital Marketing",
+        "title": "Design Campaign Landing Page",
+        "description": "Create a visually appealing landing page for the new marketing campaign.",
+        "dueDate": "12/10/2024",
+        "priority": "High",
+        "status": "New",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "Ervin Howell",
+        "completed": false
+      }
+    },
+    {
+      "id": "2d06",
+      "task": {
+        "id": "7237482374",
+        "project": "Online Account Opening",
+        "title": "Aligning a Button",
+        "description": "Task to ensure proper alignment of all buttons across the application to enhance user experience.",
+        "dueDate": "12/10/2024",
+        "priority": "High",
+        "status": "New",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "TaskWiseAI",
+        "completed": false
+      }
+    }
+  ],
+
+  "projects": [
+    {
+      "name": "Digital Marketing",
+      "description": "",
+      "startDate": "",
+      "endDate": ""
+    },
+    {
+      "name": "Online Account",
+      "description": "",
+      "startDate": "",
+      "endDate": ""
+    }
+  ]
+
+
+}

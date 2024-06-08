@@ -1,6 +1,6 @@
 <div class="dashboard">
   <mat-tab-group style="background-color: aliceblue;">
-    <mat-tab label="Projects">
+    <mat-tab [label]="projects[0].name">
       <button mat-button (click)="toggleSideNav()">Toggle Side Nav</button>
       <mat-sidenav-container class="example-container" autosize>
         <!-- Sidebar -->
@@ -73,7 +73,7 @@
       </mat-sidenav-container>
     </mat-tab>
 
-    <mat-tab label="Campaigns">
+    <mat-tab [label]="projects[1].name">
       <button mat-button (click)="toggleSideNav()">Toggle Side Nav</button>
 
       <mat-sidenav-container class="example-container" autosize>

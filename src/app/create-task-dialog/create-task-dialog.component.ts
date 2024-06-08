@@ -22,7 +22,7 @@ projectName: string = ""
   priorities: string[] = Object.values(Priority);
   constructor(public dialogRef: MatDialogRef<CreateTaskDialogComponent>,private taskService: TaskService) {}
   ngOnInit(): void {
-    this.tasks = this.taskService.getTasks();
+
 }
   onSubmit() {
     if (!this.title || !this.description || !this.priority) {

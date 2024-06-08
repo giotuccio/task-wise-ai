@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Task } from '../objects/task.model'; // Assuming you have a Task model
 import { Priority } from '../objects/priority.model';
 import { Status } from '../objects/status.model';
+import { TaskService } from '../services/task.service';
 
 @Component({
   selector: 'app-manage-task',
@@ -15,7 +16,7 @@ export class ManageTaskComponent {
   @Output() updateStatus = new EventEmitter<string>();
   priorities: string[];
   status: string[];
-  constructor() { 
+  constructor(private taskService: TaskService) { 
     this.priorities = Object.values(Priority);
     this.status = Object.values(Status);
   }

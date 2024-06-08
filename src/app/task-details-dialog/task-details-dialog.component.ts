@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Task } from '../objects/task.model';
+import { Task, Tasks } from '../objects/task.model';
 import { TaskService } from '../services/task.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { TaskService } from '../services/task.service';
 })
 export class TaskDetailsDialogComponent {
   newTask!: Task
+  editedTask!: Tasks
   taskId: string = "";
   isDeleted = false;
   constructor(@Inject(MAT_DIALOG_DATA) public task: Task,
@@ -20,20 +21,26 @@ export class TaskDetailsDialogComponent {
 
 
 
-  editTask(task: Task) {
-this.taskService.editTask(task)
-this.task.priority = task.priority
+  editTask(task: Tasks) {
+    
+this.taskService.editTask(task.id).subscribe((response) => {
+console.log(response);
 
-this.dialogRef.close();
+})
+
+  this.dialogRef.close();
 
   }
   
   deleteTask(task: Task) {
     // Implement delete task logic here
     // For example, you can ask for confirmation before deletion
-    this.taskService.deleteTask(task)
-
+    this.taskService.deleteTask(task).subscribe((response) => {
+      console.log(response);
    this.dialogRef.close();
+      
+    })
+
 
   }
   

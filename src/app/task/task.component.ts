@@ -39,7 +39,6 @@ export class TaskComponent {
   
 toggleTaskStatus(task: Task): void {
   event?.stopPropagation()
-  this.taskService.editTask(task)
 
   switch (this.selectedOption) {
     case 'inProgress':

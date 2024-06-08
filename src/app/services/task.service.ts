@@ -1,41 +1,54 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Task } from '../objects/task.model';
+import { Task, Tasks } from '../objects/task.model';
 import { Priority } from '../objects/priority.model';
 import { Status } from '../objects/status.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
+import { Observable, map } from 'rxjs';
+import { json } from 'milliparsec'
+import { Project } from '../objects/project.model';
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
   private tasks: Task[] = [];
+  private jsonServerUrl = 'http://localhost:3000/tasks';
+  private jsonServerUrlProjects = 'http://localhost:3000/projects';
   taskDeleted: EventEmitter<Task> = new EventEmitter<Task>();
   constructor(private http: HttpClient) {}
-
-  getTasks(): Task[] {
-    return this.tasks;
+  getAllTasksId(): Observable<string[]> {
+    return this.http.get<Tasks[]>(this.jsonServerUrl).pipe(
+      map(response => response.map(data => data.id))
+    );
   }
 
-  addTask(task: Task): Observable<any> {
+  getTasks(): Observable<Task[]> {
+    return this.http.get<{ task: Task }[]>(this.jsonServerUrl).pipe(
+      map(response => response.map(data => data.task))
+    );
+  }
+  getProjects(): Observable<Project[]> {
+    return this.http.get< Project[] >(this.jsonServerUrlProjects)
+  }
+  addTask(task: Task): Observable<Task[]> {
     this.tasks.push(task);
-    return this.http.post<any>('https://jsonplaceholder.typicode.com/posts', { task: task});
+    return this.http.post<Task[]>(this.jsonServerUrl, { task: task});
 
   }
-  createTask(id: string, project: string,title: string, description: string, dueDate: string,priority: Priority.High | Priority.Medium| Priority.Low, status: Status.New| Status.In_Progress| Status.Complete, assignedTo?: string, assignedBy?: string ): Task { const newTask: Task = {id,project,title, description, dueDate,priority, status, assignedTo, assignedBy, completed: status === Status.Complete }; return newTask; } 
   // Additional methods for task management (e.g., update, delete) can be added here
-  deleteTask(task: Task): void {
-task.isDeleted = true;
+ 
+  
+  deleteTask(task: Task): Observable<any> {
+    task.isDeleted = true;
+    const url = `https://jsonplaceholder.typicode.com/posts/${task.id}`;
 
-    
+    return this.http.delete<any>(url);
   }
   
-  
-  
-  editTask(editedTask: Task): void {
-    const index = this.tasks.findIndex(task => task.id === editedTask.id);
-    if (index !== -1) {
-      this.tasks[index] = editedTask;
-    }
+  editTask(editedTask: string): Observable<string> {
+    // Assuming editedTask has a property named taskId that holds the ID of the task
+    const taskId = editedTask; 
+
+    // Update the task with the dynamic taskId value
+    return this.http.put<string>(`${this.jsonServerUrl}/${taskId}`, { task: editedTask });
   }
 }

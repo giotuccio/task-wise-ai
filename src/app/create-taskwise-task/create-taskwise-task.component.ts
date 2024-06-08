@@ -42,18 +42,20 @@ export class CreateTaskwiseTaskComponent {
         const taskDetails = JSON.parse(preprocessedResponse);
 
         // Creating the new task object
-        this.newTask = {
-          id: taskDetails.id,
-          project: taskDetails.project,
-          title: taskDetails.title,
-          description: taskDetails.description,
-          dueDate: taskDetails.dueDate,
-          priority: taskDetails.priority as Priority,
-          status: taskDetails.status as Status,
-          assignedTo: taskDetails.assignedTo,
-          assignedBy: taskDetails.assignedBy,
-          completed: taskDetails.completed,
-        };
+    // Creating the new task object
+this.newTask = {
+  id: taskDetails.id,
+  project: taskDetails.project,
+  title: taskDetails.title,
+  description: taskDetails.description,
+  dueDate: taskDetails.dueDate,
+  priority: taskDetails.priority as Priority,
+  status: taskDetails.status as Status,
+  assignedTo: taskDetails.assignedTo,
+  assignedBy: taskDetails.assignedBy,
+  completed: taskDetails.completed,
+};
+
 
         // Adding the new task
         this.taskService.addTask(this.newTask);
