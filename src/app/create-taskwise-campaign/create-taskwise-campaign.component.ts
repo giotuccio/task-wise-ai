@@ -18,6 +18,7 @@ aiImageUrl: string = ""
   imageData: string | null = null;
   selectedImage: File | null = null;
   isWaiting = false;
+  imageQuantity:number = 0
   constructor(private taskwiseAIService: TaskwiseAIService, private campaignService: CampaignServiceService, @Inject(MAT_DIALOG_DATA) public task: Task,
     private dialogRef: MatDialogRef<CreateTaskwiseCampaignComponent>) { }
 
@@ -33,9 +34,8 @@ aiImageUrl: string = ""
 
   sendMessageToAI(prompt: string): void {
     this.isWaiting = true;
-
-
-    this.taskwiseAIService.sendCampaignMessage(prompt).subscribe(response => {
+this.imageQuantity = this.imageQuantity;
+    this.taskwiseAIService.sendCampaignMessage(prompt, this.imageQuantity ).subscribe(response => {
       if(response)
         this.isWaiting = false;
       this.responseFromAI = response.choices[0].message.content; // Extracting the task details from the response
@@ -71,13 +71,13 @@ aiImageUrl: string = ""
   handleCampaignAndImage(prompt: string): void {
     this.isWaiting = true;
   
-    this.taskwiseAIService.sendCampaignMessage(prompt).subscribe(response => {
+    this.taskwiseAIService.sendCampaignMessage(prompt, this.imageQuantity).subscribe(response => {
       // Assuming 'url' is directly available in the response. Adjust according to actual API response structure.
       this.responseFromAI = response.choices[0].message.content; // Extracting the task details from the response
       const taskDetails = JSON.parse(this.responseFromAI);
 
   
-      this.taskwiseAIService.generateImage(`Generate an imqge from the following: ${taskDetails.description}. Display text over image if asked from ${prompt}`).subscribe(data => {
+      this.taskwiseAIService.generateImage(`${this.imageQuantity}. Generate an image from the following: ${taskDetails.description}. IF user mentions an amount of campaign images from ${prompt}, populate that amount in property imageQuantity ${this.imageQuantity}. if its over your limit then produce only 10. Display text over image if asked from ${prompt}. `).subscribe(data => {
         this.isWaiting = false;
         this.imageData =  data.data[0].url;// Adjust based on actual API response
   

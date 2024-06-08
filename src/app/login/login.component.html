@@ -7,6 +7,7 @@
 <div class="login-container">
 
 <mat-card >
+  <mat-spinner *ngIf="isWaiting"></mat-spinner>
     <div class="login-form">
       <h2 style="text-align: center;">Login</h2>
       <form (ngSubmit)="login(username.value, password.value)">

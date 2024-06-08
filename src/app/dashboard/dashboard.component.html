@@ -7,7 +7,7 @@
         <mat-sidenav #sidenav class="example-sidenav" mode="side" [opened]="sideNavDisplayed">
           <div class="sidebar-header">
             <img class="avatar" [src]="avatarSrc" (click)="openUpdatePhotoDialog()" alt="Avatar">
-            <p class="username">Name</p>
+            <p class="username">{{userName}}</p>
           </div>
           <mat-divider></mat-divider>
           <mat-nav-list class="sidebar-nav">
@@ -33,6 +33,7 @@
 
         <!-- Main Content -->
         <div class="main-content">
+          
           <div class="dashboard">
             <!-- Header -->
             <mat-card class="dashboard-header">

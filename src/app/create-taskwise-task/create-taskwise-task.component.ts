@@ -4,7 +4,8 @@ import { TaskService } from '../services/task.service';
 import { Priority } from '../objects/priority.model';
 import { Status } from '../objects/status.model';
 import { Task } from '../objects/task.model';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CreateTaskDialogComponent } from '../create-task-dialog/create-task-dialog.component';
 
 @Component({
   selector: 'app-create-taskwise-task',
@@ -14,16 +15,18 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class CreateTaskwiseTaskComponent {
   responseFromAI: string = "";
   prompt: string = ""
-
   newTask!: Task;
   isWaiting = false;
-  constructor(private taskwiseAIService: TaskwiseAIService, private taskService: TaskService, @Inject(MAT_DIALOG_DATA) public task: Task,
-    private dialogRef: MatDialogRef<CreateTaskwiseTaskComponent>) { }
+  employees: any
+  constructor(private taskwiseAIService: TaskwiseAIService, private taskService: TaskService, @Inject(MAT_DIALOG_DATA) public task: Task,@Inject(MAT_DIALOG_DATA) public data: {employees: Array<object>},
+    private dialogRef: MatDialogRef<CreateTaskwiseTaskComponent>,private dialog: MatDialog) { 
+      this.employees = data.employees ?? []
+    }
 
   sendMessageToAI(prompt: string): void {
     this.isWaiting = true;
     this.prompt = prompt;
-    this.taskwiseAIService.sendTaskMessage(prompt).subscribe(response => {
+    this.taskwiseAIService.sendTaskMessage(prompt + `List of employees:  ${this.employees.map((x: { name: any; }) =>x.name)} you can populate assignTo property value to`).subscribe(response => {
       if(response)
         this.isWaiting = false;
       this.responseFromAI = response.choices[0].message.content; // Extracting the task details from the response

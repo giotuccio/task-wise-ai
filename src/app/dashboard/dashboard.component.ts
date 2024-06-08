@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { Task } from "../objects/task.model"; // Assuming you have a Task model
 import { Project } from "../objects/project.model";
 import { MatDialog } from "@angular/material/dialog";
@@ -16,13 +16,17 @@ import { AskTaskwiseDialogComponent } from "../ask-taskwise-dialog/ask-taskwise-
 import { UpdatePhotoDialogComponent } from "../update-photo-dialog/update-photo-dialog.component";
 import { MatBottomSheet } from "@angular/material/bottom-sheet";
 import { TaskService } from "../services/task.service";
+import { AuthService } from "../services/auth.service";
+import { UserService } from "../services/user.service";
+import { CampaignServiceService } from "../services/campaign-service.service";
 
 @Component({
   selector: "app-dashboard",
   templateUrl: "./dashboard.component.html",
   styleUrls: ["./dashboard.component.css"],
 })
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements AfterViewInit, OnInit {
+  userName = ""
   tasks: Task[] = []; // Initialize with some tasks
   campaigns: Campaign[] = []; // Initialize with some campaigns
   projects: Project[] = []; // Initialize with some projects
@@ -35,12 +39,14 @@ export class DashboardComponent implements AfterViewInit {
   showSubSubMenu: boolean = false;
   isAskTaskWiseOpen = false;
   displayedTasks: Task[] = [];
+  employees = []
   selectedIndex = 0;
   selectedProjectName: string | null = null;
   avatarSrc = "https://cdn-icons-png.flaticon.com/256/147/147144.png";
-  constructor(private dialog: MatDialog, private bottomSheet: MatBottomSheet, private taskService: TaskService) {
+  constructor(private dialog: MatDialog, private bottomSheet: MatBottomSheet, private taskService: TaskService,private campaignService: CampaignServiceService, private authService: AuthService, private userService: UserService) {
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data
+    this.userName = authService.getLoggedInUserName()  ?? "Gio"
     this.tasks = [
       {
         id: "1",
@@ -209,7 +215,16 @@ export class DashboardComponent implements AfterViewInit {
       },
     ];
   }
-
+ngOnInit(): void {
+  
+this.userService.getUsers().subscribe((response) => {
+  if(response){
+    this.employees = response; 
+    console.log(this.employees);
+    
+  }
+})
+}
   ngAfterViewInit() {
     // Set the selectedIndex to 0 to activate the first tab
     this.selectedIndex = 0;
@@ -311,7 +326,7 @@ export class DashboardComponent implements AfterViewInit {
       } else {
         return 0;
       }
-    });
+    })
   }
 
   sortByPriority() {
@@ -395,6 +410,7 @@ export class DashboardComponent implements AfterViewInit {
         campaigns: this.campaigns,
         projects: this.projects,
         tasks: this.tasks,
+        employees: this.employees
       },
       width: "80%",
       height: "80vh",
@@ -405,6 +421,10 @@ export class DashboardComponent implements AfterViewInit {
       // Check if a new task was added
       if (newTask) {
         console.log(result, newTask);
+      this.taskService.addTask(newTask).subscribe((response) => {
+        console.log(response);
+        
+      });
         // Update the tasks array or perform any other necessary actions
         this.tasks.push(newTask);
       }

@@ -58,44 +58,53 @@ body {
   /* Use the text color defined by the theme */
 
 }
-.example-container mat-divider{
+
+.example-container mat-divider {
   border-top-color: var(--text-color) !important;
 
 
-  
+
 }
-.task-wise-bottom-sheet{
+
+.task-wise-bottom-sheet {
   width: 100%;
   min-width: 100% !important;
   display: block !important;
 
 }
-.mat-bottom-sheet-container{
+
+.mat-bottom-sheet-container {
   height: 40vh !important;
   width: 100% !important;
   min-width: 100% !important;
 
 }
+
 .mat-bottom-sheet-container-medium {
   height: 40vh !important;
 }
-.mat-bottom-sheet-container-large{
+
+.mat-bottom-sheet-container-large {
   height: 40vh !important;
   width: 100% !important;
   min-width: 100% !important;
 
 }
-.cdk-overlay-container{
+
+.cdk-overlay-container {
   z-index: 2 !important;
 
 }
 
-h1[mat-dialog-title]{
+h1[mat-dialog-title] {
   background-color: rgba(0, 0, 255, 0.551);
   color: white;
   text-align: center;
 }
 
-.mat-drawer-container{
+.mat-drawer-container {
   height: 100vh !important;
+}
+ .campaign-dialog {
+  border-radius: 40%;
 }

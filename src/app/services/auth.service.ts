@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-
+  private loggedInUserName: string | undefined;
   // Example: Replace this with your actual authentication logic
 
   private isAuthenticatedValue: boolean = false;
@@ -16,20 +16,13 @@ export class AuthService {
     return this.isAuthenticatedValue;
   }
 
-  login(username: string, password: string): boolean {
-    // Example: Perform authentication here
-    // Replace this logic with your actual authentication mechanism
-    if (username === 'admin' && password === 'password') {
-      this.isAuthenticatedValue = true;
-      return true;
-    } else {
-      return false;
-    }
+
+  login(username: string, password: string): any {
+    // Perform login logic here, and if successful, set the logged-in user's name
+    this.loggedInUserName = username;
   }
 
-  logout(): void {
-    // Example: Perform logout actions here
-    // Replace this logic with your actual logout mechanism
-    this.isAuthenticatedValue = false;
+  getLoggedInUserName(): string | undefined {
+    return this.loggedInUserName;
   }
 }

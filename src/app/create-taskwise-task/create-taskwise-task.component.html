@@ -5,7 +5,6 @@
   <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
     <mat-spinner *ngIf="isWaiting"></mat-spinner>
   </div>
-  
 
   <div style="padding: 10px;" *ngIf="responseFromAI">
     <h2>TaskWise Response:</h2>
@@ -24,7 +23,7 @@
       </tr>
       <tr>
         <td><strong>Due Date:</strong></td>
-        <td><input type="date" [(ngModel)]="newTask.dueDate" class="editable-field"></td>
+        <td><input [(ngModel)]="newTask.dueDate" class="editable-field"></td>
       </tr>
       <tr>
         <td><strong>Priority:</strong></td>
@@ -47,11 +46,20 @@
           </select>
         </td>
       </tr>
+
       <tr>
         <td><strong>Assigned To:</strong></td>
-        <td><input type="text" [(ngModel)]="newTask.assignedTo" class="editable-field"></td>
+        <td>
+          <mat-form-field>
+            <mat-label>Employer:</mat-label>
+            <mat-select  [(ngModel)]="newTask.assignedTo" >
+              <mat-option  *ngFor="let employee of employees" [value]="newTask.assignedTo ? newTask.assignedTo  : employee">{{employee.name}}</mat-option>
+            </mat-select>
+            </mat-form-field>
+            </td>
       </tr>
-      <tr>
+      <tr >
+
         <td><strong>Assigned By:</strong></td>
         <td><input type="text" [(ngModel)]="newTask.assignedBy" class="editable-field"></td>
       </tr>
