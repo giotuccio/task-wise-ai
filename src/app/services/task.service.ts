@@ -21,32 +21,32 @@ export class TaskService {
     );
   }
 
-  getTasks(): Observable<Task[]> {
-    return this.http.get<{ task: Task }[]>(this.jsonServerUrl).pipe(
-      map(response => response.map(data => data.task))
+  getTasks(): Observable<any> {
+    return this.http.get<any>(this.jsonServerUrl).pipe(
+      map(response => response.map((data: { task: any; }) => data.task))
     );
   }
-  getProjects(): Observable<Project[]> {
-    return this.http.get<{ project: Project }[]>(this.jsonServerUrlProjects).pipe(
-      map(response => response.map(data => data.project))
+  getProjects(): Observable<any> {
+    return this.http.get<any>(this.jsonServerUrlProjects).pipe(
+      map(response => response.map((data: { project: any; }) => data.project))
     );
   }
-  addTask(task: Task): Observable<Task[]> {
+  addTask(task: Task): Observable<any> {
     this.tasks.push(task);
-    return this.http.post<Task[]>(this.jsonServerUrl, { task: task });
+    return this.http.post<any>(this.jsonServerUrl, { task: task });
 
   }
   // Additional methods for task management (e.g., update, delete) can be added here
 
 
-  deleteTask(task: Task): Observable<any> {
+  deleteTask(task: Task, taskId: string): Observable<any> {
     task.isDeleted = true;
     const url = `https://jsonplaceholder.typicode.com/posts/${task.id}`;
 
-    return this.http.delete<any>(url);
+    return this.http.delete<any>(this.jsonServerUrl + '/' + taskId);
   }
 
-  editTask(editedTask: Task):   Observable<{ task: Task; }[]>{
-    return this.http.put<{ task: Task }[]>(this.jsonServerUrl, {task: editedTask})
+  editTask(editedTask: Task, taskId: string):  Observable<any> {
+    return this.http.put<any>(this.jsonServerUrl + '/' + taskId, {task: editedTask, id: taskId})
   }
 }

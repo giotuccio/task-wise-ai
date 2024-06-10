@@ -1,14 +1,19 @@
-<div style="display: flex; flex-direction: column;">
+<mat-spinner *ngIf="isUpdating"></mat-spinner>
+<div style="display: flex; flex-direction: column;" *ngIf="!isDeleting &&  !isUpdating">
   <h2>Manage Task</h2>
   <p><strong>Project:</strong> {{ task.project }}</p>
 
-  <p><strong>Title:</strong> {{ task.title }}</p>
+  <mat-form-field> <mat-label>Title:</mat-label><input matInput [(ngModel)]=" task.title" /> </mat-form-field>
   <mat-form-field><mat-label>Description:</mat-label> <textarea matInput  [(ngModel)]=" task.description" ></textarea></mat-form-field>
 
   <mat-form-field><mat-label>Due Date:</mat-label> <input matInput [(ngModel)]=" task.dueDate" /></mat-form-field>
 
-  <p *ngIf="task.assignedTo"><strong>Assigned To:</strong> {{ task.assignedTo }}</p>
-
+  <mat-form-field>
+    <mat-label>Assign To:</mat-label>
+    <mat-select [(ngModel)]="task.assignedTo">
+      <mat-option *ngFor="let employee of employees" [value]="employee.name">{{ employee.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
   <mat-form-field>
     <mat-label>Priority:</mat-label>
     <mat-select [(ngModel)]="task.priority">
@@ -33,8 +38,6 @@
     </div>
 
     <!-- Task Status Update Buttons -->
-    <div>
-      <button mat-raised-button color="primary" (click)="updateTaskStatus('Completed')">Mark as Completed</button>
-    </div>
+ 
   </div>
 </div>

@@ -19,7 +19,12 @@
       </tr>
       <tr>
         <td><strong>Description:</strong></td>
-        <td><textarea [(ngModel)]="newTask.description" class="editable-field"></textarea></td>
+        <td>
+          <mat-form-field style="width: 100%;"> <textarea matInput [(ngModel)]="newTask.description"
+              class="editable-field"></textarea>
+          </mat-form-field>
+        </td>
+
       </tr>
       <tr>
         <td><strong>Due Date:</strong></td>
@@ -28,56 +33,61 @@
       <tr>
         <td><strong>Priority:</strong></td>
         <td>
-          <select [(ngModel)]="newTask.priority" class="editable-field">
-            <option value="High">High</option>
-            <option value="Normal">Normal</option>
-            <option value="Low">Low</option>
-          </select>
+          <mat-form-field style="width: 100%;">
+            <mat-label>Priority</mat-label>
+            <mat-select [(ngModel)]="newTask.priority" class="editable-field">
+              <mat-option value="High">High</mat-option>
+              <mat-option value="Normal">Normal</mat-option>
+              <mat-option value="Low">Low</mat-option>
+            </mat-select>
+          </mat-form-field>
         </td>
       </tr>
       <tr>
         <td><strong>Status:</strong></td>
         <td>
-          <select [(ngModel)]="newTask.status" class="editable-field">
-            <option value="New">New</option>
-            <option value="In Progress">In Progress</option>
-            <option value="On Hold">On Hold</option>
-            <option value="Complete">Complete</option>
-          </select>
+          <mat-form-field style="width: 100%;">
+            <mat-label>Status:</mat-label>
+            <mat-select [(ngModel)]="newTask.status" class="editable-field">
+              <mat-option value="In Progress">In Progress</mat-option>
+              <mat-option value="Ready For QA">Ready For QA</mat-option>
+              <mat-option value="Complete">Complete</mat-option>
+            </mat-select>
+          </mat-form-field>
         </td>
       </tr>
 
       <tr>
         <td><strong>Assigned To:</strong></td>
         <td>
-          <mat-form-field>
-            <mat-label>Employer:</mat-label>
-            <mat-select  [(ngModel)]="newTask.assignedTo" >
-              <mat-option  *ngFor="let employee of employees" [value]="newTask.assignedTo ? newTask.assignedTo  : employee">{{employee.name}}</mat-option>
+          <mat-form-field style="width: 100%;">
+            <mat-label>Team:</mat-label>
+            <mat-select [(ngModel)]="newTask.assignedTo">
+              <mat-option *ngFor="let employee of employees" [value]="employee.name">{{employee.name}}</mat-option>
             </mat-select>
-            </mat-form-field>
-            </td>
+          </mat-form-field>
+        </td>
       </tr>
-      <tr >
+      <tr>
 
         <td><strong>Assigned By:</strong></td>
         <td><input type="text" [(ngModel)]="newTask.assignedBy" class="editable-field"></td>
       </tr>
     </table>
     <!-- Your dialog content here -->
-  <div style="display: flex; justify-items: center;justify-content: center;">
-
-<button mat-button (click)="closeDialog()">Save Edited Changes</button>
-</div>
+    <div style="display: flex; justify-items: center;justify-content: center;">
+      <button mat-button (click)="closeDialog()">Save Edited Changes</button>
+    </div>
   </div>
   <div style="display: flex; justify-items: center;justify-content: center;">
-
-  <button style="    font-size: 11px;" *ngIf="responseFromAI" mat-button (click)="regenerateResponse()"><mat-icon>refresh</mat-icon>Regenerate</button>
-</div>
+    <button style="font-size: 11px;" *ngIf="responseFromAI" mat-button
+      (click)="regenerateResponse()"><mat-icon>refresh</mat-icon>Regenerate</button>
+  </div>
   <!-- Input Field for Sending Prompts to AI -->
   <div style="position: fixed; bottom: 100px; display: flex; width: 80%; flex-direction: row; justify-content: center;">
     <mat-form-field class="example-full-width" style="width: 80%;">
-      <input matInput #promptInput type="text" style="width: 80%;" placeholder="Begin by telling me more about the task you'd like to create..">
+      <input matInput #promptInput type="text" style="width: 80%;"
+        placeholder="Begin by telling me more about the task you'd like to create..">
     </mat-form-field>
     <button mat-button (click)="sendMessageToAI(promptInput.value)">Send</button>
 

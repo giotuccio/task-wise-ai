@@ -15,8 +15,9 @@
   .task-table tr:hover {
     background-color: #ddd;
   }
+  
   .editable-field {
-    width: 100%; /* Make inputs fill the available space */
+    width: 100% ; /* Make inputs fill the available space */
     padding: 8px; /* Add some padding for better spacing */
     border: 1px solid #ccc; /* Add a border for better visibility */
     border-radius: 4px; /* Round the corners */
@@ -29,4 +30,6 @@
     outline: none; /* Remove the default focus outline */
     border-color: #007bff; /* Change the border color when input is focused */
   }
+
+
   

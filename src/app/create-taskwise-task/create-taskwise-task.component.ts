@@ -40,9 +40,7 @@ export class CreateTaskwiseTaskComponent {
       // Parsing the task details from the preprocessed response
       try {
         const taskDetails = JSON.parse(preprocessedResponse);
-
-        // Creating the new task object
-    // Creating the new task object
+    
 this.newTask = {
   id: taskDetails.id,
   project: taskDetails.project,

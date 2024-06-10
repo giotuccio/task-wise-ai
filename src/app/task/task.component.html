@@ -1,5 +1,7 @@
-<div *ngIf="!task.isDeleted" class="task" [class.completed]="task.completed" [class.dark-theme]="isDarkTheme">
+
+<div *ngIf="!task.isDeleted" class="task" [class.completed]="task.completed" >
   <mat-card class="task-card" matRipple>
+    <mat-spinner *ngIf="isUpdating"></mat-spinner>
     <mat-card-content class="task-content">
       <div class="row">
         <!-- Left column for title -->
@@ -30,9 +32,9 @@
     </mat-card-content>
     <mat-card-actions class="full-width" *ngIf="task.assignedTo">
       <mat-button-toggle-group [(ngModel)]="selectedOption" (ngModelChange)="toggleTaskStatus(task)" class="full-width">
-        <mat-button-toggle value="inProgress" [class.blue]="selectedOption == 'inProgress' && !task.completed">In Progress</mat-button-toggle>
-        <mat-button-toggle value="sendToQA" [class.yellow]="selectedOption == 'sendToQA' && !task.completed">Ready For QA</mat-button-toggle>
-        <mat-button-toggle value="complete" [class.green]="task.completed">Complete</mat-button-toggle>
+        <mat-button-toggle value="In Progress" [class.blue]="task.status == 'In Progress' && !task.completed">In Progress</mat-button-toggle>
+        <mat-button-toggle value="Ready For QA" [class.yellow]="task.status == 'Ready For QA' && !task.completed">Ready For QA</mat-button-toggle>
+        <mat-button-toggle value="Complete" [class.green]="task.completed && task.status == 'Complete'">Complete</mat-button-toggle>
       </mat-button-toggle-group>
     </mat-card-actions>
   </mat-card>

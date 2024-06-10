@@ -1,0 +1,50 @@
+<h1 style="padding: 10px;">JOEYBOT</h1>
+
+<div style="z-index: 3; display: flex;justify-content: space-between;"  (click)="closeDialog()">
+<button mat-button >
+  <mat-icon >close</mat-icon>
+</button>
+    </div>
+<div style="position: relative "  (click)="closeDialog()" >
+
+  <!-- Display AI Response -->
+  <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+    <mat-spinner *ngIf="isWaiting"></mat-spinner>
+  </div>
+
+
+  <div style="padding: 10px; position: absolute; top: 10px;" *ngIf="responseFromAI && isJoeySpeech">
+    <span>Joey:</span>{{responseFromAI}}
+    <!-- Your dialog content here -->
+
+  </div>
+  <div style="    left: 0px;
+  display: flex;
+  position: fixed;
+  bottom: 86px;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+  right: 0px;"(click)="$event.stopPropagation()">
+  
+    <button style="    font-size: 11px;" *ngIf="responseFromAI" mat-button
+      (click)="regenerateResponse()"><mat-icon>refresh</mat-icon>Regenerate</button>
+  </div>
+  <div>{{generatingSpeech}}</div>
+  <!-- Input Field for Sending Prompts to AI -->
+  <div
+  class="taskwise-prompt-input"
+  (click)="$event.stopPropagation()"
+
+>
+
+    <mat-form-field class="example-full-width" style="width: 80%;">
+      <input matInput #promptInput type="text" style="width: 80%;" placeholder="Ask TaskWiseAI something...">
+    </mat-form-field>
+    <div style="display: flex; flex-direction: row;">
+    <button mat-button (click)="sendMessageToAI(promptInput.value)">Send</button>
+    <!-- <button *ngIf="responseFromAI" mat-button (click)="playAudio()">Voice</button> -->
+  </div>
+    <!-- Regenerate button -->
+  </div>
+</div>

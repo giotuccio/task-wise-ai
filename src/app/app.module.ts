@@ -70,6 +70,7 @@ import { AskTaskwiseDialogComponent } from './ask-taskwise-dialog/ask-taskwise-d
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { UpdatePhotoDialogComponent } from './update-photo-dialog/update-photo-dialog.component';
 import { TaskwiseTaskDetailsAssistComponent } from './taskwise-task-details-assist/taskwise-task-details-assist.component';
+import { JoeyAiComponent } from './joey-ai/joey-ai.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,6 +82,7 @@ import { TaskwiseTaskDetailsAssistComponent } from './taskwise-task-details-assi
     ProjectDetailsDialogComponent,
     TaskFormComponent,
     CreateTaskDialogComponent,
+    CreateTaskwiseCampaignComponent,
     EmployeeCalendarComponent,
     LoginComponent,
     TaskDetailsDialogComponent,
@@ -96,6 +98,7 @@ import { TaskwiseTaskDetailsAssistComponent } from './taskwise-task-details-assi
     BarChartComponent,
     UpdatePhotoDialogComponent,
     TaskwiseTaskDetailsAssistComponent,
+    JoeyAiComponent,
   ],
   imports: [
     BrowserModule,

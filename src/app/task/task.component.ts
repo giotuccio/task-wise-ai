@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task } from '../objects/task.model';import { Status } from '../objects/status.model';
-import { Priority } from '../objects/priority.model';
+import { Task } from '../objects/task.model';
+import { Status } from '../objects/status.model';
 import { TaskService } from '../services/task.service';
-; // Assuming you have a Task model
+import { User } from '../objects/user.model';
 
 @Component({
   selector: 'app-task',
@@ -11,51 +11,67 @@ import { TaskService } from '../services/task.service';
 })
 export class TaskComponent {
   @Input() task!: Task;
+  @Input() taskId!: string;
   assignedTo: string = "";
-  employees: string[] = ['Employee 1', 'Employee 2', 'Employee 3'];
-  selectedOption: string = 'inProgress';
+  @Input() employees: any;
+  selectedOption: string = '';
+  selectedTaskId: string = ''
+  isUpdating = false;
 
   @Output() complete: EventEmitter<void> = new EventEmitter<void>();
 
-  constructor(private taskService: TaskService){
+  constructor(private taskService: TaskService) {}
 
-  }
-  completeTask() {
+  completeTask(task: Task) {
+    task.completed = true;
+    task.status = Status.Complete;
     this.complete.emit();
+    this.updateTask();
   }
+
   assignEmployee(event: any) {
     this.task.assignedTo = this.assignedTo;
     // Implement other logic as needed, such as updating task assignment in the backend
   }
-  
-  isDarkTheme = false;
-  stopDefault(event: any) {
-    event.preventDefault();
-  }
-  // Function to toggle theme
-  toggleTheme() {
-    this.isDarkTheme = !this.isDarkTheme;
-  }
-  
-toggleTaskStatus(task: Task): void {
-  event?.stopPropagation()
 
-  switch (this.selectedOption) {
-    case 'inProgress':
-  task.status = Status.In_Progress
+  toggleTaskStatus(task: any) {
+    event?.stopPropagation();
 
-      // Handle in progress status
-      break;
-    case 'sendToQA':
-  task.status = Status.QA
-      // Handle send to QA status
-      break;
-    case 'complete':
-      this.completeTask()
-      // Handle complete status
-      break;
-    default:
-      break;
+
+    switch (this.selectedOption) {
+      
+      case 'In Progress':
+        console.log(this.selectedOption);
+
+       task.status = Status.In_Progress;
+
+        break;
+      case 'Ready For QA':
+        console.log(this.selectedOption);
+
+ task.status = Status.QA;
+
+        break;
+      case 'Complete':
+        console.log(this.selectedOption);
+        
+        this.completeTask(task);
+        return; // Exit early to avoid double update
+      default:
+        break;
+    }
+
+    this.updateTask();
+
   }
-}
+
+  updateTask() {
+    this.isUpdating = true;
+    this.taskService.editTask(this.task,this.taskId).subscribe((response) => {
+      if (response) {
+        console.log(response);
+        this.isUpdating = false;
+      }
+    });
+  }
 }

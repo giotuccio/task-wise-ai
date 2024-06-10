@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
-import { Task } from "../objects/task.model"; // Assuming you have a Task model
+import { Task} from "../objects/task.model"; // Assuming you have a Task model
 import { Project } from "../objects/project.model";
 import { MatDialog } from "@angular/material/dialog";
 import { ProjectDetailsDialogComponent } from "../project-details-dialog/project-details-dialog.component";
@@ -28,6 +28,9 @@ import { CampaignServiceService } from "../services/campaign-service.service";
 export class DashboardComponent implements AfterViewInit, OnInit {
   userName = ""
   tasks: Task[] = []; // Initialize with some tasks
+  updatedTask: Task[] = []; // Initialize with some tasks
+  taskIds: string[] = [];
+  taskIdIndex: any;
   campaigns: Campaign[] = []; // Initialize with some campaigns
   projects: Project[] = []; // Initialize with some projects
   selectedProject: Project | null = null;
@@ -42,6 +45,7 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   employees = []
   selectedIndex = 0;
   selectedProjectName: string | null = null;
+  updatedStatus = ""
   avatarSrc = "https://cdn-icons-png.flaticon.com/256/147/147144.png";
   constructor(private dialog: MatDialog, private bottomSheet: MatBottomSheet, private taskService: TaskService,private campaignService: CampaignServiceService, private authService: AuthService, private userService: UserService) {
     // Fetch tasks and projects from a service or API
@@ -61,12 +65,23 @@ this.userService.getUsers().subscribe((response) => {
 
 
 })
-this.taskService.getTasks().subscribe((response) => {
-  this.tasks = response
-})
 this.taskService.getProjects().subscribe((response) => {
-  this.projects = response
-})
+  this.projects = response;
+  console.log(this.projects);
+  
+});
+
+this.taskService.getTasks().subscribe((response) => {
+  this.tasks = response;
+  console.log(this.tasks);  // Debug log to verify tasks
+});
+
+this.taskService.getAllTasksId().subscribe((response) => {
+  this.taskIds = response;
+  console.log(this.taskIds);  // Debug log to verify task IDs
+});
+
+
 this.campaignService.getCampaigns().subscribe((response) => {
   this.campaigns =response
 })
@@ -133,13 +148,13 @@ this.campaignService.getCampaigns().subscribe((response) => {
     );
   }
 
-  getPendingTasks(projectName: string): Task[] {
+  getPendingTasks(projectName: string, index: number): Task[] {
     return this.tasks.filter(
       (task) =>
         task.project === projectName && !task.assignedTo && !task.completed
     );
   }
-  getCompletedTasks(projectName: string): Task[] {
+  getCompletedTasks(projectName: string, index: number): Task[] {
     return this.tasks.filter(
       (task) =>
         task.project === projectName && task.assignedTo && task.completed
@@ -155,37 +170,7 @@ this.campaignService.getCampaigns().subscribe((response) => {
     task.completed = true;
     task.status = Status.Complete;
   }
-  sortByDate() {
-    this.tasks.sort((a, b) => {
-      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
-    });
-  }
 
-  sortByAssigned() {
-    this.tasks.sort((a, b) => {
-      if (!a.assignedTo && !b.assignedTo) {
-        return 0;
-      } else if (!a.assignedTo) {
-        return -1;
-      } else if (!b.assignedTo) {
-        return 1;
-      } else {
-        return 0;
-      }
-    })
-  }
-
-  sortByPriority() {
-    this.tasks.sort((a, b) => {
-      const priorityOrder = {
-        [Priority.Low]: 0,
-        [Priority.Medium]: 1,
-        [Priority.High]: 2,
-      };
-
-      return priorityOrder[a.priority] - priorityOrder[b.priority];
-    });
-  }
 
   openUpdatePhotoDialog(): void {
     const dialogRef = this.dialog.open(UpdatePhotoDialogComponent, {
@@ -201,18 +186,28 @@ this.campaignService.getCampaigns().subscribe((response) => {
       }
     });
   }
+  openTaskDetailsDialog(task: Task, index: number) {
+    
+    const selectedTaskId = this.taskIds[index]; // Directly use the outer task's id property
+    console.log(selectedTaskId);
 
-  openTaskDetailsDialog(task: Task) {
     const dialogRef = this.dialog.open(TaskDetailsDialogComponent, {
-      data: task,
+      data: { task: task, selectedTaskId, employees: this.employees }, // Pass the inner task details and the outer task's id
       width: "80%",
       height: "80vh",
     });
+
     dialogRef.afterClosed().subscribe((result) => {
-      // If result is not null, add the new task to the list
-      // this.tasks.push(dialogRef.componentInstance.task);
-    
-      console.log(dialogRef.componentInstance.task);
+      if (result) {
+        console.log(result);
+        task.title = result.title
+        task.description = result.description
+        task.dueDate = result.dueDate
+        task.assignedTo = result.assignedTo
+        task.priority = result.priority
+
+        task.status = result.status
+      }
     });
   }
 

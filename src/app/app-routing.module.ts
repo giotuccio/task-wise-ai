@@ -5,12 +5,18 @@ import { EmployeeCalendarComponent } from './employee-calendar/employee-calendar
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard'; // Import your AuthGuard
 import { TaskDetailsDialogComponent } from './task-details-dialog/task-details-dialog.component';
+import { JoeyAiComponent } from './joey-ai/joey-ai.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { 
     path: 'dashboard', 
     component: DashboardComponent, 
+    // canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'joey', 
+    component: JoeyAiComponent, 
     // canActivate: [AuthGuard] 
   },
   { path: 'task-details/:id', component: TaskDetailsDialogComponent },

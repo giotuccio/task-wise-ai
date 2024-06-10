@@ -3,6 +3,7 @@ import { Task } from '../objects/task.model'; // Assuming you have a Task model
 import { Priority } from '../objects/priority.model';
 import { Status } from '../objects/status.model';
 import { TaskService } from '../services/task.service';
+import { User } from '../objects/user.model';
 
 @Component({
   selector: 'app-manage-task',
@@ -11,20 +12,29 @@ import { TaskService } from '../services/task.service';
 })
 export class ManageTaskComponent {
   @Input() task!: Task; // Input task from parent component
-  @Output() edit = new EventEmitter<Task>();
+  @Output() edit = new EventEmitter<void>();
   @Output() delete = new EventEmitter<Task>();
   @Output() updateStatus = new EventEmitter<string>();
+  @Output() updatePriority = new EventEmitter<string>();
+  @Input() isUpdating = false;
+  @Input() isDeleting = false;
+  @Input() employees: any;
   priorities: string[];
   status: string[];
+  @Output() complete: EventEmitter<void> = new EventEmitter<void>();
   constructor(private taskService: TaskService) { 
     this.priorities = Object.values(Priority);
     this.status = Object.values(Status);
   }
-
+  completeTask() {
+    this.task.completed = true;
+    this.task.status = Status.Complete;
+    this.complete.emit();
+  }
 
   editTask() {
     // Emit edit event to parent component
-    this.edit.emit(this.task);
+    this.edit.emit();
   }
 
   deleteTask() {
@@ -32,8 +42,7 @@ export class ManageTaskComponent {
     this.delete.emit(this.task);
   }
 
-  updateTaskStatus(newStatus: string) {
-    // Emit update status event to parent component
-    this.updateStatus.emit(newStatus);
-  }
+ 
+
+ 
 }

@@ -51,20 +51,18 @@
           <div class="dashboard">
             <mat-tab-group class="dashboard-tabs">
               <mat-tab label="Assigned Tasks">
-                <div *ngFor="let task of getAssignedTasks(selectedProjectName ?? '')">
-                  <app-task [task]="task" (complete)="completeTask(task)"
-                    (click)="openTaskDetailsDialog(task)"></app-task>
+                <div *ngFor="let task of getAssignedTasks(selectedProjectName ?? ''); let i = index">
+                  <app-task [employees]="employees"  [task]="task" [taskId]="taskIds[i]" (complete)="completeTask(task)" (click)="openTaskDetailsDialog(task, i)"></app-task>
                 </div>
               </mat-tab>
               <mat-tab label="Unassigned Tasks">
-                <div *ngFor="let task of getPendingTasks(selectedProjectName ?? '')">
-                  <app-task [task]="task" (complete)="completeTask(task)"
-                    (click)="openTaskDetailsDialog(task)"></app-task>
+                <div *ngFor="let task of getPendingTasks(selectedProjectName ?? '',taskIdIndex); let i = index">
+                  <app-task [task]="task" (complete)="completeTask(task)" (click)="openTaskDetailsDialog(task, i)"></app-task>
                 </div>
               </mat-tab>
               <mat-tab label="Completed Tasks">
-                <div *ngFor="let task of getCompletedTasks(selectedProjectName ?? '')">
-                  <app-task *ngIf="task.completed" [task]="task" (click)="openTaskDetailsDialog(task)"></app-task>
+                <div *ngFor="let task of getCompletedTasks(selectedProjectName ?? '',taskIdIndex); let i = index">
+                  <app-task *ngIf="task.completed" [task]="task" (click)="openTaskDetailsDialog(task, i)"></app-task>
                 </div>
               </mat-tab>
             </mat-tab-group>
@@ -129,6 +127,9 @@
 
   </mat-tab-group>
 
+</div>
+<div>
+  <a routerLink="/joey">Whats This</a>
 </div>
 <div class="shimmer-wrapper" (click)=" toggleAskTaskWise() ">
   <img class="shimmer-image" src="assets/TaskAITransparent.png" width="80px" />
