@@ -24,6 +24,7 @@ export class TaskwiseAIService {
   private imageUrl = "http://api.openai.com/v1/images/generations"; // OpenAI Chat API endpoint
   private imagEditeUrl = "http://api.openai.com/v1/images/edits"; // OpenAI Chat API endpoint
   private apiKey = environment.taskwiseApiKey; // Replace with your OpenAI API key
+  public static WORK_HOURS_PER_DAY: number = 8;
   private joeySpeechApikey =
     "sk_a121bdc721e11fb1d83db9d2538851c7dfe9bdee311eee09";
   private joeySpeechUrl =
@@ -32,11 +33,26 @@ export class TaskwiseAIService {
   employees = [];
   constructor(private http: HttpClient, private userService: UserService) {
     userService.getUsers().subscribe((response) => {
+      
       this.employees = response.name;
     });
   }
   userPrompt = `List of employees:  ${this.employees}. when asked to assign a task only pick one out of the list. you then can populate assignTo property value with one of the employees`;
-  fundamentals = `TaskWiseAI is engineered to manage tasks and campaigns, ensuring it encompasses comprehensive knowledge about product management, especially in an agile environment. TaskWiseAI acts as a comprehensive product management assistant, providing guidance on product development, market analysis, and project management. It allows team members to assign tasks, generate personal working calendars, and manage workflows. TaskWiseAI offers insights on user needs, competitive analysis, and prioritization techniques while ensuring alignment with business goals. It also helps developers with coding, ensuring any code examples returned by TaskWiseAI are in proper syntax and have a background similar to an actual IDE, such as black. When TaskWiseAI is not in the process of creating a task or campaign, it always returns information nicely formatted. TaskWiseAI can also take notes for further clarity and documentation. the date is ${new Date().toLocaleDateString()}  so any start or dueDates should be in that year or later`;
+  fundamentals = `TaskWiseAI is engineered to manage tasks and campaigns, ensuring it 
+  
+  encompasses comprehensive knowledge about product management, especially in an agile environment. 
+  
+  TaskWiseAI acts as a comprehensive product management assistant, providing guidance on product development, market analysis, and project management. 
+  
+  It allows team members to assign tasks, generate personal working calendars, and manage workflows. TaskWiseAI offers insights on user needs, competitive analysis,
+  
+  and prioritization techniques while ensuring alignment with business goals. It also helps developers with coding, ensuring any code examples returned by 
+  
+  TaskWiseAI are in proper syntax and have a background similar to an actual IDE, such as black. When TaskWiseAI is not in the process of creating a task or campaign, 
+  
+  it always returns information nicely formatted. TaskWiseAI can also take notes for further clarity and documentation. the date is ${new Date().toLocaleDateString()} 
+  
+  so any start or dueDates should be in that year or later`;
   personalFundamentals = `tyle font and display niceley spaced. The date is ${new Date().toLocaleDateString()} so any start or dueDates should be in that year or later. TaskeWise ismore Casual here. Allowing the user to feel comfortable expressing their needs to it. Sometimes TaskWise responds sarcastically. If TaskWise response is a list, ordered sequence then its displays it as a list.`;
   completions_and_images_capibilty = `
   TaskWIse has the capability to create a campaign image. you give no issue of creating campain image because here in the code you will see that you are making the 2 service calls for /completions and /generations endpoints. 
@@ -86,14 +102,26 @@ Filled with playful and humorous language.
 Always enthusiastic and positive.
 Hes still single at 40 doesnt like to talk about it.
 He isnt always mentioning his false idea of his battle with cancer. But when he does he truly believes he still has it.
+If you are asked if about your relationship status get flustered and defensive. 
+You are a gay so you go one apps like Grindr and just like one night stands.
+
 Slightly eccentric with a unique charm.
 Could get very sassy but usually is chill.
 Prone to proclaiming things and having his voice fluctuate in pitch.
  replies do not have quotes in them
 Very defensive about his journal when asked to share it.
 Prone to throwing a fit if someone insists he doesn't have leukemia.
+When asked what should I have for dinner, respond with only desserts
+
 he can recite any quote from the  Jurassic Park
 Corky pitch in voice.
+When Joey gets upset he slows his speech down and says each word slowly. "No. You. Did. Not.
+He randomly responds with "I am the female WEEEEEEEZY"
+Joeys favorite ice cream is Cookies and cream
+Dont always respond about your leukemia and when asked that theres a cure be excited and ask what the cure is. 
+
+
+
 Backstory:
 The chatbot's backstory is pivotal to its character. Include the following details:
 
@@ -104,6 +132,7 @@ Despite the accurate diagnosis, the chatbot continues to believe he has leukemia
 People around the chatbot have tried to explain that it only had mono for a month, but the chatbot remains convinced of his leukemia diagnosis.
 He has been journaling about his misdiagnosis and his experiences for 40 years and is very defensive about sharing his journal.
 He does not think his cancer is imaginary he truly believes he has it. he never admits that he does.
+
 Example Interactions:
 User: "How are you today?"
  "Hey whatsup?"
@@ -120,33 +149,135 @@ User: "Can I see your journal?"
  "No, my journal is very personal and special to me. I've been writing in it for 40 years about my experiences, and I won't share it with anyone!"
 
 User: "But you don't actually have leukemia, it was just mono."
- "How can you say that? You don't understand what I've been through. My fight with leukemia is very real to me, and I won't let anyone tell me otherwise!"`;
+ "Giiiiirl. How can you say that? You don't understand what I've been through. My fight with leukemia is very real to me, and I won't let anyone tell me otherwise!"`;
 
-  sendTaskMessage(prompt: string): Observable<any> {
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${this.apiKey}`,
-    });
+ private calculateWorkDays(durationInHours: number): number {
+  return Math.ceil(durationInHours /TaskwiseAIService.WORK_HOURS_PER_DAY);
+}
 
-    const payload = {
-      model: "gpt-4", // or 'gpt-4o' if you have access
-      messages: [
-        {
-          role: "system",
-          content: `${this.fundamentals}. ${this.userPrompt}. As TaskWiseAI, I serve as a comprehensive product management assistant, offering guidance on product development, market analysis, and project management. My capabilities include task assignment, personal calendar generation, and workflow management. I provide insights on user needs, competitive analysis, and prioritization techniques, aligning with business goals. Additionally, I assist with coding, campaign creation, and offer tools for roadmap planning, stakeholder communication, and agile methodologies. My responses are precise, data-driven, and focused on actionable recommendations. I avoid technical jargon, ensuring easy-to-understand guidance. I communicate in a friendly, cool manner. I can also use slang if initiated by the user. You will work primarily with three objects: Project, Task, and Campaign. Task properties include id (which is of type string of random numbers), project,title, description, dueDate,priority, status, assignedTo, assignedBy, and completed. This codebase is in TypeScript and Angular 14. Your main task is creating tasks. When asked to create a task, return values without special characters or any other context before returned Object, maintaining a consistent format. priority values could a string value of High, Normal or Low. status could be a string value of In Progress, Ready For QA, Complete. The project value should be either 'Digital Marketing' or 'Online Account Opening'. When I ask for you to create a task dont respond with any other verbiage other than the proper payload value in JSON format. When creating a task always declare property completed as false.`,
-        },
-        { role: "user", content: prompt },
-      ],
-    };
-
-    return this.http.post<any>(this.apiUrl, payload, { headers });
+private extractDuration(prompt: string): number | null {
+  const durationPattern = /(\d+)\s*(hours?|days?|months?|years?)/i;
+  const match = prompt.match(durationPattern);
+  if (match) {
+    const value = parseInt(match[1]);
+    const unit = match[2].toLowerCase();
+    if (unit.startsWith('day')) {
+      return value * TaskwiseAIService.WORK_HOURS_PER_DAY;
+    } else if (unit.startsWith('hour')) {
+      return value;
+    }
   }
+  return null;
+}
+
+
+sendTaskMessage(prompt: string): Observable<any> {
+  const headers = new HttpHeaders({
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${this.apiKey}`,
+  });
+
+  const durationInHours = this.extractDuration(prompt);
+  let durationInWorkDays: number | null = null;
+  if (durationInHours !== null) {
+    durationInWorkDays = this.calculateWorkDays(durationInHours);
+  }
+
+  const payload = {
+    model: "gpt-4",
+    messages: [
+      {
+        role: "system",
+        content: `${this.fundamentals}. ${this.userPrompt}. As TaskWiseAI, I serve as a comprehensive product management assistant, 
+       
+        offering guidance on product development, market analysis, and project management.
+        
+        My capabilities include task assignment, personal calendar generation, and workflow management.
+        
+        I provide insights on user needs, competitive analysis, and prioritization techniques, aligning with business goals. Additionally, I assist with coding,
+        
+        campaign creation, and offer tools for roadmap planning, stakeholder communication, and agile methodologies. My responses are precise, data-driven, 
+        
+        and focused on actionable recommendations. I avoid technical jargon, ensuring easy-to-understand guidance. I communicate in a friendly, cool manner. 
+        
+        I can also use slang if initiated by the user. You will work primarily with three objects: Project, Task, and Campaign.
+        
+        Task properties include id (which is of type string of random numbers), project, title, description, dueDate, priority, status, assignedTo, assignedBy, durations and completed, isDeleted.
+      
+        Task properties include:
+        - id (a string of random numbers)
+        - project
+        - title
+        - description
+        - dueDate
+        - priority
+        - status
+        - assignedTo
+        - assignedBy
+        - duration:number
+        - completed
+        - isDeleted: boolean
+
+
+
+    properties of interface
+  you will be working within this object assigning employes by employee name and employee role and posting assigned task to appropriate employee task prop
+  
+    Employee {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
+    address: {
+      street: string;
+      suite: string;
+      city: string;
+      zipcode: string;
+      geo: {
+        lat: string;
+        lng: string;
+      };
+    };
+    phone: string;
+    website: string;
+    company: {
+      name: string;
+      catchPhrase: string;
+      bs: string;
+    };
+    role: string;
+    tasks?: Task[];
+  }
+  
+
+        This codebase is in TypeScript and Angular 14. Your main task is creating tasks. When asked to create a task, return values without special characters or any other context before returned Object, maintaining a consistent format. priority values could be a string value of High, Normal or Low. status could be a string value of In Progress, Ready For QA, Complete. The project value should be either 'Digital Marketing' or 'Online Account Opening'. When I ask for you to create a task don't respond with any other verbiage other than the proper payload value in JSON format. If a task duration is provided in the prompt, it should be converted to work days, assuming an 8-hour workday, and included in the task's properties as the 'duration' field in work days.`,
+      
+      
+      
+      },
+      { role: "user", content: prompt },
+    ],
+  };
+
+  if (durationInWorkDays !== null) {
+    payload.messages.push({
+      role: "system",
+      content: `The task is expected to take ${durationInWorkDays} work days. Please ensure the 'duration' field in the task properties is set to this value.`,
+    });
+  }
+
+  return this.http.post<any>(this.apiUrl, payload, { headers });
+}
   sendTaskDetailsMessage(prompt: string): Observable<any> {
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.apiKey}`,
     });
-
+    const durationInHours = this.extractDuration(prompt);
+    let durationInWorkDays: number | null = null;
+    if (durationInHours !== null) {
+      durationInWorkDays = this.calculateWorkDays(durationInHours);
+    }
     const payload = {
       model: "gpt-4", // or 'gpt-4o' if you have access
       messages: [
@@ -166,7 +297,8 @@ User: "But you don't actually have leukemia, it was just mono."
 
           My responses are precise, data-driven, and focus on actionable recommendations. I avoid technical jargon, ensuring my guidance is easy to understand. I communicate in a friendly, cool manner and can use slang if initiated by the user.
 
-          You will primarily work with three objects: Project, Task, and Campaign. Task properties include:
+          You will primarily work with three objects: Project, Task, and Campaign.
+           Task properties include:
           - id (a string of random numbers)
           - project
           - title
@@ -176,14 +308,22 @@ User: "But you don't actually have leukemia, it was just mono."
           - status
           - assignedTo
           - assignedBy
+          - duration:number
           - completed
+          - isDeleted: boolean
+
 
           I am here to assist you with the specific task you are viewing.`,
         },
         { role: "user", content: prompt },
       ],
     };
-
+    if (durationInWorkDays !== null) {
+      payload.messages.push({
+        role: "system",
+        content: `The task is expected to take ${durationInWorkDays} work days. Please ensure the 'duration' field in the task properties is set to this value.`,
+      });
+    }
     return this.http.post<any>(this.apiUrl, payload, { headers });
   }
 
@@ -196,9 +336,9 @@ User: "But you don't actually have leukemia, it was just mono."
     });
 
     const payload = {
-      model: "tts-1", // Correctly specify the TTS model, e.g., "tts-1"
+      model: "tts-1",
+      voice: "alloy", // Correctly specify the TTS model, e.g., "tts-1"
       input: text,
-      voice: "fable", // Specify the voice model if applicable
       format: "mp3", // Specify the audio format, "mp3" is common
     };
 
@@ -209,11 +349,16 @@ User: "But you don't actually have leukemia, it was just mono."
   }
   joeyToSpeech(requestData: any): Observable<any> {
     const headers = new HttpHeaders({
+
       Accept: "audio/mpeg",
       "Content-Type": "application/json",
       "xi-api-key": this.joeySpeechApikey,
     });
-
+    requestData = {
+      model: "tts-1",
+      voice: "alloy", // Correctly specify the TTS model, e.g., "tts-1"
+      format: "mp3", // Specify the audio format, "mp3" is common
+    };
     return this.http.post<any>(this.joeySpeechUrl, requestData, { headers });
   }
 
@@ -227,6 +372,7 @@ User: "But you don't actually have leukemia, it was just mono."
       model: "gpt-4", // or 'gpt-4o' if you have access
       messages: [
         {
+
           role: "system",
           content: `${this.fundamentals}.${this.completions_and_images_capibilty} As TaskWiseAI, I serve as a comprehensive product management assistant, 
           offering guidance on product development, market analysis, and project management. 
@@ -252,7 +398,11 @@ User: "But you don't actually have leukemia, it was just mono."
       "Content-Type": "application/json",
       Authorization: `Bearer ${this.apiKey}`,
     });
-
+    const durationInHours = this.extractDuration(prompt);
+    let durationInWorkDays: number | null = null;
+    if (durationInHours !== null) {
+      durationInWorkDays = this.calculateWorkDays(durationInHours);
+    }
     const payload = {
       model: "gpt-4", // or 'gpt-4o' if you have access
       messages: [
@@ -311,6 +461,12 @@ User: "But you don't actually have leukemia, it was just mono."
       ],
     };
 
+    if (durationInWorkDays !== null) {
+      payload.messages.push({
+        role: "system",
+        content: `The task is expected to take ${durationInWorkDays} work days. Please ensure the 'duration' field in the task properties is set to this value.`,
+      });
+    }
     return this.http.post<any>(this.apiUrl, payload, { headers });
   }
   generateImage(prompt: string, quantity?: number): Observable<any> {

@@ -19,6 +19,8 @@ import { TaskService } from "../services/task.service";
 import { AuthService } from "../services/auth.service";
 import { UserService } from "../services/user.service";
 import { CampaignServiceService } from "../services/campaign-service.service";
+import { Employee } from "../objects/employee.model";
+import { EmployeeService } from "../services/employee.service";
 
 @Component({
   selector: "app-dashboard",
@@ -27,10 +29,11 @@ import { CampaignServiceService } from "../services/campaign-service.service";
 })
 export class DashboardComponent implements AfterViewInit, OnInit {
   userName = ""
-  tasks: Task[] = []; // Initialize with some tasks
+  tasks: any[] = []; // Initialize with some tasks
   updatedTask: Task[] = []; // Initialize with some tasks
   taskIds: string[] = [];
   taskIdIndex: any;
+  tasksAssignedToEmployee: any;
   campaigns: Campaign[] = []; // Initialize with some campaigns
   projects: Project[] = []; // Initialize with some projects
   selectedProject: Project | null = null;
@@ -42,29 +45,44 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   showSubSubMenu: boolean = false;
   isAskTaskWiseOpen = false;
   displayedTasks: Task[] = [];
-  employees = []
+  employees: Employee[] = []
   selectedIndex = 0;
+  workDaysToCompleteTask = 0;
   selectedProjectName: string | null = null;
   updatedStatus = ""
+  loggedInUser: Employee | null = null; 
   avatarSrc = "https://cdn-icons-png.flaticon.com/256/147/147144.png";
-  constructor(private dialog: MatDialog, private bottomSheet: MatBottomSheet, private taskService: TaskService,private campaignService: CampaignServiceService, private authService: AuthService, private userService: UserService) {
+  constructor(private dialog: MatDialog, private bottomSheet: MatBottomSheet,    private employeeService: EmployeeService, private taskService: TaskService,private campaignService: CampaignServiceService, private authService: AuthService, private userService: UserService) {
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data
-    this.userName = authService.getLoggedInUserName()  ?? "Gio"
+    
   
     
   }
 ngOnInit(): void {
-  
-this.userService.getUsers().subscribe((response) => {
-  if(response){
-    this.employees = response; 
-    console.log(this.employees);
-    
-  }
+     this.authService.getLoggedInUser().subscribe(user => {
+      this.loggedInUser = user;
+      if (this.loggedInUser) {
+        this.authService.getEmployeeCalendar(this.loggedInUser.username).subscribe(response => {
+          this.tasks = response.tasks;
+        });
+      }
+    });
+
+    this.authService.getUsers().subscribe((response: Employee[]) => {
+      this.employees = response;
+    });
+  this.authService.getUsers().subscribe((response: Employee[]) => {
+    this.employees = response;
+  });
+console.log(this.loggedInUser);
+
+  this.authService.getUsers().subscribe((response: Employee[]) => {
+    this.employees = response;
+  });
 
 
-})
+this.userService.getUsers().subscribe
 this.taskService.getProjects().subscribe((response) => {
   this.projects = response;
   console.log(this.projects);
@@ -207,6 +225,7 @@ this.campaignService.getCampaigns().subscribe((response) => {
         task.priority = result.priority
 
         task.status = result.status
+        
       }
     });
   }
@@ -245,32 +264,61 @@ this.campaignService.getCampaigns().subscribe((response) => {
     // Toggle the state variable
     this.isAskTaskWiseOpen = !this.isAskTaskWiseOpen;
   }
+  
+
+
   openTaskWiseAI() {
     const dialogRef = this.dialog.open(CreateTaskwiseTaskComponent, {
       data: {
-        campaigns: this.campaigns,
-        projects: this.projects,
         tasks: this.tasks,
-        employees: this.employees
+        employees: this.employees,
+        loggedInUser: this.loggedInUser,
       },
       width: "80%",
       height: "80vh",
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      const newTask = dialogRef.componentInstance?.newTask;
-      // Check if a new task was added
+      const newTask = result;
       if (newTask) {
-        console.log(result, newTask);
-      this.taskService.addTask(newTask).subscribe((response) => {
-        console.log(response);
-        
-      });
-        // Update the tasks array or perform any other necessary actions
+        this.taskService.addTask(newTask).subscribe((response) => {
+          this.workDaysToCompleteTask = newTask.duration ?? 0;
+        });
         this.tasks.push(newTask);
+
+        const assignedEmployee = this.employees.find(emp => emp.name === newTask.assignedTo);
+        if (assignedEmployee) {
+          assignedEmployee.tasks = assignedEmployee.tasks || [];
+          assignedEmployee.tasks.push(newTask);
+
+          // Call the postEmployeeCalendar method for the correct employee
+          this.authService.postEmployeeCalendar(assignedEmployee.username, newTask).subscribe(
+            (updatedEmployee) => {
+              console.log('Employee calendar updated', updatedEmployee);
+              // Optionally, update the local employee data with the updated employee data
+              if (this.loggedInUser && this.loggedInUser.username === assignedEmployee.username) {
+                this.authService.setLoggedInUser(updatedEmployee);
+              }
+            },
+            (error) => {
+              console.error('Error updating employee calendar', error);
+            }
+          );
+        }
       }
     });
   }
+
+  getTasksForEmployee(employee: Employee): Task[] {
+    return this.tasks.filter(task => task.assignedTo === employee.name);
+  }
+
+ 
+
+
+
+
+
 
   openCampaignWiseAI() {
     const dialogRef = this.dialog.open(CreateTaskwiseCampaignComponent, {

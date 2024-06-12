@@ -1,8 +1,17 @@
-<div class="employee-calendar">
-  <mat-calendar [(selected)]="selectedDate" (selectedChange)="onDateSelected($event)" [startAt]="startOfWeek"></mat-calendar>
-  <div *ngIf="selectedDate" class="availability-container">
-    <h3 class="availability-heading">Availability for {{ selectedDate | date }}</h3>
-    <!-- Display employee availability for the selected date -->
-    <p class="availability-details">Insert employee availability details here...</p>
+<div class="calendar">
+  <div class="calendar-header">
+    <div class="calendar-header-day" *ngFor="let day of daysOfWeek">{{ day }}</div>
+  </div>
+  <div class="calendar-body">
+    <div class="calendar-week" *ngFor="let week of weeksInMonth">
+      <div class="calendar-day" *ngFor="let day of week">
+        <div class="calendar-day-number">{{ day.date }}</div>
+        <div class="calendar-tasks">
+          <div class="calendar-task" *ngFor="let task of getTasksForDay(day.fullDate)">
+            {{ task.title }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

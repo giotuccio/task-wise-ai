@@ -12,6 +12,7 @@ import { User } from '../objects/user.model';
 export class TaskComponent {
   @Input() task!: Task;
   @Input() taskId!: string;
+  @Input() workDaysToCompleteTask: number = 0;
   assignedTo: string = "";
   @Input() employees: any;
   selectedOption: string = '';

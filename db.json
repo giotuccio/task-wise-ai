@@ -2,113 +2,302 @@
   "tasks": [
     {
       "task": {
-        "id": "9348743",
+        "id": "384720985",
         "project": "Digital Marketing",
-        "title": "Task for Jan",
-        "description": "A newly created task to be assigned to Jan",
-        "dueDate": "6/30/2024",
+        "title": "Washing Socks",
+        "description": "Task assigned to wash socks as per request",
+        "dueDate": "10/12/2024",
         "priority": "Medium",
+        "status": "Complete",
+        "assignedTo": "Patricia Lebsack",
+        "assignedBy": "TaskWiseAI",
+        "duration": 20,
+        "completed": true
+      },
+      "id": "3f9c"
+    },
+    {
+      "task": {
+        "id": "384720985",
+        "project": "Digital Marketing",
+        "title": "Washing Socks",
+        "description": "Task assigned to wash socks as per request",
+        "dueDate": "10/12/2024",
+        "priority": "High",
         "status": "In Progress",
-        "assignedTo": "Mrs. Dennis Schulist",
+        "assignedTo": "Patricia Lebsack",
         "assignedBy": "TaskWiseAI",
         "completed": false
       },
-      "id": "7ccd"
+      "id": "7f3d"
     },
     {
       "task": {
-        "id": "9348743",
+        "id": "384720985",
         "project": "Digital Marketing",
-        "title": "Task for Jan",
-        "description": "A newly created task to be assigned to Jan",
-        "dueDate": "6/30/2024",
-        "priority": "High",
-        "status": "In Progress",
-        "assignedTo": "Nicholas Runolfsdottir V",
-        "assignedBy": "TaskWiseAI",
-        "completed": false
-      },
-      "id": "a0ca"
-    },
-    {
-      "task": {
-        "id": "5748392",
-        "project": "Digital Marketing",
-        "title": "Analyze competitor social media strategy",
-        "description": "Analyze the social media strategy of our key competitors to identify gaps and areas for improvement in our current strategy.",
-        "dueDate": "09/30/2024",
-        "priority": "High",
-        "status": "Complete",
-        "assignedTo": "Ervin Howell",
-        "assignedBy": "TaskWiseAI",
-        "completed": true
-      },
-      "id": "7e31"
-    },
-    {
-      "task": {
-        "id": "2345678",
-        "project": "Digital Marketing",
-        "title": "Fix dashboard error - Duplicates when updating toggle",
-        "description": "We are experiencing an issue with our dashboard, it's populating duplicate tasks when updating from the toggle switch. The issue needs to be investigated and resolved as soon as possible.",
-        "dueDate": "09/06/2024",
-        "priority": "High",
-        "status": "Complete",
-        "assignedTo": "Glenna Reichert",
-        "assignedBy": "TaskWiseAI",
-        "completed": true
-      },
-      "id": "37bc"
-    },
-    {
-      "id": "3f9c",
-      "task": {
-        "id": "5748392",
-        "project": "Digital Marketing",
-        "title": "Analyze competitor social media strategy",
-        "description": "Analyze the social media strategy of our key competitors to identify gaps and areas for improvement in our current strategy.",
-        "dueDate": "09/30/2024",
+        "title": "Washing Socks",
+        "description": "Task assigned to wash socks as per request",
+        "dueDate": "10/12/2024",
         "priority": "High",
         "status": "Ready For QA",
-        "assignedTo": "Ervin Howell",
+        "assignedTo": "Patricia Lebsack",
         "assignedBy": "TaskWiseAI",
+        "completed": false
+      },
+      "id": "0f43"
+    },
+    {
+      "id": "543b",
+      "task": {
+        "id": "6251984",
+        "project": "Online Account Opening",
+        "title": "App cusomization",
+        "description": "Customize the new feature of the application",
+        "dueDate": "06/17/2024",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Clementina DuBuque",
+        "assignedBy": "Nicholas Runolfsdottir V",
         "completed": false
       }
     },
     {
-      "id": "7f3d",
+      "id": "0c72",
       "task": {
-        "id": "87324158",
+        "id": "528956",
+        "project": "Digital Marketing",
+        "title": "SEO Optimization",
+        "description": "Conduct analysis on website and implement SEO strategies to improve organic ranking",
+        "dueDate": "06/24/2024",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "TaskWiseAI",
+        "duration": 10,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "8b4e",
+      "task": {
+        "id": "8948763456",
         "project": "Online Account Opening",
-        "title": "Window Cleaning Task",
-        "description": "The assigned person will need to clean all windows in the designated area. Ensure all windows are left sparkling clean.",
-        "dueDate": "2024-09-20",
+        "title": "Task Title",
+        "description": "Task Description",
+        "dueDate": "7/10/2024",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "TaskWiseAI",
+        "duration": 20,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "52b5",
+      "task": {
+        "id": "82340393",
+        "project": "Digital Marketing",
+        "title": "Task Title",
+        "description": "Task Description",
+        "dueDate": "6/15/2024",
         "priority": "Normal",
         "status": "In Progress",
-        "assignedTo": "Nicholas Runolfsdottir V",
-        "assignedBy": "TaskWiseAI",
-        "completed": false
+        "assignedTo": "Ervin Howell",
+        "assignedBy": "TaskwiseAI",
+        "duration": 1,
+        "completed": false,
+        "isDeleted": false
       }
-    }
-  ],
-  "projects": [
-    {
-      "project": {
-        "name": "Digital Marketing",
-        "description": "",
-        "startDate": "",
-        "endDate": ""
-      },
-      "id": "4856"
     },
     {
-      "project": {
-        "name": "Online Account Opening",
-        "description": "",
-        "startDate": "",
-        "endDate": ""
-      },
-      "id": "5338"
+      "id": "c239",
+      "task": {
+        "id": "8765",
+        "project": "Digital Marketing",
+        "title": "Cleaning my house",
+        "description": "Leanne has the task to clean the house thoroughly, focusing on dusting, sweeping, mopping, and sanitizing all areas.",
+        "dueDate": "6/18/2024",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "TaskWiseAI",
+        "duration": 3,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "aa51",
+      "task": {
+        "id": "8965321",
+        "project": "Digital Marketing",
+        "title": "Task for Leanne Graham",
+        "description": "Complete the assigned task by tomorrow",
+        "dueDate": "6/12/2024",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "TaskWiseAI",
+        "duration": 1,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "0397",
+      "task": {
+        "id": "564372",
+        "project": "Digital Marketing",
+        "title": "New Campaign Strategy",
+        "description": "Create a comprehensive digital marketing strategy for the upcoming campaign",
+        "dueDate": "11/12/2024",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "Product Manager",
+        "duration": 10,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "4452",
+      "task": {
+        "id": "123456789",
+        "project": "Digital Marketing",
+        "title": "New Task",
+        "description": "A new task assigned to Leanne Graham",
+        "dueDate": "6/25/2024",
+        "priority": "Normal",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "TaskWiseAI",
+        "duration": 5,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "6bc5",
+      "task": {
+        "id": "236978123",
+        "project": "Digital Marketing",
+        "title": "Task for Leanne",
+        "description": "Task assigned to Leanne",
+        "dueDate": "12/20/2024",
+        "priority": "Normal",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "TaskWiseAI",
+        "duration": 5,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "8f4c",
+      "task": {
+        "id": "928374",
+        "project": "Digital Marketing",
+        "title": "Digital Marketing Strategy",
+        "description": "Develop and implement a comprehensive digital marketing strategy.",
+        "dueDate": "07/11/2024",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "TaskWiseAI",
+        "duration": 10,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "a159",
+      "task": {
+        "id": "4852091323",
+        "project": "Online Account Opening",
+        "title": "Task for Leanne Graham",
+        "description": "Task provided for Leanne to complete",
+        "dueDate": "6/20/2024",
+        "priority": "Normal",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "TaskWiseAI",
+        "duration": 8,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "7741",
+      "task": {
+        "id": "5421345",
+        "project": "Digital Marketing",
+        "title": "Task for Leanne",
+        "description": "Complete the assigned task",
+        "dueDate": "12/30/2024",
+        "priority": "Normal",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "System",
+        "duration": 8,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "fea0",
+      "task": {
+        "id": "123456789",
+        "project": "Digital Marketing",
+        "title": "Task Title",
+        "description": "Task Description",
+        "dueDate": "12/12/2024",
+        "priority": "Normal",
+        "status": "In Progress",
+        "assignedTo": "Clementine Bauch",
+        "assignedBy": "Leanne Graham",
+        "duration": 5,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "6646",
+      "task": {
+        "id": "12456",
+        "project": "Digital Marketing",
+        "title": "Task Title",
+        "description": "Task Description",
+        "dueDate": "06/30/2024",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Patricia Lebsack",
+        "assignedBy": "NaN",
+        "duration": 5,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "6ed8",
+      "task": {
+        "id": "637638",
+        "project": "Digital Marketing",
+        "title": "Assigned Task",
+        "description": "A new task to work on.",
+        "dueDate": "6/30/2024",
+        "priority": "Normal",
+        "status": "In Progress",
+        "assignedTo": "Gio Tuccio",
+        "assignedBy": "Gio Tuccio",
+        "duration": 5,
+        "completed": false,
+        "isDeleted": false
+      }
     }
   ],
   "campaigns": [
@@ -166,6 +355,316 @@
         "isActive": true,
         "campaignImage": "https://oaidalleapiprodscus.blob.core.windows.net/private/org-igpCA8jLmAtZO9PE5996QLqf/user-OAsZ1G5Qvck6YtjMLuyEwgtu/img-uWabT4e4Q1jkknaKTeHf5PXl.png?st=2024-06-09T12%3A48%3A42Z&se=2024-06-09T14%3A48%3A42Z&sp=r&sv=2023-11-03&sr=b&rscd=inline&rsct=image/png&skoid=6aaadede-4fb3-4698-a8f6-684d7786b067&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-06-08T21%3A02%3A21Z&ske=2024-06-09T21%3A02%3A21Z&sks=b&skv=2023-11-03&sig=3/ikb6f1DkS5SEHGIsoUVUfYyIgMwyD7cV4D0SpeItE%3D"
       }
+    }
+  ],
+  "employees": [
+    {
+      "id": "0",
+      "name": "Gio Tuccio",
+      "username": "Gio",
+      "email": "tucciogiorgio@yahoo.com",
+      "address": {
+        "street": "Kulas Light",
+        "suite": "Apt. 556",
+        "city": "Gwenborough",
+        "zipcode": "92998-3874",
+        "geo": {
+          "lat": "-37.3159",
+          "lng": "81.1496"
+        }
+      },
+      "phone": "1-770-736-8031 x56442",
+      "website": "hildegard.org",
+      "company": {
+        "name": "Romaguera-Crona",
+        "catchPhrase": "Multi-layered client-server neural-net",
+        "bs": "harness real-time e-markets"
+      },
+      "role": "Developer",
+      "tasks": []
+    },
+    {
+      "id": "1",
+      "name": "Leanne Graham",
+      "username": "Bret",
+      "email": "Sincere@april.biz",
+      "address": {
+        "street": "Kulas Light",
+        "suite": "Apt. 556",
+        "city": "Gwenborough",
+        "zipcode": "92998-3874",
+        "geo": {
+          "lat": "-37.3159",
+          "lng": "81.1496"
+        }
+      },
+      "phone": "1-770-736-8031 x56442",
+      "website": "hildegard.org",
+      "company": {
+        "name": "Romaguera-Crona",
+        "catchPhrase": "Multi-layered client-server neural-net",
+        "bs": "harness real-time e-markets"
+      },
+      "role": "QA",
+      "tasks": [
+        {
+          "id": "5421345",
+          "project": "Digital Marketing",
+          "title": "Task for Leanne",
+          "description": "Complete the assigned task",
+          "dueDate": "2024-12-30",
+          "priority": "Normal",
+          "status": "In Progress",
+          "assignedTo": "Leanne Graham",
+          "assignedBy": "System",
+          "duration": 8,
+          "completed": false,
+          "isDeleted": false
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Ervin Howell",
+      "username": "Antonette",
+      "email": "Shanna@melissa.tv",
+      "address": {
+        "street": "Victor Plains",
+        "suite": "Suite 879",
+        "city": "Wisokyburgh",
+        "zipcode": "90566-7771",
+        "geo": {
+          "lat": "-43.9509",
+          "lng": "-34.4618"
+        }
+      },
+      "phone": "010-692-6593 x09125",
+      "website": "anastasia.net",
+      "company": {
+        "name": "Deckow-Crist",
+        "catchPhrase": "Proactive didactic contingency",
+        "bs": "synergize scalable supply-chains"
+      },
+      "role": "Dev",
+      "tasks": [
+        {
+          "id": "5421346",
+          "project": "Online Account Opening",
+          "title": "Task for Ervin",
+          "description": "Develop the account opening feature",
+          "dueDate": "2024-11-15",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Ervin Howell",
+          "assignedBy": "System",
+          "duration": 5,
+          "completed": false,
+          "isDeleted": false
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Clementine Bauch",
+      "username": "Samantha",
+      "email": "Nathan@yesenia.net",
+      "address": {
+        "street": "Douglas Extension",
+        "suite": "Suite 847",
+        "city": "McKenziehaven",
+        "zipcode": "59590-4157",
+        "geo": {
+          "lat": "-68.6102",
+          "lng": "-47.0653"
+        }
+      },
+      "phone": "1-463-123-4447",
+      "website": "ramiro.info",
+      "company": {
+        "name": "Romaguera-Jacobson",
+        "catchPhrase": "Face to face bifurcated interface",
+        "bs": "e-enable strategic applications"
+      },
+      "role": "Dev",
+      "tasks": []
+    },
+    {
+      "id": "4",
+      "name": "Patricia Lebsack",
+      "username": "Karianne",
+      "email": "Julianne.OConner@kory.org",
+      "address": {
+        "street": "Hoeger Mall",
+        "suite": "Apt. 692",
+        "city": "South Elvis",
+        "zipcode": "53919-4257",
+        "geo": {
+          "lat": "29.4572",
+          "lng": "-164.2990"
+        }
+      },
+      "phone": "493-170-9623 x156",
+      "website": "kale.biz",
+      "company": {
+        "name": "Robel-Corkery",
+        "catchPhrase": "Multi-tiered zero tolerance productivity",
+        "bs": "transition cutting-edge web services"
+      },
+      "role": "Dev",
+      "tasks": []
+    },
+    {
+      "id": "5",
+      "name": "Chelsey Dietrich",
+      "username": "Kamren",
+      "email": "Lucio_Hettinger@annie.ca",
+      "address": {
+        "street": "Skiles Walks",
+        "suite": "Suite 351",
+        "city": "Roscoeview",
+        "zipcode": "33263",
+        "geo": {
+          "lat": "-31.8129",
+          "lng": "62.5342"
+        }
+      },
+      "phone": "(254)954-1289",
+      "website": "demarco.info",
+      "company": {
+        "name": "Keebler LLC",
+        "catchPhrase": "User-centric fault-tolerant solution",
+        "bs": "revolutionize end-to-end systems"
+      },
+      "role": "QA",
+      "tasks": []
+    }
+  ],
+  "logins": [
+    {
+      "id": "1660",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "4453",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "1131",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "5e11",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "a9cc",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "80e2",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "12a0",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "772c",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "247c",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "fac5",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "e1d0",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "32b0",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "eeed",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "e703",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "b26b",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "7cc2",
+      "title": "Leanne Graham",
+      "body": "admin"
+    },
+    {
+      "id": "87fe",
+      "title": "Leanne Graham",
+      "body": "admin"
+    }
+  ],
+  "login": [],
+  "employee-calendar": [
+    {
+      "id": "f53e",
+      "task": {
+        "id": "5421345",
+        "project": "Digital Marketing",
+        "title": "Task for Leanne",
+        "description": "Complete the assigned task",
+        "dueDate": "12/30/2024",
+        "priority": "Normal",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "System",
+        "duration": 8,
+        "completed": false,
+        "isDeleted": false
+      },
+      "employer": "Leanne Graham"
+    }
+  ],
+  "projects": [
+    {
+      "project": {
+        "name": "Digital Marketing",
+        "description": "",
+        "startDate": "",
+        "endDate": ""
+      },
+      "id": "4856"
+    },
+    {
+      "project": {
+        "name": "Online Account Opening",
+        "description": "",
+        "startDate": "",
+        "endDate": ""
+      },
+      "id": "5338"
     }
   ]
 }

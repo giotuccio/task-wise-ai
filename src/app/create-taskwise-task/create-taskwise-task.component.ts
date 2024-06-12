@@ -18,50 +18,67 @@ export class CreateTaskwiseTaskComponent {
   newTask!: Task;
   isWaiting = false;
   employees: any
-  constructor(private taskwiseAIService: TaskwiseAIService, private taskService: TaskService, @Inject(MAT_DIALOG_DATA) public task: Task,@Inject(MAT_DIALOG_DATA) public data: {employees: Array<object>},
-    private dialogRef: MatDialogRef<CreateTaskwiseTaskComponent>,private dialog: MatDialog) { 
+  loggedInUser: string
+  constructor(private taskwiseAIService: TaskwiseAIService,  private taskService: TaskService,
+    @Inject(MAT_DIALOG_DATA) public task: Task,
+    @Inject(MAT_DIALOG_DATA) public data: { employees: Array<object>, loggedInUser: any },
+    private dialogRef: MatDialogRef<CreateTaskwiseTaskComponent>,
+    private dialog: MatDialog) { 
       this.employees = data.employees ?? []
+      this.loggedInUser = data.loggedInUser;
+
+      console.log(this.loggedInUser, this.employees.map((x: { name: any; }) => x.name));
+      this.loggedInUser
+      
     }
 
-  sendMessageToAI(prompt: string): void {
-    this.isWaiting = true;
-    this.prompt = prompt;
-    this.taskwiseAIService.sendTaskMessage(prompt + `List of employees:  ${this.employees.map((x: { name: any; }) =>x.name)} you can populate assignTo property value to`).subscribe(response => {
-      if(response)
-        this.isWaiting = false;
-      this.responseFromAI = response.choices[0].message.content; // Extracting the task details from the response
+    sendMessageToAI(prompt: string): void {
+      this.isWaiting = true;
+      this.prompt = prompt;
+      this.taskwiseAIService.sendTaskMessage(prompt + ` 
+        the loggedin user is ${this.loggedInUser}.
 
-      // Logging the response content
-      console.log('Response from AI:', this.responseFromAI);
-
-      // Preprocessing the response to remove square brackets from the description
-      const preprocessedResponse = this.responseFromAI.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
-
-      // Parsing the task details from the preprocessed response
-      try {
-        const taskDetails = JSON.parse(preprocessedResponse);
-    
-this.newTask = {
-  id: taskDetails.id,
-  project: taskDetails.project,
-  title: taskDetails.title,
-  description: taskDetails.description,
-  dueDate: taskDetails.dueDate,
-  priority: taskDetails.priority as Priority,
-  status: taskDetails.status as Status,
-  assignedTo: taskDetails.assignedTo,
-  assignedBy: taskDetails.assignedBy,
-  completed: taskDetails.completed,
-};
-
-
-        // Adding the new task
-        this.taskService.addTask(this.newTask);
-      } catch (error) {
-        console.error('Error parsing response:', error);
-      }
-    });
-  }
+        You can populate property assignTo with the value of an employees name.  
+        
+        List of employees: ${this.employees.map((x: { name: any; }) => x.name).join(', ')},`).subscribe(response => {
+        if (response)
+          this.isWaiting = false;
+        this.responseFromAI = response.choices[0].message.content; // Extracting the task details from the response
+  
+        // Logging the response content
+        console.log('Response from AI:', this.responseFromAI);
+  
+        // Preprocessing the response to remove square brackets from the description
+        const preprocessedResponse = this.responseFromAI.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+  
+        // Parsing the task details from the preprocessed response
+        try {
+          const taskDetails = JSON.parse(preprocessedResponse);
+  
+          this.newTask = {
+            id: taskDetails.id,
+            project: taskDetails.project,
+            title: taskDetails.title,
+            description: taskDetails.description,
+            dueDate: taskDetails.dueDate,
+            priority: taskDetails.priority as Priority,
+            status: taskDetails.status as Status,
+            assignedTo: taskDetails.assignedTo,
+            assignedBy: taskDetails.assignedBy,
+            duration: taskDetails.duration,
+            completed: taskDetails.completed,
+            isDeleted: false
+          };
+  
+  
+          // Close the dialog and pass the new task back to the parent component
+  
+        } catch (error) {
+          console.error('Error parsing response:', error);
+        }
+      });
+    }
+  
 
 
 
@@ -75,8 +92,20 @@ this.newTask = {
     this.sendMessageToAI('configure that task with the following details enhance: title, description' + this.prompt);
   }
   
-  
+  updateEmployeeCalendar(task: Task) {
+    const assignedEmployee = this.employees.find((emp: { name: string }) => emp.name === task.assignedTo);
+    if (assignedEmployee) {
+      assignedEmployee.tasks = assignedEmployee.tasks || [];
+      assignedEmployee.tasks.push(task);
+    }
+  }
   closeDialog(): void {
+    
+          // Adding the new task
+          this.taskService.addTask(this.newTask);
+  
+          // Optionally, you can also update the employee's calendar here
+          this.updateEmployeeCalendar(this.newTask);
     // Close the dialog and pass the updated task back to the parent component
     this.dialogRef.close(this.newTask);
   }

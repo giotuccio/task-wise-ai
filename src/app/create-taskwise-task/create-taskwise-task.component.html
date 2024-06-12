@@ -28,7 +28,11 @@
       </tr>
       <tr>
         <td><strong>Due Date:</strong></td>
-        <td><input [(ngModel)]="newTask.dueDate" class="editable-field"></td>
+        <td>
+          <mat-form-field style="width: 100%;">
+          <input matInput [(ngModel)]="newTask.dueDate" class="editable-field">
+        </mat-form-field>
+        </td>
       </tr>
       <tr>
         <td><strong>Priority:</strong></td>
@@ -61,7 +65,7 @@
         <td><strong>Assigned To:</strong></td>
         <td>
           <mat-form-field style="width: 100%;">
-            <mat-label>Team:</mat-label>
+            <mat-label>Team Employee:</mat-label>
             <mat-select [(ngModel)]="newTask.assignedTo">
               <mat-option *ngFor="let employee of employees" [value]="employee.name">{{employee.name}}</mat-option>
             </mat-select>
@@ -71,7 +75,12 @@
       <tr>
 
         <td><strong>Assigned By:</strong></td>
-        <td><input type="text" [(ngModel)]="newTask.assignedBy" class="editable-field"></td>
+        <td>
+          <mat-form-field style="width: 100%;">
+          <mat-label>Team Employee:</mat-label>
+          <input type="text" matInput [(ngModel)]="newTask.assignedBy" class="editable-field">
+        
+        </mat-form-field></td>
       </tr>
     </table>
     <!-- Your dialog content here -->

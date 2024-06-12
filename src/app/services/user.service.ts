@@ -9,11 +9,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
   private userRole: UserRole | undefined;
-  private usersEndpoint = 'https://jsonplaceholder.typicode.com/users'
+  private usersEndpoint = 'http://localhost:3000/employees'
+  private usersLogin = 'http://localhost:3000/logins'
   constructor(private router: Router, private http: HttpClient) { }
 
   userExists(username: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.usersEndpoint}/exists/${username}`);
+    return this.http.get<boolean>(`${this.usersEndpoint}`);
   }
   getUsers(): Observable<any> {
     return this.http.get<any>(this.usersEndpoint);
@@ -21,7 +22,7 @@ export class UserService {
   // Method to log in a user (simulate login with JSONPlaceholder)
   login(username: string, password: string): Observable<any> {
     // Assuming `/posts` as the endpoint for simulating login
-    return this.http.post<any>('https://jsonplaceholder.typicode.com/posts', { title: username, body: password });
+    return this.http.post<any>(this.usersLogin, { title: username, body: password});
   }
 
   getUserRole(): UserRole | undefined {

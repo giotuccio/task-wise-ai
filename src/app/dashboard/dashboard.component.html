@@ -47,13 +47,21 @@
             </mat-tab-group>
           </div>
 
+<!-- dashboard.component.html -->
+<div *ngIf="loggedInUser">
+  <h3>{{ loggedInUser.name }}</h3>
+  <app-employee-calendar [tasks]="getTasksForEmployee(loggedInUser)" [employee]="loggedInUser"></app-employee-calendar>
+</div>
+
           <!-- Task Tabs -->
           <div class="dashboard">
             <mat-tab-group class="dashboard-tabs">
               <mat-tab label="Assigned Tasks">
                 <div *ngFor="let task of getAssignedTasks(selectedProjectName ?? ''); let i = index">
-                  <app-task [employees]="employees"  [task]="task" [taskId]="taskIds[i]" (complete)="completeTask(task)" (click)="openTaskDetailsDialog(task, i)"></app-task>
+                  <app-task [employees]="employees" [workDaysToCompleteTask]="workDaysToCompleteTask"  [task]="task" [taskId]="taskIds[i]" (complete)="completeTask(task)" (click)="openTaskDetailsDialog(task, i)"></app-task>
+                  
                 </div>
+                
               </mat-tab>
               <mat-tab label="Unassigned Tasks">
                 <div *ngFor="let task of getPendingTasks(selectedProjectName ?? '',taskIdIndex); let i = index">
@@ -64,13 +72,14 @@
                 <div *ngFor="let task of getCompletedTasks(selectedProjectName ?? '',taskIdIndex); let i = index">
                   <app-task *ngIf="task.completed" [task]="task" (click)="openTaskDetailsDialog(task, i)"></app-task>
                 </div>
+                
               </mat-tab>
             </mat-tab-group>
           </div>
         </div>
       </mat-sidenav-container>
     </mat-tab>
-{{projects | json}}
+
     <mat-tab label="Campaigns">
       <button mat-button (click)="toggleSideNav()">Toggle Side Nav</button>
 

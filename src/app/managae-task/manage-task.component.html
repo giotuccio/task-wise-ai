@@ -15,6 +15,12 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field>
+    <mat-label>Assigned by:</mat-label>
+    <mat-select [(ngModel)]="task.assignedTo">
+      <mat-option *ngFor="let employee of employees" [value]="employee.name">{{ employee.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
     <mat-label>Priority:</mat-label>
     <mat-select [(ngModel)]="task.priority">
       <mat-option *ngFor="let priority of priorities" [value]="priority">{{ priority }}</mat-option>

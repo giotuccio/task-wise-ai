@@ -1,28 +1,106 @@
 // auth.service.ts
 import { Injectable } from '@angular/core';
+import { Employee } from '../objects/employee.model';
+import { Task } from '../objects/task.model';
+import { Observable, BehaviorSubject, catchError, map, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private loggedInUserName: string | undefined;
-  // Example: Replace this with your actual authentication logic
+  private apiUrl = 'http://localhost:3000';
+  private loggedInUserSubject = new BehaviorSubject<Employee | null>(this.getUserFromLocalStorage());
+  private userTasksSubject = new BehaviorSubject<Task[]>(this.getTasksFromLocalStorage());
 
-  private isAuthenticatedValue: boolean = false;
+  constructor(private http: HttpClient) {}
 
-  constructor() {}
+  login(username: string, password: string): Observable<Employee | null> {
+    return this.http.get<Employee[]>(`${this.apiUrl}/employees?username=${username}&password=${password}`).pipe(
+      map(employees => {
+        if (employees.length === 0) {
+          throw new Error('Invalid username or password');
+        }
+        const employee = employees[0];
+        this.setLoggedInUser(employee);
+        this.setTasks(employee.tasks ?? []);
+        return employee;
+      }),
+      catchError(error => {
+        console.error(error);
+        return of(null);
+      })
+    );
+  }
+
+  getEmployeeByUsername(username: string): Observable<Employee> {
+    return this.http.get<Employee[]>(`${this.apiUrl}/employees?username=${username}`).pipe(
+      map(employees => {
+        if (employees.length === 0) {
+          throw new Error('Employee not found');
+        }
+        return employees[0];
+      })
+    );
+  }
+
+  postEmployeeCalendar(username: string, task: Task): Observable<Employee> {
+    return this.http.post<Employee>(`${this.apiUrl}/employees/${username}/tasks`, task);
+  }
+
+  getEmployeeCalendar(username: string): Observable<{ employee: Employee, tasks: Task[] }> {
+    return this.http.get<Employee[]>(`${this.apiUrl}/employees?username=${username}`).pipe(
+      map(employees => {
+        if (employees.length === 0) {
+          throw new Error('Employee not found');
+        }
+        const employee = employees[0];
+        const tasks = employee.tasks || []; // Ensure tasks is always an array
+        return { employee, tasks };
+      })
+    );
+  }
+
+  getUsers(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.apiUrl}/employees`);
+  }
+
+  setLoggedInUser(user: Employee) {
+    this.loggedInUserSubject.next(user);
+    localStorage.setItem('loggedInUser', JSON.stringify(user));
+  }
+
+  getLoggedInUser(): Observable<Employee | null> {
+    return this.loggedInUserSubject.asObservable();
+  }
+
+  setTasks(tasks: Task[]) {
+    this.userTasksSubject.next(tasks);
+    localStorage.setItem('userTasks', JSON.stringify(tasks));
+  }
+
+  getTasks(): Observable<Task[]> {
+    return this.userTasksSubject.asObservable();
+  }
 
   isAuthenticated(): boolean {
-    return this.isAuthenticatedValue;
+    return this.loggedInUserSubject.value !== null;
   }
 
-
-  login(username: string, password: string): any {
-    // Perform login logic here, and if successful, set the logged-in user's name
-    this.loggedInUserName = username;
+  logout() {
+    this.loggedInUserSubject.next(null);
+    this.userTasksSubject.next([]);
+    localStorage.removeItem('loggedInUser');
+    localStorage.removeItem('userTasks');
   }
 
-  getLoggedInUserName(): string | undefined {
-    return this.loggedInUserName;
+  private getUserFromLocalStorage(): Employee | null {
+    const userJson = localStorage.getItem('loggedInUser');
+    return userJson ? JSON.parse(userJson) : null;
+  }
+
+  private getTasksFromLocalStorage(): Task[] {
+    const tasksJson = localStorage.getItem('userTasks');
+    return tasksJson ? JSON.parse(tasksJson) : [];
   }
 }

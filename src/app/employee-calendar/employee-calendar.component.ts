@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { startOfISOWeek } from 'date-fns'; // Add this import statement
-
-import { EmployeeService } from '../services/employee.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { Task } from '../objects/task.model';
+import { Employee } from '../objects/employee.model';
 
 @Component({
   selector: 'app-employee-calendar',
@@ -9,27 +8,63 @@ import { EmployeeService } from '../services/employee.service';
   styleUrls: ['./employee-calendar.component.css']
 })
 export class EmployeeCalendarComponent implements OnInit {
-  selectedDate!: Date;
-  startOfWeek!: Date;
+  @Input() tasks: Task[] = [];
+  @Input() employee!: Employee;
 
-  constructor(private employeeService: EmployeeService) { }
+  daysOfWeek: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  weeksInMonth: any[] = [];
 
   ngOnInit(): void {
-    const currentDate = new Date();
-    // Calculate the start of the current week
-    this.startOfWeek = startOfISOWeek(currentDate);
+    this.generateCalendar(new Date());
   }
 
-  onDateSelected(date: Date) {
-    this.selectedDate = date;
-    // Fetch employee availability data for the selected date
-    this.fetchEmployeeAvailability(date);
+  generateCalendar(date: Date): void {
+    const startOfMonth = new Date(date.getFullYear(), date.getMonth(), 1);
+    const endOfMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    const startDate = this.getStartDate(startOfMonth);
+    const endDate = this.getEndDate(endOfMonth);
+
+    const weeks: any[] = [];
+    let currentWeek: any[] = [];
+    let currentDate = new Date(startDate);
+
+    while (currentDate <= endDate) {
+      currentWeek.push({ date: currentDate.getDate(), fullDate: new Date(currentDate) });
+      if (currentDate.getDay() === 6) {
+        weeks.push(currentWeek);
+        currentWeek = [];
+      }
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    if (currentWeek.length > 0) {
+      weeks.push(currentWeek);
+    }
+
+    this.weeksInMonth = weeks;
   }
 
-  fetchEmployeeAvailability(date: Date) {
-    // Call a service method to fetch employee availability data
-    this.employeeService.getAvailability(date).subscribe(availabilities => {
-      // Process and display the fetched data
-    });
+  getStartDate(startOfMonth: Date): Date {
+    const dayOfWeek = startOfMonth.getDay();
+    const startDate = new Date(startOfMonth);
+    startDate.setDate(startOfMonth.getDate() - dayOfWeek);
+    return startDate;
+  }
+
+  getEndDate(endOfMonth: Date): Date {
+    const dayOfWeek = endOfMonth.getDay();
+    const endDate = new Date(endOfMonth);
+    endDate.setDate(endOfMonth.getDate() + (6 - dayOfWeek));
+    return endDate;
+  }
+
+  getTasksForDay(date: Date): Task[] {
+    return this.tasks?.filter(task => {
+      const taskDate = new Date(task.dueDate);
+      return task.assignedTo === this.employee.name &&
+             taskDate.getFullYear() === date.getFullYear() &&
+             taskDate.getMonth() === date.getMonth() &&
+             taskDate.getDate() === date.getDate();
+    }) || [];
   }
 }

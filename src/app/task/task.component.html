@@ -6,14 +6,13 @@
       <div class="row">
         <!-- Left column for title -->
         <div class="column">
-          <mat-card-header>
             <mat-card-title>{{ task.title }}</mat-card-title>
-          </mat-card-header>
+          <mat-card-subtitle><strong>Description:</strong> {{ task.description }}</mat-card-subtitle>
         </div>
         <!-- Right column for description, due date, etc. -->
         <div class="column">
-          <mat-card-subtitle><strong>Description:</strong> {{ task.description }}</mat-card-subtitle>
-          <mat-card-subtitle>Due Date: {{ task.dueDate }}</mat-card-subtitle>
+          <mat-card-subtitle>Due Date: {{ task.dueDate | date: "MM/dd/YYYY" }}</mat-card-subtitle>
+          <mat-hint style="font-size: 12px;" *ngIf="!task.completed">Estimated Works Days To Complete: {{task.duration}} days.</mat-hint>
           <ng-container *ngIf="!task.assignedTo; else assignedToSection">
             <mat-form-field (click)="$event.stopPropagation()">
               <mat-label>Assign To</mat-label>

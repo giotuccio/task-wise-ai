@@ -39,14 +39,14 @@ export class TaskService {
   // Additional methods for task management (e.g., update, delete) can be added here
 
 
-  deleteTask(task: Task, taskId: string): Observable<any> {
+  deleteTask(task: any, taskId: string): Observable<any> {
     task.isDeleted = true;
     const url = `https://jsonplaceholder.typicode.com/posts/${task.id}`;
 
     return this.http.delete<any>(this.jsonServerUrl + '/' + taskId);
   }
 
-  editTask(editedTask: Task, taskId: string):  Observable<any> {
+  editTask(editedTask: any, taskId: string):  Observable<any> {
     return this.http.put<any>(this.jsonServerUrl + '/' + taskId, {task: editedTask, id: taskId})
   }
 }
