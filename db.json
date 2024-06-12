@@ -2,299 +2,170 @@
   "tasks": [
     {
       "task": {
-        "id": "384720985",
+        "id": "473802",
         "project": "Digital Marketing",
-        "title": "Washing Socks",
-        "description": "Task assigned to wash socks as per request",
-        "dueDate": "10/12/2024",
-        "priority": "Medium",
-        "status": "Complete",
-        "assignedTo": "Patricia Lebsack",
-        "assignedBy": "TaskWiseAI",
-        "duration": 20,
-        "completed": true
-      },
-      "id": "3f9c"
-    },
-    {
-      "task": {
-        "id": "384720985",
-        "project": "Digital Marketing",
-        "title": "Washing Socks",
-        "description": "Task assigned to wash socks as per request",
-        "dueDate": "10/12/2024",
-        "priority": "High",
-        "status": "In Progress",
-        "assignedTo": "Patricia Lebsack",
-        "assignedBy": "TaskWiseAI",
-        "completed": false
-      },
-      "id": "7f3d"
-    },
-    {
-      "task": {
-        "id": "384720985",
-        "project": "Digital Marketing",
-        "title": "Washing Socks",
-        "description": "Task assigned to wash socks as per request",
-        "dueDate": "10/12/2024",
-        "priority": "High",
-        "status": "Ready For QA",
-        "assignedTo": "Patricia Lebsack",
-        "assignedBy": "TaskWiseAI",
-        "completed": false
-      },
-      "id": "0f43"
-    },
-    {
-      "id": "543b",
-      "task": {
-        "id": "6251984",
-        "project": "Online Account Opening",
-        "title": "App cusomization",
-        "description": "Customize the new feature of the application",
-        "dueDate": "06/17/2024",
-        "priority": "High",
-        "status": "In Progress",
-        "assignedTo": "Clementina DuBuque",
-        "assignedBy": "Nicholas Runolfsdottir V",
-        "completed": false
-      }
-    },
-    {
-      "id": "0c72",
-      "task": {
-        "id": "528956",
-        "project": "Digital Marketing",
-        "title": "SEO Optimization",
-        "description": "Conduct analysis on website and implement SEO strategies to improve organic ranking",
-        "dueDate": "06/24/2024",
+        "title": "Implement SEO strategy!",
+        "description": "Develop and implement an effective SEO strategy for our new product line.",
+        "dueDate": "2024-12-31",
         "priority": "High",
         "status": "In Progress",
         "assignedTo": "Leanne Graham",
-        "assignedBy": "TaskWiseAI",
+        "assignedBy": "Gio Tuccio",
         "duration": 10,
         "completed": false,
         "isDeleted": false
-      }
+      },
+      "id": "10e3"
     },
     {
-      "id": "8b4e",
       "task": {
-        "id": "8948763456",
-        "project": "Online Account Opening",
-        "title": "Task Title",
-        "description": "Task Description",
-        "dueDate": "7/10/2024",
-        "priority": "High",
-        "status": "In Progress",
-        "assignedTo": "Leanne Graham",
-        "assignedBy": "TaskWiseAI",
-        "duration": 20,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "52b5",
-      "task": {
-        "id": "82340393",
+        "id": "487463298",
         "project": "Digital Marketing",
-        "title": "Task Title",
-        "description": "Task Description",
-        "dueDate": "6/15/2024",
-        "priority": "Normal",
-        "status": "In Progress",
-        "assignedTo": "Ervin Howell",
-        "assignedBy": "TaskwiseAI",
-        "duration": 1,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "c239",
-      "task": {
-        "id": "8765",
-        "project": "Digital Marketing",
-        "title": "Cleaning my house",
-        "description": "Leanne has the task to clean the house thoroughly, focusing on dusting, sweeping, mopping, and sanitizing all areas.",
-        "dueDate": "6/18/2024",
-        "priority": "High",
-        "status": "In Progress",
-        "assignedTo": "Leanne Graham",
-        "assignedBy": "TaskWiseAI",
-        "duration": 3,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "aa51",
-      "task": {
-        "id": "8965321",
-        "project": "Digital Marketing",
-        "title": "Task for Leanne Graham",
-        "description": "Complete the assigned task by tomorrow",
-        "dueDate": "6/12/2024",
-        "priority": "High",
-        "status": "In Progress",
-        "assignedTo": "Leanne Graham",
-        "assignedBy": "TaskWiseAI",
-        "duration": 1,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "0397",
-      "task": {
-        "id": "564372",
-        "project": "Digital Marketing",
-        "title": "New Campaign Strategy",
-        "description": "Create a comprehensive digital marketing strategy for the upcoming campaign",
-        "dueDate": "11/12/2024",
-        "priority": "High",
-        "status": "In Progress",
-        "assignedTo": "Leanne Graham",
-        "assignedBy": "Product Manager",
-        "duration": 10,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "4452",
-      "task": {
-        "id": "123456789",
-        "project": "Digital Marketing",
-        "title": "New Task",
-        "description": "A new task assigned to Leanne Graham",
-        "dueDate": "6/25/2024",
-        "priority": "Normal",
-        "status": "In Progress",
-        "assignedTo": "Leanne Graham",
-        "assignedBy": "TaskWiseAI",
-        "duration": 5,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "6bc5",
-      "task": {
-        "id": "236978123",
-        "project": "Digital Marketing",
-        "title": "Task for Leanne",
-        "description": "Task assigned to Leanne",
-        "dueDate": "12/20/2024",
-        "priority": "Normal",
-        "status": "In Progress",
-        "assignedTo": "Leanne Graham",
-        "assignedBy": "TaskWiseAI",
-        "duration": 5,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "8f4c",
-      "task": {
-        "id": "928374",
-        "project": "Digital Marketing",
-        "title": "Digital Marketing Strategy",
-        "description": "Develop and implement a comprehensive digital marketing strategy.",
-        "dueDate": "07/11/2024",
-        "priority": "High",
-        "status": "In Progress",
-        "assignedTo": "Leanne Graham",
-        "assignedBy": "TaskWiseAI",
-        "duration": 10,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "a159",
-      "task": {
-        "id": "4852091323",
-        "project": "Online Account Opening",
-        "title": "Task for Leanne Graham",
-        "description": "Task provided for Leanne to complete",
-        "dueDate": "6/20/2024",
-        "priority": "Normal",
-        "status": "In Progress",
-        "assignedTo": "Leanne Graham",
-        "assignedBy": "TaskWiseAI",
-        "duration": 8,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "7741",
-      "task": {
-        "id": "5421345",
-        "project": "Digital Marketing",
-        "title": "Task for Leanne",
-        "description": "Complete the assigned task",
-        "dueDate": "12/30/2024",
-        "priority": "Normal",
-        "status": "In Progress",
-        "assignedTo": "Leanne Graham",
-        "assignedBy": "System",
-        "duration": 8,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "fea0",
-      "task": {
-        "id": "123456789",
-        "project": "Digital Marketing",
-        "title": "Task Title",
-        "description": "Task Description",
-        "dueDate": "12/12/2024",
-        "priority": "Normal",
-        "status": "In Progress",
-        "assignedTo": "Clementine Bauch",
-        "assignedBy": "Leanne Graham",
-        "duration": 5,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "6646",
-      "task": {
-        "id": "12456",
-        "project": "Digital Marketing",
-        "title": "Task Title",
-        "description": "Task Description",
-        "dueDate": "06/30/2024",
-        "priority": "High",
-        "status": "In Progress",
-        "assignedTo": "Patricia Lebsack",
-        "assignedBy": "NaN",
-        "duration": 5,
-        "completed": false,
-        "isDeleted": false
-      }
-    },
-    {
-      "id": "6ed8",
-      "task": {
-        "id": "637638",
-        "project": "Digital Marketing",
-        "title": "Assigned Task",
-        "description": "A new task to work on.",
-        "dueDate": "6/30/2024",
+        "title": "Create new promotional material!!!!!",
+        "description": "Design and produce new promotional material for our upcoming product campaign",
+        "dueDate": "06/19/2004",
         "priority": "Normal",
         "status": "In Progress",
         "assignedTo": "Gio Tuccio",
         "assignedBy": "Gio Tuccio",
-        "duration": 5,
+        "duration": 10,
+        "completed": false,
+        "isDeleted": false
+      },
+      "id": "a850"
+    },
+    {
+      "task": {
+        "id": "123456",
+        "project": "Digital Marketing",
+        "title": "New Task",
+        "description": "This is a new task description",
+        "dueDate": "06/12/2024",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Gio Tuccio",
+        "assignedBy": "TaskWiseAI",
+        "duration": 2,
+        "completed": false,
+        "isDeleted": false
+      },
+      "id": "5e32"
+    },
+    {
+      "id": "6e46",
+      "task": {
+        "id": "123456",
+        "project": "Digital Marketing",
+        "title": "New Task",
+        "description": "This is a new task description",
+        "dueDate": "12/12/2024",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Gio Tuccio",
+        "assignedBy": "TaskWiseAI",
+        "duration": 2,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "task": {
+        "id": "434357437846",
+        "project": "Digital Marketing",
+        "title": "New Task",
+        "description": "This is a newly created task assigned to a team member.",
+        "dueDate": "2024-06-12",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Gio Tuccio",
+        "assignedBy": "Gio Tuccio",
+        "duration": 1,
+        "completed": false,
+        "isDeleted": false
+      },
+      "id": "a674"
+    },
+    {
+      "task": {
+        "id": "434357437846",
+        "project": "Digital Marketing",
+        "title": "New Task",
+        "description": "This is a newly created task assigned to a team member.",
+        "dueDate": "2024-06-12",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Gio Tuccio",
+        "assignedBy": "Gio Tuccio",
+        "duration": 1,
+        "completed": false,
+        "isDeleted": false
+      },
+      "id": "0202"
+    },
+    {
+      "task": {
+        "id": "434357437846",
+        "project": "Digital Marketing",
+        "title": "New Task",
+        "description": "This is a newly created task assigned to a team member.",
+        "dueDate": "2024-06-12",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Leanne Graham",
+        "assignedBy": "Gio Tuccio",
+        "duration": 1,
+        "completed": false,
+        "isDeleted": false
+      },
+      "id": "5449"
+    },
+    {
+      "task": {
+        "id": "123456789",
+        "project": "Digital Marketing",
+        "title": "New Task",
+        "description": "This is a new task for Gio Tuccio",
+        "dueDate": "6/19/2024",
+        "priority": "High",
+        "status": "In Progress",
+        "assignedTo": "Gio Tuccio",
+        "assignedBy": "Gio Tuccio",
+        "duration": 0,
+        "completed": false,
+        "isDeleted": false
+      },
+      "id": "ef52"
+    },
+    {
+      "id": "7dd9",
+      "task": {
+        "id": "123456789",
+        "project": "Digital Marketing",
+        "title": "New Task",
+        "description": "This is a new task for Gio Tuccio",
+        "dueDate": "7/1/2024",
+        "priority": "High",
+        "status": "New",
+        "assignedTo": "Gio Tuccio",
+        "assignedBy": "Gio Tuccio",
+        "duration": 0,
+        "completed": false,
+        "isDeleted": false
+      }
+    },
+    {
+      "id": "a9ee",
+      "task": {
+        "id": "12345abc",
+        "project": "Online Account Opening",
+        "title": "New Task",
+        "description": "This is a new task",
+        "dueDate": "6/30/2024",
+        "priority": "Normal",
+        "status": "New",
+        "assignedTo": "Gio Tuccio",
+        "assignedBy": "Gio Tuccio",
+        "duration": 8,
         "completed": false,
         "isDeleted": false
       }
@@ -381,7 +252,302 @@
         "bs": "harness real-time e-markets"
       },
       "role": "Developer",
-      "tasks": []
+      "tasks": [
+        {
+          "id": "384375",
+          "project": "Digital Marketing",
+          "title": "New Digital Marketing Task",
+          "description": "Details about the new Digital Marketing task",
+          "dueDate": "6/30/2024",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 5,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "123456789",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a new task for Gio Tuccio",
+          "dueDate": "7/1/2024",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 0,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "123456789",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a new task for Gio Tuccio",
+          "dueDate": "7/1/2024",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 0,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "487463298",
+          "project": "Digital Marketing",
+          "title": "Create new promotional material!!",
+          "description": "Design and produce new promotional material for our upcoming product campaign",
+          "dueDate": "06/19/2004",
+          "priority": "Normal",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 10,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "487463298",
+          "project": "Digital Marketing",
+          "title": "Create new promotional material!!!!!",
+          "description": "Design and produce new promotional material for our upcoming product campaign",
+          "dueDate": "06/19/2004",
+          "priority": "Normal",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 10,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "123456",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a new task description",
+          "dueDate": "06/12/2024",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "TaskWiseAI",
+          "duration": 2,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "123456789",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a new task for Gio Tuccio",
+          "dueDate": "6/19/2024",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 0,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "123456789",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a new task for Gio Tuccio",
+          "dueDate": "6/19/2024",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Gio Tuccio",
+          "assignedBy": "Gio Tuccio",
+          "duration": 0,
+          "completed": false,
+          "isDeleted": false
+        }
+      ]
     },
     {
       "id": "1",
@@ -408,16 +574,44 @@
       "role": "QA",
       "tasks": [
         {
-          "id": "5421345",
+          "id": "473802",
           "project": "Digital Marketing",
-          "title": "Task for Leanne",
-          "description": "Complete the assigned task",
-          "dueDate": "2024-12-30",
-          "priority": "Normal",
+          "title": "Implement SEO strategy!",
+          "description": "Develop and implement an effective SEO strategy for our new product line.",
+          "dueDate": "2024-12-31",
+          "priority": "High",
           "status": "In Progress",
           "assignedTo": "Leanne Graham",
-          "assignedBy": "System",
-          "duration": 8,
+          "assignedBy": "Gio Tuccio",
+          "duration": 10,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Leanne Graham",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
+          "completed": false,
+          "isDeleted": false
+        },
+        {
+          "id": "434357437846",
+          "project": "Digital Marketing",
+          "title": "New Task",
+          "description": "This is a newly created task assigned to a team member.",
+          "dueDate": "2024-06-12",
+          "priority": "High",
+          "status": "In Progress",
+          "assignedTo": "Leanne Graham",
+          "assignedBy": "Gio Tuccio",
+          "duration": 1,
           "completed": false,
           "isDeleted": false
         }
@@ -446,22 +640,7 @@
         "bs": "synergize scalable supply-chains"
       },
       "role": "Dev",
-      "tasks": [
-        {
-          "id": "5421346",
-          "project": "Online Account Opening",
-          "title": "Task for Ervin",
-          "description": "Develop the account opening feature",
-          "dueDate": "2024-11-15",
-          "priority": "High",
-          "status": "In Progress",
-          "assignedTo": "Ervin Howell",
-          "assignedBy": "System",
-          "duration": 5,
-          "completed": false,
-          "isDeleted": false
-        }
-      ]
+      "tasks": []
     },
     {
       "id": "3",
@@ -627,26 +806,7 @@
     }
   ],
   "login": [],
-  "employee-calendar": [
-    {
-      "id": "f53e",
-      "task": {
-        "id": "5421345",
-        "project": "Digital Marketing",
-        "title": "Task for Leanne",
-        "description": "Complete the assigned task",
-        "dueDate": "12/30/2024",
-        "priority": "Normal",
-        "status": "In Progress",
-        "assignedTo": "Leanne Graham",
-        "assignedBy": "System",
-        "duration": 8,
-        "completed": false,
-        "isDeleted": false
-      },
-      "employer": "Leanne Graham"
-    }
-  ],
+  "employee-calendar": [],
   "projects": [
     {
       "project": {

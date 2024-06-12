@@ -1,8 +1,7 @@
-// auth.service.ts
 import { Injectable } from '@angular/core';
 import { Employee } from '../objects/employee.model';
 import { Task } from '../objects/task.model';
-import { Observable, BehaviorSubject, catchError, map, of } from 'rxjs';
+import { Observable, BehaviorSubject, catchError, map, of, switchMap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -37,7 +36,7 @@ export class AuthService {
     return this.http.get<Employee[]>(`${this.apiUrl}/employees?username=${username}`).pipe(
       map(employees => {
         if (employees.length === 0) {
-          throw new Error('Employee not found');
+          throw new Error(`Employee not found with username: ${username}`);
         }
         return employees[0];
       })
@@ -45,7 +44,20 @@ export class AuthService {
   }
 
   postEmployeeCalendar(username: string, task: Task): Observable<Employee> {
-    return this.http.post<Employee>(`${this.apiUrl}/employees/${username}/tasks`, task);
+    return this.getEmployeeByUsername(username).pipe(
+      map(employee => {
+        if (!employee.tasks) {
+          employee.tasks = [];
+        }
+        employee.tasks.push(task);
+        return employee;
+      }),
+      switchMap(employee => this.http.put<Employee>(`${this.apiUrl}/employees/${employee.id}`, employee)),
+      catchError(error => {
+        console.error('Error in postEmployeeCalendar:', error);
+        return throwError(() => new Error('Failed to post employee calendar'));
+      })
+    );
   }
 
   getEmployeeCalendar(username: string): Observable<{ employee: Employee, tasks: Task[] }> {
@@ -57,6 +69,10 @@ export class AuthService {
         const employee = employees[0];
         const tasks = employee.tasks || []; // Ensure tasks is always an array
         return { employee, tasks };
+      }),
+      catchError(error => {
+        console.error('Error in getEmployeeCalendar:', error);
+        return of({ employee: null as any, tasks: [] }); // Return default value on error
       })
     );
   }

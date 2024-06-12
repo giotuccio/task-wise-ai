@@ -13,9 +13,10 @@ export class EmployeeCalendarComponent implements OnInit {
 
   daysOfWeek: string[] = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   weeksInMonth: any[] = [];
+  currentMonth: Date = new Date();
 
   ngOnInit(): void {
-    this.generateCalendar(new Date());
+    this.generateCalendar(this.currentMonth);
   }
 
   generateCalendar(date: Date): void {
@@ -66,5 +67,26 @@ export class EmployeeCalendarComponent implements OnInit {
              taskDate.getMonth() === date.getMonth() &&
              taskDate.getDate() === date.getDate();
     }) || [];
+  }
+
+  previousMonth(): void {
+    const newDate = new Date(this.currentMonth);
+    newDate.setMonth(newDate.getMonth() - 1);
+    this.currentMonth = newDate;
+    this.generateCalendar(this.currentMonth);
+  }
+
+  nextMonth(): void {
+    const newDate = new Date(this.currentMonth);
+    newDate.setMonth(newDate.getMonth() + 1);
+    this.currentMonth = newDate;
+    this.generateCalendar(this.currentMonth);
+  }
+
+  isToday(date: Date): boolean {
+    const today = new Date();
+    return date.getDate() === today.getDate() &&
+           date.getMonth() === today.getMonth() &&
+           date.getFullYear() === today.getFullYear();
   }
 }

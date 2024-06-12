@@ -1,14 +1,24 @@
 <div class="calendar">
+  <div class="calendar-navigation">
+    <button mat-icon-button (click)="previousMonth()">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <span>{{ currentMonth | date: 'MMMM yyyy' }}</span>
+    <button mat-icon-button (click)="nextMonth()">
+      <mat-icon>chevron_right</mat-icon>
+    </button>
+  </div>
   <div class="calendar-header">
     <div class="calendar-header-day" *ngFor="let day of daysOfWeek">{{ day }}</div>
   </div>
   <div class="calendar-body">
     <div class="calendar-week" *ngFor="let week of weeksInMonth">
-      <div class="calendar-day" *ngFor="let day of week">
+      <div class="calendar-day" [ngClass]="{'today': isToday(day.fullDate)}" *ngFor="let day of week">
         <div class="calendar-day-number">{{ day.date }}</div>
         <div class="calendar-tasks">
           <div class="calendar-task" *ngFor="let task of getTasksForDay(day.fullDate)">
             {{ task.title }}
+            {{task.assignedTo}}
           </div>
         </div>
       </div>

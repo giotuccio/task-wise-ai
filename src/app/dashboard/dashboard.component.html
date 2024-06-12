@@ -48,10 +48,15 @@
           </div>
 
 <!-- dashboard.component.html -->
-<div *ngIf="loggedInUser">
-  <h3>{{ loggedInUser.name }}</h3>
+<mat-expansion-panel *ngIf="loggedInUser">
+  <mat-expansion-panel-header>
+    <div style="display: flex; justify-content: space-between;">
+      {{ loggedInUser.name }}
+    </div>
+    
+   </mat-expansion-panel-header  >
   <app-employee-calendar [tasks]="getTasksForEmployee(loggedInUser)" [employee]="loggedInUser"></app-employee-calendar>
-</div>
+</mat-expansion-panel>
 
           <!-- Task Tabs -->
           <div class="dashboard">

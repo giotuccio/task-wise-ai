@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
-import { Task} from "../objects/task.model"; // Assuming you have a Task model
+import { Task } from "../objects/task.model"; // Assuming you have a Task model
 import { Project } from "../objects/project.model";
 import { MatDialog } from "@angular/material/dialog";
 import { ProjectDetailsDialogComponent } from "../project-details-dialog/project-details-dialog.component";
@@ -21,6 +21,7 @@ import { UserService } from "../services/user.service";
 import { CampaignServiceService } from "../services/campaign-service.service";
 import { Employee } from "../objects/employee.model";
 import { EmployeeService } from "../services/employee.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-dashboard",
@@ -50,60 +51,66 @@ export class DashboardComponent implements AfterViewInit, OnInit {
   workDaysToCompleteTask = 0;
   selectedProjectName: string | null = null;
   updatedStatus = ""
-  loggedInUser: Employee | null = null; 
+  loggedInUser: Employee | null = null;
+  loggedInEmployeesName: string = "";
+  loggedInEmployeesTasks: Task[] = [];
+  private subscriptions: Subscription[] = [];
   avatarSrc = "https://cdn-icons-png.flaticon.com/256/147/147144.png";
-  constructor(private dialog: MatDialog, private bottomSheet: MatBottomSheet,    private employeeService: EmployeeService, private taskService: TaskService,private campaignService: CampaignServiceService, private authService: AuthService, private userService: UserService) {
+  constructor(private dialog: MatDialog, private bottomSheet: MatBottomSheet, private employeeService: EmployeeService, private taskService: TaskService, private campaignService: CampaignServiceService, private authService: AuthService, private userService: UserService) {
     // Fetch tasks and projects from a service or API
     // For now, let's just add some dummy data
-    
-  
-    
+
+
+
   }
-ngOnInit(): void {
-     this.authService.getLoggedInUser().subscribe(user => {
+  ngOnInit(): void {
+    const loggedInUserSub = this.authService.getLoggedInUser().subscribe(user => {
       this.loggedInUser = user;
+      this.loggedInEmployeesName = user?.name ?? '';
+      this.loggedInEmployeesTasks = user?.tasks ?? [];
+      console.log(this.loggedInEmployeesName, this.loggedInUser, this.loggedInEmployeesTasks);
+
       if (this.loggedInUser) {
         this.authService.getEmployeeCalendar(this.loggedInUser.username).subscribe(response => {
           this.tasks = response.tasks;
+          console.log(this.tasks);
         });
       }
     });
+    this.subscriptions.push(loggedInUserSub);
 
-    this.authService.getUsers().subscribe((response: Employee[]) => {
+    const usersSub = this.authService.getUsers().subscribe((response: Employee[]) => {
       this.employees = response;
     });
-  this.authService.getUsers().subscribe((response: Employee[]) => {
-    this.employees = response;
-  });
-console.log(this.loggedInUser);
-
-  this.authService.getUsers().subscribe((response: Employee[]) => {
-    this.employees = response;
-  });
+    this.subscriptions.push(usersSub);
 
 
-this.userService.getUsers().subscribe
-this.taskService.getProjects().subscribe((response) => {
-  this.projects = response;
-  console.log(this.projects);
-  
-});
 
-this.taskService.getTasks().subscribe((response) => {
-  this.tasks = response;
-  console.log(this.tasks);  // Debug log to verify tasks
-});
+    this.taskService.getProjects().subscribe((response) => {
+      this.projects = response;
+      console.log(this.projects);
 
-this.taskService.getAllTasksId().subscribe((response) => {
-  this.taskIds = response;
-  console.log(this.taskIds);  // Debug log to verify task IDs
-});
+    });
+
+    this.taskService.getTasks().subscribe((response) => {
+      this.tasks = response;
+      console.log(this.tasks);  // Debug log to verify tasks
+    });
+
+    this.taskService.getAllTasksId().subscribe((response) => {
+      this.taskIds = response;
+      console.log(this.taskIds);  // Debug log to verify task IDs
+    });
 
 
-this.campaignService.getCampaigns().subscribe((response) => {
-  this.campaigns =response
-})
-}
+    this.campaignService.getCampaigns().subscribe((response) => {
+      this.campaigns = response
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
   ngAfterViewInit() {
     // Set the selectedIndex to 0 to activate the first tab
     this.selectedIndex = 0;
@@ -205,7 +212,6 @@ this.campaignService.getCampaigns().subscribe((response) => {
     });
   }
   openTaskDetailsDialog(task: Task, index: number) {
-    
     const selectedTaskId = this.taskIds[index]; // Directly use the outer task's id property
     console.log(selectedTaskId);
 
@@ -218,14 +224,46 @@ this.campaignService.getCampaigns().subscribe((response) => {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         console.log(result);
-        task.title = result.title
-        task.description = result.description
-        task.dueDate = result.dueDate
-        task.assignedTo = result.assignedTo
-        task.priority = result.priority
+        task.title = result.title;
+        task.description = result.description;
+        task.dueDate = result.dueDate;
+        task.assignedTo = result.assignedTo;
+        task.priority = result.priority;
+        task.status = result.status;
 
-        task.status = result.status
-        
+        // Update the task in the assigned employee's task list
+        const assignedEmployee = this.employees.find(emp => emp.name === task.assignedTo);
+        if (assignedEmployee) {
+          assignedEmployee.tasks = assignedEmployee.tasks || [];
+          const taskIndex = assignedEmployee.tasks.findIndex(t => t.id === task.id);
+          if (taskIndex !== -1) {
+            assignedEmployee.tasks[taskIndex] = task;
+          } else {
+            assignedEmployee.tasks.push(task);
+          }
+
+          if (task.status !== 'New') {
+            this.authService.postEmployeeCalendar(assignedEmployee.username, task).subscribe(
+              (updatedEmployee) => {
+                console.log('Employee calendar updated', updatedEmployee);
+                // Update local data
+                const index = this.employees.findIndex(emp => emp.id === updatedEmployee.id);
+                if (index !== -1) {
+                  this.employees[index] = updatedEmployee;
+                }
+                // Optionally, update the logged-in user
+                this.authService.getLoggedInUser().subscribe(loggedInUser => {
+                  if (loggedInUser && loggedInUser.name === updatedEmployee.name) {
+                    this.authService.setLoggedInUser(updatedEmployee);
+                  }
+                });
+              },
+              (error) => {
+                console.error('Error updating employee calendar', error);
+              }
+            );
+          }
+        }
       }
     });
   }
@@ -264,7 +302,8 @@ this.campaignService.getCampaigns().subscribe((response) => {
     // Toggle the state variable
     this.isAskTaskWiseOpen = !this.isAskTaskWiseOpen;
   }
-  
+
+
 
 
   openTaskWiseAI() {
@@ -273,6 +312,7 @@ this.campaignService.getCampaigns().subscribe((response) => {
         tasks: this.tasks,
         employees: this.employees,
         loggedInUser: this.loggedInUser,
+        loggedInEmployeesName: this.loggedInEmployeesName
       },
       width: "80%",
       height: "80vh",
@@ -285,35 +325,43 @@ this.campaignService.getCampaigns().subscribe((response) => {
           this.workDaysToCompleteTask = newTask.duration ?? 0;
         });
         this.tasks.push(newTask);
+console.log(newTask.status);
 
         const assignedEmployee = this.employees.find(emp => emp.name === newTask.assignedTo);
         if (assignedEmployee) {
           assignedEmployee.tasks = assignedEmployee.tasks || [];
           assignedEmployee.tasks.push(newTask);
 
-          // Call the postEmployeeCalendar method for the correct employee
-          this.authService.postEmployeeCalendar(assignedEmployee.username, newTask).subscribe(
-            (updatedEmployee) => {
-              console.log('Employee calendar updated', updatedEmployee);
-              // Optionally, update the local employee data with the updated employee data
-              if (this.loggedInUser && this.loggedInUser.username === assignedEmployee.username) {
-                this.authService.setLoggedInUser(updatedEmployee);
+          if (newTask.status !== 'New') {
+            this.authService.postEmployeeCalendar(assignedEmployee.username, newTask).subscribe(
+              (updatedEmployee) => {
+                console.log('Employee calendar updated', updatedEmployee);
+                // Update local data
+                const index = this.employees.findIndex(emp => emp.id === updatedEmployee.id);
+                if (index !== -1) {
+                  this.employees[index] = updatedEmployee;
+                }
+                // Optionally, update the logged-in user
+                if (this.loggedInUser && this.loggedInUser.name === updatedEmployee.name) {
+                  this.authService.setLoggedInUser(updatedEmployee);
+                }
+              },
+              (error) => {
+                console.error('Error updating employee calendar', error);
               }
-            },
-            (error) => {
-              console.error('Error updating employee calendar', error);
-            }
-          );
+            );
+          }
         }
       }
     });
   }
 
+
   getTasksForEmployee(employee: Employee): Task[] {
     return this.tasks.filter(task => task.assignedTo === employee.name);
   }
 
- 
+
 
 
 

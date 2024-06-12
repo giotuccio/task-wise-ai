@@ -33,7 +33,7 @@ export class TaskwiseAIService {
   employees = [];
   constructor(private http: HttpClient, private userService: UserService) {
     userService.getUsers().subscribe((response) => {
-      
+
       this.employees = response.name;
     });
   }
@@ -151,44 +151,44 @@ User: "Can I see your journal?"
 User: "But you don't actually have leukemia, it was just mono."
  "Giiiiirl. How can you say that? You don't understand what I've been through. My fight with leukemia is very real to me, and I won't let anyone tell me otherwise!"`;
 
- private calculateWorkDays(durationInHours: number): number {
-  return Math.ceil(durationInHours /TaskwiseAIService.WORK_HOURS_PER_DAY);
-}
+  private calculateWorkDays(durationInHours: number): number {
+    return Math.ceil(durationInHours / TaskwiseAIService.WORK_HOURS_PER_DAY);
+  }
 
-private extractDuration(prompt: string): number | null {
-  const durationPattern = /(\d+)\s*(hours?|days?|months?|years?)/i;
-  const match = prompt.match(durationPattern);
-  if (match) {
-    const value = parseInt(match[1]);
-    const unit = match[2].toLowerCase();
-    if (unit.startsWith('day')) {
-      return value * TaskwiseAIService.WORK_HOURS_PER_DAY;
-    } else if (unit.startsWith('hour')) {
-      return value;
+  private extractDuration(prompt: string): number | null {
+    const durationPattern = /(\d+)\s*(hours?|days?|months?|years?)/i;
+    const match = prompt.match(durationPattern);
+    if (match) {
+      const value = parseInt(match[1]);
+      const unit = match[2].toLowerCase();
+      if (unit.startsWith('day')) {
+        return value * TaskwiseAIService.WORK_HOURS_PER_DAY;
+      } else if (unit.startsWith('hour')) {
+        return value;
+      }
     }
-  }
-  return null;
-}
-
-
-sendTaskMessage(prompt: string): Observable<any> {
-  const headers = new HttpHeaders({
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${this.apiKey}`,
-  });
-
-  const durationInHours = this.extractDuration(prompt);
-  let durationInWorkDays: number | null = null;
-  if (durationInHours !== null) {
-    durationInWorkDays = this.calculateWorkDays(durationInHours);
+    return null;
   }
 
-  const payload = {
-    model: "gpt-4",
-    messages: [
-      {
-        role: "system",
-        content: `${this.fundamentals}. ${this.userPrompt}. As TaskWiseAI, I serve as a comprehensive product management assistant, 
+
+  sendTaskMessage(prompt: string): Observable<any> {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.apiKey}`,
+    });
+
+    const durationInHours = this.extractDuration(prompt);
+    let durationInWorkDays: number | null = null;
+    if (durationInHours !== null) {
+      durationInWorkDays = this.calculateWorkDays(durationInHours);
+    }
+
+    const payload = {
+      model: "gpt-4",
+      messages: [
+        {
+          role: "system",
+          content: `${this.fundamentals}. ${this.userPrompt}. As TaskWiseAI, I serve as a comprehensive product management assistant, 
        
         offering guidance on product development, market analysis, and project management.
         
@@ -250,24 +250,24 @@ sendTaskMessage(prompt: string): Observable<any> {
   }
   
 
-        This codebase is in TypeScript and Angular 14. Your main task is creating tasks. When asked to create a task, return values without special characters or any other context before returned Object, maintaining a consistent format. priority values could be a string value of High, Normal or Low. status could be a string value of In Progress, Ready For QA, Complete. The project value should be either 'Digital Marketing' or 'Online Account Opening'. When I ask for you to create a task don't respond with any other verbiage other than the proper payload value in JSON format. If a task duration is provided in the prompt, it should be converted to work days, assuming an 8-hour workday, and included in the task's properties as the 'duration' field in work days.`,
-      
-      
-      
-      },
-      { role: "user", content: prompt },
-    ],
-  };
+        This codebase is in TypeScript and Angular 14. Your main task is creating tasks. When asked to create a task, return values without special characters or any other context before returned Object, maintaining a consistent format. priority values could be a string value of High, Normal or Low. status could be a string value of New, In Progress, Ready For QA, Complete. The project value should be either 'Digital Marketing' or 'Online Account Opening'. When I ask for you to create a task don't respond with any other verbiage other than the proper payload value in JSON format. If a task duration is provided in the prompt, it should be converted to work days, assuming an 8-hour workday, and included in the task's properties as the 'duration' field in work days.`,
 
-  if (durationInWorkDays !== null) {
-    payload.messages.push({
-      role: "system",
-      content: `The task is expected to take ${durationInWorkDays} work days. Please ensure the 'duration' field in the task properties is set to this value.`,
-    });
+
+
+        },
+        { role: "user", content: prompt },
+      ],
+    };
+
+    if (durationInWorkDays !== null) {
+      payload.messages.push({
+        role: "system",
+        content: `The task is expected to take ${durationInWorkDays} work days. Please ensure the 'duration' field in the task properties is set to this value.`,
+      });
+    }
+
+    return this.http.post<any>(this.apiUrl, payload, { headers });
   }
-
-  return this.http.post<any>(this.apiUrl, payload, { headers });
-}
   sendTaskDetailsMessage(prompt: string): Observable<any> {
     const headers = new HttpHeaders({
       "Content-Type": "application/json",

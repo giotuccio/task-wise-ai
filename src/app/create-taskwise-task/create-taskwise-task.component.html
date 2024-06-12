@@ -53,6 +53,8 @@
           <mat-form-field style="width: 100%;">
             <mat-label>Status:</mat-label>
             <mat-select [(ngModel)]="newTask.status" class="editable-field">
+              <mat-option value="New">New</mat-option>
+
               <mat-option value="In Progress">In Progress</mat-option>
               <mat-option value="Ready For QA">Ready For QA</mat-option>
               <mat-option value="Complete">Complete</mat-option>

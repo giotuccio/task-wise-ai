@@ -27,11 +27,6 @@
   grid-template-columns: repeat(7, 1fr);
 }
 
-.calendar-day {
-  border: 1px solid #ccc;
-  padding: 5px;
-  height: 100px;
-}
 
 .calendar-day-number {
   font-weight: bold;
@@ -46,4 +41,17 @@
   margin: 2px 0;
   padding: 2px 4px;
   border-radius: 3px;
+}
+
+.calendar-day {
+  flex: 1;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  min-height: 100px;
+  padding: 4px;
+  background-color: #fafafa; /* Light background color for days */
+}
+
+.calendar-day.today {
+  background-color: #3bd8ffa4; /* Highlight background color for today */
 }

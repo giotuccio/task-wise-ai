@@ -21,18 +21,18 @@ export class CreateTaskwiseTaskComponent {
   loggedInUser: string
   constructor(private taskwiseAIService: TaskwiseAIService,  private taskService: TaskService,
     @Inject(MAT_DIALOG_DATA) public task: Task,
-    @Inject(MAT_DIALOG_DATA) public data: { employees: Array<object>, loggedInUser: any },
+    @Inject(MAT_DIALOG_DATA) public data: { employees: Array<object>, loggedInEmployeesName: string },
     private dialogRef: MatDialogRef<CreateTaskwiseTaskComponent>,
     private dialog: MatDialog) { 
       this.employees = data.employees ?? []
-      this.loggedInUser = data.loggedInUser;
+      this.loggedInUser = data.loggedInEmployeesName;
 
       console.log(this.loggedInUser, this.employees.map((x: { name: any; }) => x.name));
-      this.loggedInUser
       
     }
 
     sendMessageToAI(prompt: string): void {
+      this.loggedInUser = this.data.loggedInEmployeesName
       this.isWaiting = true;
       this.prompt = prompt;
       this.taskwiseAIService.sendTaskMessage(prompt + ` 
@@ -102,10 +102,8 @@ export class CreateTaskwiseTaskComponent {
   closeDialog(): void {
     
           // Adding the new task
-          this.taskService.addTask(this.newTask);
   
           // Optionally, you can also update the employee's calendar here
-          this.updateEmployeeCalendar(this.newTask);
     // Close the dialog and pass the updated task back to the parent component
     this.dialogRef.close(this.newTask);
   }
